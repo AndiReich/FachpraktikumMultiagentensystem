@@ -1,6 +1,4 @@
 class_name Cell
-# imports
-var CellStateHandler = load("res://src/model/cellStateHandler.gd")
 
 var cellStateHandler: CellStateHandler = CellStateHandler.new()
 

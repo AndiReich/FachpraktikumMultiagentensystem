@@ -5,13 +5,15 @@ func next_move(cell: Cell):
 	print("Not implemented yet.")
 	
 func move():
+	# moves towards next antibody?
 	super.move()
 	
 func differenciate():
-	print("Not implemented yet.") 
+	print_debug("Antigen does not differenciate.")
 	
 func generate():
-	print("Not implemented yet.")
+	# should antigens reproduce or not?
+	print_debug("Antigen does not generate.")
 	
 func emanate():
 	# emanates chemotactic substances

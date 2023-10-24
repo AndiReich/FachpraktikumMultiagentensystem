@@ -1,8 +1,5 @@
 class_name THelperCellT4 extends CellStateHandler
 
-# imports
-var ActivatedTHelperCellT4 = load("res://src/model/cellStateHandlers/activatedTHelperCellT4.gd")
-
 func next_move(cell: Cell):
 	# implement
 	print("Not implemented yet.")

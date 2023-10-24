@@ -9,13 +9,11 @@ func move():
 	super.move()
 	
 func differenciate():
-	# APC does not differenciate
-	return 
+	print_debug("Antigen presenting cell does not differenciate.")
 	
 func generate():
-	# APC does not generate
-	print("Not implemented yet.")
+	print_debug("Antigen presenting cell does not generate.")
 	
 func emanate():
 	# APC does not emanate
-	print("Not implemented yet.")
+	print_debug("Antigen presenting cell does not emanate.")
