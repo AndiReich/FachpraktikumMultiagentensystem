@@ -1,12 +1,11 @@
 class_name Antigen extends CellStateHandler
 
-func next_move(cell: Cell):
-	# implement
-	print("Not implemented yet.")
+func next_move(delta: float, cell: Cell):
+	move(delta, cell)
 	
-func move():
+func move(delta: float, cell: Cell):
 	# moves towards next antibody?
-	super.move()
+	super.move(delta,cell)
 	
 func differenciate():
 	print_debug("Antigen does not differenciate.")

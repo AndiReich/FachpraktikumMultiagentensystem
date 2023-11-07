@@ -1,11 +1,12 @@
 class_name ActivatedTHelperCellT4 extends CellStateHandler
 
-func next_move(cell: Cell):
+func next_move(delta: float, cell: Cell):
+	move(delta, cell)
 	# implement
 	print("Not implemented yet.")
 	
-func move():
-	super.move()
+func move(delta: float, cell: Cell):
+	super.move(delta,cell)
 	
 func differenciate():
 	print_debug("Activated t-helper cell T4 does not differenciate.")

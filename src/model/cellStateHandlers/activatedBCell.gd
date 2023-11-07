@@ -1,11 +1,12 @@
 class_name ActivatedBCell extends CellStateHandler
 
-func next_move(cell: Cell):
+func next_move(delta: float, cell: Cell):
+	move(delta, cell)
 	# implement
 	print("Not implemented yet.")
 	
-func move():
-	super.move()
+func move(delta: float, cell: Cell):
+	super.move(delta,cell)
 	
 func differenciate():
 	# maybe something like each x ticks there is a chance for differenciation to either B cell or P Cell

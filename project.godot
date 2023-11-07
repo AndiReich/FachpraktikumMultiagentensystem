@@ -11,5 +11,15 @@ config_version=5
 [application]
 
 config/name="Fachpraktikum Multiagentensystem"
+run/main_scene="res://scenes/agents/virusTest.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=1024
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

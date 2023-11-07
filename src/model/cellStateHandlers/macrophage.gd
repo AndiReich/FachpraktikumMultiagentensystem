@@ -1,12 +1,13 @@
 class_name Macrophage extends CellStateHandler
 
-func next_move(cell: Cell):
+func next_move(delta: float, cell: Cell):
+	move(delta, cell)
 	# implement
 	print("Not implemented yet.")
 	
-func move():
-	# should move towards Antigens
-	super.move()
+func move(delta: float, cell: Cell):
+	# should move towards antigen
+	super.move(delta,cell)
 	
 func differenciate():
 	# handle collision with antigen via signals and then differenciate
