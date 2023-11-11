@@ -25,3 +25,6 @@ func generate():
 func emanate():
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
 	
+
+	
+
