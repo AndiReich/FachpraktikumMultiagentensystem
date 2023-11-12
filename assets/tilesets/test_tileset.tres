@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b8yfcmtd5qdls"]
+
+[ext_resource type="Texture2D" uid="uid://h2cxv30yjclc" path="res://assets/TestConcentrationTilesheet.png" id="1_l83my"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a7qht"]
+texture = ExtResource("1_l83my")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_a7qht")

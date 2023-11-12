@@ -9,11 +9,12 @@ func move(delta: float, cell: Cell):
 	# maybe have default move here and have input parameters from child classes
 	# e.g. some array or something of movement probabilites
 	var velocity = Vector2.ZERO
-	velocity.x += 5
-	velocity.y += 5
+	velocity.x += 15
+	velocity.y += 15
 	
 	cell.position += velocity * delta
 	cell.position = cell.position.clamp(Vector2.ZERO, cell.get_viewport_rect().size)
+	print("viewport_size: %s" % cell.get_viewport_rect().size)
 	
 	
 func differenciate():

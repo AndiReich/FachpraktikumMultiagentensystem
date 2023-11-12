@@ -11,10 +11,10 @@ var cellStateHandler: CellStateHandler = CellStateHandler.new()
 # have a unified signal "cell_emanate" and add a cell type argument
 #
 # or this way where we have multiple handler functions for different signals
-# (this way we have more freedom of what data we sendon a per celltype basis)
+# (this way we have more freedom of what data we send on a per celltype basis)
 
 # only scripts that are attached to a node are able to define signals 
-signal antigen_emanate(pos_x, pos_y, value)
+signal antigen_emanate(position, type)
 
 func _ready():
 	$AnimatedSprite2D.play()

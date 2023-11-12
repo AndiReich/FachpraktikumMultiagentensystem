@@ -22,5 +22,6 @@ func generate():
 
 func emanate():
 	# emanates chemotactic substances
-	cell.antigen_emanate.emit(cell.global_position.x, cell.global_position.y, 4)
+	var patter = ""
+	cell.antigen_emanate.emit(cell.global_position, cell.TYPES.ANTIGEN)
 	# print("Not implemented yet.")
