@@ -1,12 +1,9 @@
 class_name Cell extends Area2D
 
 enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, ANTIGEN, ACTIVATEDTHELPERCELL} 
-
-
 @export var initialCellType: TYPES = TYPES.ANTIGEN
 
 var cellStateHandler: CellStateHandler = CellStateHandler.new()
-
 
 func _ready():
 	$AnimatedSprite2D.play()

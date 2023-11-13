@@ -21,6 +21,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ch054"]
 
 [node name="Virus" type="Area2D"]
+position = Vector2(569, 455)
 script = ExtResource("1_mqrm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
