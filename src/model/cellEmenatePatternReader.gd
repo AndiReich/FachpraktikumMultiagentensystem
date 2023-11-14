@@ -1,8 +1,10 @@
 class_name CellEmenatePatternReader
 
-func read_pattern_for_cell_type(cell_type: Cell.TYPES) -> Array:
+func read_pattern_for_cell_type(cell_type: String) -> Array:
 	var filepath = get_filepath_of_celltype(cell_type)
-	var file = FileAccess.open("filepath", FileAccess.READ)
+	if (!FileAccess.file_exists(filepath)):
+		return []
+	var file = FileAccess.open(filepath, FileAccess.READ)
 	var text = file.get_as_text()
 	var matrix = get_content_as_2d_Array(text)
 	# transposed since we want to address the matrix with [x][y] instead of [y][x]
@@ -45,7 +47,7 @@ func transpose_matrix(matrix: Array) -> Array:
 
 	return transposed_matrix
 		
-func get_filepath_of_celltype(cell_type: Cell.TYPES) -> String:
+func get_filepath_of_celltype(cell_type: String) -> String:
 	var cell_type_name = str(cell_type).to_lower()
 	return "res://resources/%s_gradient.txt" % cell_type_name
 	

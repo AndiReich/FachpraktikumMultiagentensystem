@@ -8,9 +8,11 @@ var cell_pattern_dict = {}
 
 func _enter_tree(): 
 	var reader = CellEmenatePatternReader.new()
-		# initialize patterns from config files
+	# initialize patterns from config files
 	for cell_type in Cell.TYPES:
-		cell_pattern_dict[cell_type] = reader.read_pattern_for_cell_type(cell_type)
+		var value = reader.read_pattern_for_cell_type(cell_type)
+		if(value != []):
+			cell_pattern_dict[cell_type] = value
 	
 
 func _ready():
