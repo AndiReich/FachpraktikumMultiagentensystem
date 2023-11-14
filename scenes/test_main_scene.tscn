@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bmeatc51d0dv2" path="res://scenes/agents/virusTest.tscn" id="1_o16ro"]
 [ext_resource type="PackedScene" uid="uid://bp60hcbn7cjcp" path="res://scenes/tilemaps/tile_map_controller.tscn" id="2_r5bkj"]
-[ext_resource type="Script" path="res://src/model/gradientReader.gd" id="3_yq36y"]
+[ext_resource type="Script" path="res://src/model/cellEmenatePatternReader.gd" id="3_ypa3r"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -12,7 +12,6 @@
 layer_0/tile_data = PackedInt32Array(393221, 196608, 0, 655369, 196608, 0, 589833, 196608, 0, 327695, 196608, 0, 327702, 196608, 0, 589845, 196608, 0)
 
 [node name="ReaderNode" type="Node2D" parent="."]
-script = ExtResource("3_yq36y")
-filepath = "res://resources/test_gradient.txt"
+script = ExtResource("3_ypa3r")
 
 [connection signal="antigen_emanate" from="Virus" to="TileMapController" method="_on_virus_antigen_emanate"]
