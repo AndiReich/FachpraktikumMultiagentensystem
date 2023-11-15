@@ -17,8 +17,7 @@ func modify_pattern_for_cell_type():
 	
 func get_content_as_2d_Array(text: String) -> Array:
 	var lines = text.strip_edges().split("\n")
-	var horizontal_size = lines.size()
-	var vertical_size = lines[0].length()
+	var vertical_size = lines.size()
 	var gradient_grid = []
 	for y_index in vertical_size:
 		var characters = lines[y_index].split()
