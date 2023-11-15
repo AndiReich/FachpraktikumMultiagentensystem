@@ -28,13 +28,9 @@ func _ready():
 			grid_state[x].append(0)
 
 func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
-	print_debug("Tries handling emanate.")
-	
 	var map_position : Vector2i = self.local_to_map(cell_position)
-	
-	print_debug("map coords   = x: %d, y: %d" % [map_position.x, map_position.y])
 	set_pattern_by_cell_type(map_position, type_id)
-	print_debug("Handled emit")
+	
 	
 func set_pattern_by_cell_type(cell_position: Vector2i, type_id: Cell.TYPES):
 	var cell_type = Cell.TYPES.find_key(type_id)
@@ -67,6 +63,7 @@ func is_spot_valid(next_pos: Vector3i) -> bool:
 	if(grid_state[x][y] >= value):
 		return false
 	return true
+	
 	
 func find_grid_positions_relative_to_cell(
 	cell_position: Vector2i, 

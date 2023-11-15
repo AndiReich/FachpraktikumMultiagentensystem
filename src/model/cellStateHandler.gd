@@ -14,7 +14,6 @@ func move(delta: float, cell: Cell):
 	
 	cell.position += velocity * delta
 	cell.position = cell.position.clamp(Vector2.ZERO, cell.get_viewport_rect().size)
-	print("viewport_size: %s" % cell.get_viewport_rect().size)
 	
 	
 func differenciate():

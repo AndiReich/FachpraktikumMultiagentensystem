@@ -1,8 +1,6 @@
 class_name Antigen extends CellStateHandler
 
-
 var cell: Cell
-
 
 func next_move(delta: float, cell: Cell):
 	self.cell = cell

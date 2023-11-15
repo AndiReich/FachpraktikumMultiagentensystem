@@ -7,9 +7,8 @@ func read_pattern_for_cell_type(cell_type: String) -> Array:
 	var file = FileAccess.open(filepath, FileAccess.READ)
 	var text = file.get_as_text()
 	var matrix = get_content_as_2d_Array(text)
-	# transposed since we want to address the matrix with [x][y] instead of [y][x]
-	var transposed_matrix = transpose_matrix(matrix)
-	return transposed_matrix
+	
+	return matrix
 	
 	
 func modify_pattern_for_cell_type():
@@ -30,6 +29,7 @@ func get_content_as_2d_Array(text: String) -> Array:
 	return gradient_grid
 
 func transpose_matrix(matrix: Array) -> Array:
+	# in case we want to turn the matrix by 90°
 	var transposed_matrix = []
 
 	# Get the number of rows and columns in the original matrix
