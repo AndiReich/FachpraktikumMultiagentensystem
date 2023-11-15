@@ -25,43 +25,68 @@ func _ready():
 	for x in grid_size_x:
 		grid_state.append([])
 		for y in grid_size_y:
-			grid_state[x].append(Vector2i.ZERO)
+			grid_state[x].append(0)
 
-func _on_virus_antigen_emanate(position : Vector2, type: Cell.TYPES):
+func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 	print_debug("Tries handling emanate.")
 	
+	var map_position : Vector2i = self.local_to_map(cell_position)
 	
-	var local_position : Vector2 = to_local(position)
-	var map_position : Vector2i = local_to_map(local_position)
-	
-	print_debug("local coords = x: %d, y: %d" % [local_position.x, local_position.y])
 	print_debug("map coords   = x: %d, y: %d" % [map_position.x, map_position.y])
-	
+	set_pattern_by_cell_type(map_position, type_id)
 	print_debug("Handled emit")
 	
-func set_pattern_by_cell_type(position: Vector2i, cell_type: Cell.TYPES):
+func set_pattern_by_cell_type(cell_position: Vector2i, type_id: Cell.TYPES):
+	var cell_type = Cell.TYPES.find_key(type_id)
 	if(!cell_pattern_dict.has(cell_type)):
 		print_debug("Pattern of %s not found." % cell_type)
 		return
 	var pattern_matrix = cell_pattern_dict[cell_type]
 	
-	var x_size = pattern_matrix.size
-	for x in x_size:
-		var y_size = pattern_matrix[x].size
-		for y in y_size:
-			var next_pos = Vector2i()
-			if(is_spot_viable(next_pos)):
-				print("")
-	print("")
-
-func match_pattern_with_grid_state(pattern_matrix):
+	var grid_positions_and_values = find_grid_positions_relative_to_cell(
+				cell_position, 
+				pattern_matrix
+	)
 	
-	return 
+	for pos_with_value in grid_positions_and_values:
+		if(is_spot_valid(pos_with_value)):
+			var pos = Vector2i(pos_with_value.x, pos_with_value.y)
+			var value_to_set = pos_with_value.z
+			set_cell(0, pos, 0, Vector2i(value_to_set-1,0))
+			grid_state[pos.x][pos.y] = value_to_set
 	
-func is_spot_viable(next_pos: Vector2i) -> bool:
-	if(position.x < 0 || position.x > grid_state.size):
+	
+func is_spot_valid(next_pos: Vector3i) -> bool:
+	var x = next_pos.x
+	var y = next_pos.y
+	var value = next_pos.z
+	if(x < 0 || x >= grid_state.size()):
 		return false
-	if(position.y < 0 || position.y > grid_state[0].size):
+	if(y < 0 || y >= grid_state[0].size()):
+		return false
+	if(grid_state[x][y] >= value):
 		return false
 	return true
+	
+func find_grid_positions_relative_to_cell(
+	cell_position: Vector2i, 
+	matrix : Array
+) -> Array[Vector3i]:
+	var matrix_x_size = matrix.size()
+	var matrix_y_size = matrix[0].size()
+	
+	var offset_x = cell_position.x - (matrix_x_size/2) 
+	var offset_y = cell_position.y - (matrix_y_size/2)
+	
+	var relative_positions = [] as Array[Vector3i]
+	
+	for x in matrix_x_size:
+		for y in matrix_y_size:
+			var pos_x = offset_x + x
+			var pos_y = offset_y + y
+			var value = int(matrix[x][y])
+			relative_positions.append(Vector3i(pos_x, pos_y, value))
+	return relative_positions
+	
+	
 
