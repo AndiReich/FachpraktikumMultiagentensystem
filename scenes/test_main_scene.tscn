@@ -9,4 +9,8 @@
 
 [node name="TileMapController" parent="." instance=ExtResource("2_r5bkj")]
 
+[node name="Virus2" parent="." instance=ExtResource("1_o16ro")]
+position = Vector2(431, 294)
+
 [connection signal="antigen_emanate" from="Virus" to="TileMapController" method="_on_virus_antigen_emanate"]
+[connection signal="antigen_emanate" from="Virus2" to="TileMapController" method="_on_virus_antigen_emanate"]
