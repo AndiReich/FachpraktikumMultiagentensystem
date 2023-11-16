@@ -18,6 +18,7 @@ func next_move(delta: float, cell: Cell):
 func move(delta: float, cell: Cell):
 	# maybe have default move here and have input parameters from child classes
 	# e.g. some array or something of movement probabilites
+  
 	# implementation for Brownian motion taken from:
 	#     https://scipy-cookbook.readthedocs.io/items/BrownianMotion.html
 	var x: float = rng.randfn()
@@ -36,3 +37,6 @@ func generate():
 func emanate():
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
 	
+
+	
+

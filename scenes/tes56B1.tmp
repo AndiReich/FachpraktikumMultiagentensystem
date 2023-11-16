@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://73cbm33k6jn5"]
+
+[ext_resource type="PackedScene" uid="uid://bmeatc51d0dv2" path="res://scenes/agents/virusTest.tscn" id="1_o16ro"]
+[ext_resource type="PackedScene" uid="uid://bp60hcbn7cjcp" path="res://scenes/tilemaps/tile_map_controller.tscn" id="2_r5bkj"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Virus" parent="." instance=ExtResource("1_o16ro")]
+
+[node name="TileMapController" parent="." instance=ExtResource("2_r5bkj")]
+layer_0/tile_data = PackedInt32Array(393221, 196608, 0, 655369, 196608, 0, 589833, 196608, 0, 327695, 196608, 0, 327702, 196608, 0, 589845, 196608, 0)
+
+[connection signal="antigen_emanate" from="Virus" to="TileMapController" method="_on_virus_antigen_emanate"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp60hcbn7cjcp"]
+
+[ext_resource type="TileSet" uid="uid://b8yfcmtd5qdls" path="res://assets/tilesets/test_tileset.tres" id="1_27kfq"]
+[ext_resource type="Script" path="res://src/controller/tilemapController.gd" id="2_pa6ol"]
+
+[node name="TileMapController" type="TileMap"]
+tile_set = ExtResource("1_27kfq")
+cell_quadrant_size = 32
+format = 2
+script = ExtResource("2_pa6ol")
