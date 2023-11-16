@@ -8,6 +8,5 @@
 [node name="Virus" parent="." instance=ExtResource("1_o16ro")]
 
 [node name="TileMapController" parent="." instance=ExtResource("2_r5bkj")]
-layer_0/tile_data = PackedInt32Array(393221, 196608, 0, 655369, 196608, 0, 589833, 196608, 0, 327695, 196608, 0, 327702, 196608, 0, 589845, 196608, 0)
 
 [connection signal="antigen_emanate" from="Virus" to="TileMapController" method="_on_virus_antigen_emanate"]
