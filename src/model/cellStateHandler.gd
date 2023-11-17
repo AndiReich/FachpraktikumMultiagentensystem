@@ -1,11 +1,15 @@
 class_name CellStateHandler
 
 @export var random_walk_diffusion_rate: float = 10.0
-@export var alpha = 0.0 # weight of active movement in total velocity
-@export var beta = 1.0 # weight of Brownian motion/random walk in total velocity
-@export var gamma = 0.0 # weight of Chemotaxis movement in total velocity
+@export var alpha: float = 0.0 # weight of active movement in total velocity
+@export var beta: float = 1.0 # weight of Brownian motion/random walk in total velocity
+@export var gamma: float = 0.0 # weight of Chemotaxis movement in total velocity
+@export var emanate_cooldown: float = 0.5 # cooldown for emanation
 
 var rng = RandomNumberGenerator.new() # TODO: should probably be moved to main scene to have a globale RNG
+# set initial value to cooldown to start emanating at the beginning of the 
+# simulation
+var emanate_timer: float = emanate_cooldown 
 
 func _init():
 	rng.randomize()
