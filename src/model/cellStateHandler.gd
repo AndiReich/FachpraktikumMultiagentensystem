@@ -4,7 +4,7 @@ class_name CellStateHandler
 @export var alpha: float = 0.0 # weight of active movement in total velocity
 @export var beta: float = 1.0 # weight of Brownian motion/random walk in total velocity
 @export var gamma: float = 0.0 # weight of Chemotaxis movement in total velocity
-@export var emanate_cooldown: float = 0.5 # cooldown for emanation
+@export var emanate_cooldown: float = 1.0 # cooldown for emanation
 
 var rng = RandomNumberGenerator.new() # TODO: should probably be moved to main scene to have a globale RNG
 # set initial value to cooldown to start emanating at the beginning of the 
@@ -18,11 +18,10 @@ func _init():
 # default implementation should always fail as it is not intended to be instanciated.
 func next_move(delta: float, cell: Cell):
 	move(delta, cell)
-
+	
 func move(delta: float, cell: Cell):
 	# maybe have default move here and have input parameters from child classes
 	# e.g. some array or something of movement probabilites
-  
 	# implementation for Brownian motion taken from:
 	#     https://scipy-cookbook.readthedocs.io/items/BrownianMotion.html
 	var x: float = rng.randfn()

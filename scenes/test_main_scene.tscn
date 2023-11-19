@@ -5,12 +5,33 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Virus" parent="." instance=ExtResource("1_o16ro")]
-
 [node name="TileMapController" parent="." instance=ExtResource("2_r5bkj")]
 
+[node name="Virus" parent="." instance=ExtResource("1_o16ro")]
+position = Vector2(651, 439)
+
 [node name="Virus2" parent="." instance=ExtResource("1_o16ro")]
-position = Vector2(431, 294)
+position = Vector2(1143, 468)
+
+[node name="Virus3" parent="." instance=ExtResource("1_o16ro")]
+position = Vector2(587, 728)
+
+[node name="Virus4" parent="." instance=ExtResource("1_o16ro")]
+position = Vector2(388, 320)
+
+[node name="Virus5" parent="." instance=ExtResource("1_o16ro")]
+position = Vector2(933, 313)
+
+[node name="Virus6" parent="." instance=ExtResource("1_o16ro")]
+position = Vector2(969, 654)
+
+[node name="Virus7" parent="." instance=ExtResource("1_o16ro")]
+position = Vector2(337, 671)
 
 [connection signal="antigen_emanate" from="Virus" to="TileMapController" method="_on_virus_antigen_emanate"]
 [connection signal="antigen_emanate" from="Virus2" to="TileMapController" method="_on_virus_antigen_emanate"]
+[connection signal="antigen_emanate" from="Virus3" to="TileMapController" method="_on_virus_antigen_emanate"]
+[connection signal="antigen_emanate" from="Virus4" to="TileMapController" method="_on_virus_antigen_emanate"]
+[connection signal="antigen_emanate" from="Virus5" to="TileMapController" method="_on_virus_antigen_emanate"]
+[connection signal="antigen_emanate" from="Virus6" to="TileMapController" method="_on_virus_antigen_emanate"]
+[connection signal="antigen_emanate" from="Virus7" to="TileMapController" method="_on_virus_antigen_emanate"]

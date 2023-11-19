@@ -38,7 +38,6 @@ func _ready():
 func _process(delta: float):
 	next_move(delta)
 
-
 func next_move(delta: float):
 	## this is the only function that should be called for the cellStateHandler
 	cellStateHandler.next_move(delta, self)

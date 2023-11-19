@@ -2,6 +2,7 @@ class_name CellEmenatePatternReader
 
 const utils = preload("res://src/utils/matrix_utils.gd")
 
+
 func read_pattern_for_cell_type(cell_type: String) -> Array:
 	var filepath = get_filepath_of_celltype(cell_type)
 	if (!FileAccess.file_exists(filepath)):
@@ -26,12 +27,11 @@ func get_content_as_2d_Array(text: String) -> Array:
 		if(characters.size() > 0):
 			gradient_grid.append(characters)
 	
-	gradient_grid = utils.transpose_matrix_in_place(gradient_grid)
+	# FIXME: Why is the transpose here, the pattern is symmetric?
+	utils.transpose_matrix_in_place(gradient_grid)
 	return gradient_grid
 
 
-		
 func get_filepath_of_celltype(cell_type: String) -> String:
 	var cell_type_name = str(cell_type).to_lower()
 	return "res://resources/%s_gradient.txt" % cell_type_name
-	
