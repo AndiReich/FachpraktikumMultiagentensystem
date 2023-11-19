@@ -110,9 +110,9 @@ func add_emante_pattern_to_grid(cell_position: Vector2i, type_id: Cell.TYPES):
 		var global_x: int = offset_x + local_x
 		for local_y in pattern_matrix[0].size():
 			var global_y: int = offset_y + local_y
-			var value: float = float(pattern_matrix[local_x][local_y])
+			var value: float = float(pattern_matrix[local_x][local_y]) / self.ntiles
 			if(is_position_valid(global_x, global_y, value)):
-				current_grid_state[global_x][global_y] += value / self.ntiles
+				current_grid_state[global_x][global_y] += value 
 
 
 # Not that it matters, but we could check for valid positions in each loop to 
@@ -121,5 +121,7 @@ func is_position_valid(x: int, y: int, value: float) -> bool:
 	if(x < 0 || x >= current_grid_state.size()):
 		return false
 	if(y < 0 || y >= current_grid_state[0].size()):
+		return false
+	if(current_grid_state[x][y] >= 1.0):
 		return false
 	return true
