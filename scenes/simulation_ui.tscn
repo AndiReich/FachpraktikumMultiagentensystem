@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhfoe4ea55tbn"]
+[gd_scene load_steps=4 format=3 uid="uid://bhfoe4ea55tbn"]
 
 [ext_resource type="Script" path="res://src/ui/ToggleGrid.gd" id="1_6y3ih"]
 [ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="1_ulisa"]
+[ext_resource type="Script" path="res://scenes/ToggleTab.gd" id="2_i5tha"]
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_ulisa")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer" node_paths=PackedStringArray("tabContainer")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -40.0
+offset_right = -410.0
+grow_horizontal = 2
+grow_vertical = 0
+button_pressed = true
+script = ExtResource("2_i5tha")
+tabContainer = NodePath("../TabContainer")
 
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
 anchors_preset = 7
