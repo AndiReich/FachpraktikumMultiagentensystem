@@ -1,0 +1,102 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhfoe4ea55tbn"]
+
+[ext_resource type="Script" path="res://src/ui/ToggleGrid.gd" id="1_6y3ih"]
+[ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="1_ulisa"]
+
+[node name="UI" type="Node2D"]
+script = ExtResource("1_ulisa")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -408.0
+offset_top = -186.0
+offset_right = 408.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Agents" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+layout_mode = 2
+
+[node name="Grid Layers" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TabContainer/Grid Layers"]
+layout_mode = 2
+columns = 6
+
+[node name="ChemoHBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer"]
+layout_mode = 2
+text = "Chemo"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_6y3ih")
+substanceType = 4
+
+[node name="IL2HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer"]
+layout_mode = 2
+text = "IL2"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_6y3ih")
+
+[node name="IL4HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer"]
+layout_mode = 2
+text = "IL4"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_6y3ih")
+substanceType = 1
+
+[node name="IL5HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer"]
+layout_mode = 2
+text = "IL5"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_6y3ih")
+substanceType = 2
+
+[node name="IL6HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer"]
+layout_mode = 2
+text = "IL6"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_6y3ih")
+substanceType = 3
+
+[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer/CheckButton" method="_on_toggled"]
