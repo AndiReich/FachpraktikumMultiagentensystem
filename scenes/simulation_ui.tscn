@@ -1,12 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://clr2uylrh7h6o"]
+[gd_scene load_steps=15 format=3 uid="uid://clr2uylrh7h6o"]
 
 [ext_resource type="Script" path="res://src/ui/ToggleGrid.gd" id="1_6y3ih"]
 [ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="1_ulisa"]
 [ext_resource type="Script" path="res://scenes/ToggleTab.gd" id="2_i5tha"]
-[ext_resource type="Texture2D" uid="uid://3h8du7jt6l1o" path="res://assets/virusGreen1.png" id="3_2nhka"]
+[ext_resource type="Texture2D" uid="uid://3358gsyymc0j" path="res://assets/cells/Macrophage.png" id="3_h7ots"]
 [ext_resource type="Script" path="res://src/ui/CreateAgentButton.gd" id="4_cps25"]
+[ext_resource type="Texture2D" uid="uid://gvs6xwelscbh" path="res://assets/cells/APCMacrophage.png" id="4_ian7i"]
+[ext_resource type="Texture2D" uid="uid://b2fvsypxt1eyn" path="res://assets/cells/BCell.png" id="5_reyya"]
+[ext_resource type="Texture2D" uid="uid://btee0f8x4nw8s" path="res://assets/cells/THelperCell.png" id="6_g4xsa"]
 [ext_resource type="Script" path="res://src/ui/FPS.gd" id="6_roesk"]
 [ext_resource type="Script" path="res://src/ui/AgentCounter.gd" id="7_ivp52"]
+[ext_resource type="Texture2D" uid="uid://dlswbg8m06lap" path="res://assets/cells/PlasmaCell.png" id="7_jfiqw"]
+[ext_resource type="Texture2D" uid="uid://3h8du7jt6l1o" path="res://assets/cells/virusGreen1.png" id="8_bkq5s"]
+[ext_resource type="Texture2D" uid="uid://dnygmf53052an" path="res://assets/ui/TrashIcon.png" id="10_aqyy5"]
+[ext_resource type="Texture2D" uid="uid://dlkcqskk6i85o" path="res://assets/cells/Antigen.png" id="10_d5ptk"]
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_ulisa")
@@ -58,7 +65,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/MakrophageHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("3_h7ots")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/MakrophageHBoxContainer"]
@@ -70,7 +77,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/APCHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("4_ian7i")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/APCHBoxContainer"]
@@ -85,7 +92,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/BZelleHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("5_reyya")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/BZelleHBoxContainer"]
@@ -97,7 +104,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/TZelleHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("6_g4xsa")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/TZelleHBoxContainer"]
@@ -109,7 +116,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/PZelleHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("7_jfiqw")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/PZelleHBoxContainer"]
@@ -121,7 +128,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/VirusHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("8_bkq5s")
 stretch_mode = 3
 script = ExtResource("4_cps25")
 
@@ -134,7 +141,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/AntikoerperHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("10_d5ptk")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/AntikoerperHBoxContainer"]
@@ -145,7 +152,7 @@ text = "Antikörper"
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-texture_normal = ExtResource("3_2nhka")
+texture_normal = ExtResource("10_aqyy5")
 
 [node name="Grid Layers" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3k1wgfvps87m"
-path="res://.godot/imported/TestUiBorder.png-442c18e17573a4ce52c834e6d67c26e4.ctex"
+uid="uid://3358gsyymc0j"
+path="res://.godot/imported/Macrophage.png-bd9b51fc2b5073f260e211d7aa8677ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/TestUiBorder.png"
-dest_files=["res://.godot/imported/TestUiBorder.png-442c18e17573a4ce52c834e6d67c26e4.ctex"]
+source_file="res://assets/cells/Macrophage.png"
+dest_files=["res://.godot/imported/Macrophage.png-bd9b51fc2b5073f260e211d7aa8677ed.ctex"]
 
 [params]
 
