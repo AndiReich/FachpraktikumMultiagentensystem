@@ -29,6 +29,7 @@ layout_mode = 2
 layout_mode = 2
 texture_normal = ExtResource("1_62ya2")
 stretch_mode = 3
+script = ExtResource("7_35x53")
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/MakrophageHBoxContainer"]
 layout_mode = 2
@@ -41,6 +42,8 @@ layout_mode = 2
 layout_mode = 2
 texture_normal = ExtResource("2_5qdip")
 stretch_mode = 3
+script = ExtResource("7_35x53")
+agentType = 5
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/APCHBoxContainer"]
 custom_minimum_size = Vector2(130, 0)
@@ -56,6 +59,8 @@ layout_mode = 2
 layout_mode = 2
 texture_normal = ExtResource("3_0pfvy")
 stretch_mode = 3
+script = ExtResource("7_35x53")
+agentType = 3
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/BZelleHBoxContainer"]
 layout_mode = 2
@@ -68,6 +73,8 @@ layout_mode = 2
 layout_mode = 2
 texture_normal = ExtResource("4_e4kpe")
 stretch_mode = 3
+script = ExtResource("7_35x53")
+agentType = 2
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/TZelleHBoxContainer"]
 layout_mode = 2
@@ -80,6 +87,8 @@ layout_mode = 2
 layout_mode = 2
 texture_normal = ExtResource("5_hx3g3")
 stretch_mode = 3
+script = ExtResource("7_35x53")
+agentType = 1
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/PZelleHBoxContainer"]
 layout_mode = 2
@@ -106,6 +115,8 @@ layout_mode = 2
 layout_mode = 2
 texture_normal = ExtResource("8_e88mo")
 stretch_mode = 3
+script = ExtResource("7_35x53")
+agentType = 7
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/AntikoerperHBoxContainer"]
 layout_mode = 2

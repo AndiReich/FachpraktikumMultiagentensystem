@@ -2,18 +2,31 @@ extends TextureButton
 
 @export var agentType : Cell.TYPES
 
-# Called when the node enters the scene tree for the first time.
+var agentRootNode
+
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	agentRootNode = get_tree().root.find_child("AgentRootNode", true, false)
 
 func _pressed():
-	var virus = preload("res://scenes/agents/virusTest.tscn").instantiate()
-	var agentRootNode = get_tree().root.find_child("AgentRootNode", true, false)
-	virus.isInitialize = true
-	agentRootNode.add_child(virus)
+	var agent
+	match agentType:
+		Cell.TYPES.MACROPHAGE: print("")
+		
+		Cell.TYPES.PLASMACYTE: print("")
+		
+		Cell.TYPES.THELPERCELL: print("")
+		
+		Cell.TYPES.BCELL: print("")
+		
+		Cell.TYPES.ACTIVATEDBCELL: print("")
+		
+		Cell.TYPES.ANTIGENPRESENTINGCELL: print("")
+		
+		Cell.TYPES.ANTIGEN: agent = preload("res://scenes/agents/virusTest.tscn").instantiate()
+		
+		Cell.TYPES.ACTIVATEDTHELPERCELL: print("")
+	
+	if agent:
+		agent.isInitialize = true
+		agentRootNode.add_child(agent)
 	
