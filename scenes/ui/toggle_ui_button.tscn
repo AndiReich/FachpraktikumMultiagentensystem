@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjdomkrr3l6u0"]
+
+[ext_resource type="Script" path="res://src/ui/ToggleUiButton.gd" id="1_kqh6k"]
+
+[node name="ToggleUiButton" type="CheckButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ToggleUiCheckButton"
+script = ExtResource("1_kqh6k")

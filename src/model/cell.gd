@@ -3,6 +3,7 @@ class_name Cell extends Area2D
 enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, ANTIGEN, ACTIVATEDTHELPERCELL} 
 
 @export var initialCellType: TYPES = TYPES.ANTIGEN
+@export var isInitialize: bool = false
 
 var cellStateHandler: CellStateHandler = CellStateHandler.new()
 
@@ -34,9 +35,22 @@ func _ready():
 		TYPES.ANTIGEN: cellStateHandler = Antigen.new()
 		
 		TYPES.ACTIVATEDTHELPERCELL: print("")
+	
+	var root = get_tree().root
+	var tileMapController = root.find_child("TileMapController", true, false)
+	antigen_emanate.connect(tileMapController._on_virus_antigen_emanate)
+	input_event.connect(_on_input_event)
+	followMouse()
 
 func _process(delta: float):
-	next_move(delta)
+	if isInitialize:
+		followMouse()
+	else:
+		next_move(delta)
+
+func followMouse():
+	position = get_global_mouse_position()
+	position = position.clamp(Vector2.ZERO, get_viewport_rect().size)
 
 func next_move(delta: float):
 	## this is the only function that should be called for the cellStateHandler
@@ -44,3 +58,8 @@ func next_move(delta: float):
 
 func set_state(cellStateHandler: CellStateHandler):
 	self.cellStateHandler = cellStateHandler
+
+
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		isInitialize = false

@@ -1,6 +1,7 @@
 class_name TileMapController extends TileMap
 
 const utils = preload("res://src/utils/matrix_utils.gd")
+enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CHEMO}
 
 var old_grid_state: Array = []
 var current_grid_state: Array = [] 
@@ -24,8 +25,7 @@ func _enter_tree():
 		var value = reader.read_pattern_for_cell_type(cell_type)
 		if(value != []):
 			cell_pattern_dict[cell_type] = value
-
-
+	
 func _ready():
 	var cell_size: Vector2i = self.tile_set.tile_size
 	var viewport_size: Vector2i = self.get_viewport_rect().size

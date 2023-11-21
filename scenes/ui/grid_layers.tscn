@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb8fjnap60vwe"]
+
+[ext_resource type="Script" path="res://src/ui/ToggleGrid.gd" id="1_2c5ce"]
+
+[node name="Grid Layers" type="MarginContainer"]
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 6
+
+[node name="ChemoHBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/ChemoHBoxContainer"]
+layout_mode = 2
+text = "Chemo"
+
+[node name="CheckButton" type="CheckButton" parent="GridContainer/ChemoHBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_2c5ce")
+substanceType = 4
+
+[node name="IL2HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/IL2HBoxContainer"]
+layout_mode = 2
+text = "IL2"
+
+[node name="CheckButton" type="CheckButton" parent="GridContainer/IL2HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_2c5ce")
+
+[node name="IL4HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/IL4HBoxContainer"]
+layout_mode = 2
+text = "IL4"
+
+[node name="CheckButton" type="CheckButton" parent="GridContainer/IL4HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_2c5ce")
+substanceType = 1
+
+[node name="IL5HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/IL5HBoxContainer"]
+layout_mode = 2
+text = "IL5"
+
+[node name="CheckButton" type="CheckButton" parent="GridContainer/IL5HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_2c5ce")
+substanceType = 2
+
+[node name="IL6HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/IL6HBoxContainer"]
+layout_mode = 2
+text = "IL6"
+
+[node name="CheckButton" type="CheckButton" parent="GridContainer/IL6HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_2c5ce")
+substanceType = 3
+
+[connection signal="toggled" from="GridContainer/ChemoHBoxContainer/CheckButton" to="GridContainer/ChemoHBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="GridContainer/IL2HBoxContainer/CheckButton" to="GridContainer/IL2HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="GridContainer/IL4HBoxContainer/CheckButton" to="GridContainer/IL4HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="GridContainer/IL5HBoxContainer/CheckButton" to="GridContainer/IL5HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="GridContainer/IL6HBoxContainer/CheckButton" to="GridContainer/IL6HBoxContainer/CheckButton" method="_on_toggled"]
