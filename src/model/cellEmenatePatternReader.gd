@@ -1,5 +1,8 @@
 class_name CellEmenatePatternReader
 
+const utils = preload("res://src/utils/matrix_utils.gd")
+
+
 func read_pattern_for_cell_type(cell_type: String) -> Array:
 	var filepath = get_filepath_of_celltype(cell_type)
 	if (!FileAccess.file_exists(filepath)):
@@ -24,29 +27,11 @@ func get_content_as_2d_Array(text: String) -> Array:
 		if(characters.size() > 0):
 			gradient_grid.append(characters)
 	
-	gradient_grid = transpose_matrix(gradient_grid)
+	# FIXME: Why is the transpose here, the pattern is symmetric?
+	utils.transpose_matrix_in_place(gradient_grid)
 	return gradient_grid
 
-func transpose_matrix(matrix: Array) -> Array:
-	# in case we want to turn the matrix by 90°
-	var transposed_matrix = []
 
-	# Get the number of rows and columns in the original matrix
-	var rows = matrix.size()
-	var columns = matrix[0].size()
-
-	# Initialize the transposed matrix with empty arrays
-	for i in range(columns):
-		transposed_matrix.append([])
-
-	# Iterate through the original matrix and fill in the transposed matrix
-	for i in range(rows):
-		for j in range(columns):
-			transposed_matrix[j].append(matrix[i][j])
-
-	return transposed_matrix
-		
 func get_filepath_of_celltype(cell_type: String) -> String:
 	var cell_type_name = str(cell_type).to_lower()
 	return "res://resources/%s_gradient.txt" % cell_type_name
-	
