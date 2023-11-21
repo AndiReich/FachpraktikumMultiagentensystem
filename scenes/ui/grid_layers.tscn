@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://src/ui/ToggleGrid.gd" id="1_2c5ce"]
 
 [node name="Grid Layers" type="MarginContainer"]
-visible = false
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2

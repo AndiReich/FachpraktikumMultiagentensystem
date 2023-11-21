@@ -1,6 +1,7 @@
-class_name SimulationUI extends Control
+extends Control
 
-signal on_grid_toggle (substance_type: TileMapController.SUBSTANCE_TYPE)
+signal close
+var selectedCode = [0,0,0,0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

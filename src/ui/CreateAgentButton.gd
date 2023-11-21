@@ -20,7 +20,8 @@ func _pressed():
 		
 		Cell.TYPES.ACTIVATEDBCELL: print("")
 		
-		Cell.TYPES.ANTIGENPRESENTINGCELL: print("")
+		Cell.TYPES.ANTIGENPRESENTINGCELL: 
+			print("APC")
 		
 		Cell.TYPES.ANTIGEN: agent = preload("res://scenes/agents/virusTest.tscn").instantiate()
 		

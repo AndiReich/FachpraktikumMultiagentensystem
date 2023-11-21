@@ -84,5 +84,5 @@ func find_grid_positions_relative_to_cell(
 			relative_positions.append(Vector3i(pos_x, pos_y, value))
 	return relative_positions
 	
-func _on_ui_on_grid_toggle(substance_type):
+func _on_simulation_ui_on_grid_toggle(substance_type):
 	set_layer_enabled(0, !is_layer_enabled((0)))

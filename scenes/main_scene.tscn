@@ -7,8 +7,8 @@
 
 [node name="TileMapController" parent="." instance=ExtResource("1_pmsyw")]
 
-[node name="UI" parent="." instance=ExtResource("2_fajki")]
+[node name="SimulationUI" parent="." instance=ExtResource("2_fajki")]
 
 [node name="AgentRootNode" type="Node2D" parent="."]
 
-[connection signal="on_grid_toggle" from="UI" to="TileMapController" method="_on_ui_on_grid_toggle"]
+[connection signal="on_grid_toggle" from="SimulationUI" to="TileMapController" method="_on_simulation_ui_on_grid_toggle"]
