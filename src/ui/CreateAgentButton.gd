@@ -1,5 +1,6 @@
 extends TextureButton
 
+@export var agentType : Cell.TYPES
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +14,6 @@ func _process(delta):
 func _pressed():
 	var virus = preload("res://scenes/agents/virusTest.tscn").instantiate()
 	var agentRootNode = get_tree().root.find_child("AgentRootNode", true, false)
-	virus.initialCellType = Cell.TYPES.ANTIGEN
 	virus.isInitialize = true
 	agentRootNode.add_child(virus)
 	

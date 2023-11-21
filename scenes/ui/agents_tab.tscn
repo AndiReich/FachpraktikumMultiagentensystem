@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=3 uid="uid://dr0145lm6r45m"]
+
+[ext_resource type="Texture2D" uid="uid://3358gsyymc0j" path="res://assets/cells/Macrophage.png" id="1_62ya2"]
+[ext_resource type="Texture2D" uid="uid://gvs6xwelscbh" path="res://assets/cells/APCMacrophage.png" id="2_5qdip"]
+[ext_resource type="Texture2D" uid="uid://b2fvsypxt1eyn" path="res://assets/cells/BCell.png" id="3_0pfvy"]
+[ext_resource type="Texture2D" uid="uid://btee0f8x4nw8s" path="res://assets/cells/THelperCell.png" id="4_e4kpe"]
+[ext_resource type="Texture2D" uid="uid://dlswbg8m06lap" path="res://assets/cells/PlasmaCell.png" id="5_hx3g3"]
+[ext_resource type="Texture2D" uid="uid://3h8du7jt6l1o" path="res://assets/cells/virusGreen1.png" id="6_wifhi"]
+[ext_resource type="Script" path="res://src/ui/CreateAgentButton.gd" id="7_35x53"]
+[ext_resource type="Texture2D" uid="uid://dlkcqskk6i85o" path="res://assets/cells/Antigen.png" id="8_e88mo"]
+[ext_resource type="Texture2D" uid="uid://dnygmf53052an" path="res://assets/ui/TrashIcon.png" id="9_c028h"]
+
+[node name="Agents" type="PanelContainer"]
+
+[node name="AgentsList" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="AgentsList"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="AgentsList/CenterContainer"]
+layout_mode = 2
+columns = 10
+
+[node name="MakrophageHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/MakrophageHBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_62ya2")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/MakrophageHBoxContainer"]
+layout_mode = 2
+text = "Makrophage"
+
+[node name="APCHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/APCHBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_5qdip")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/APCHBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Antigen-Präsentierende-Zelle"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BZelleHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/BZelleHBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_0pfvy")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/BZelleHBoxContainer"]
+layout_mode = 2
+text = "B-Zelle"
+
+[node name="TZelleHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/TZelleHBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_e4kpe")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/TZelleHBoxContainer"]
+layout_mode = 2
+text = "T-Zelle"
+
+[node name="PZelleHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/PZelleHBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_hx3g3")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/PZelleHBoxContainer"]
+layout_mode = 2
+text = "P-Zelle"
+
+[node name="VirusHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/VirusHBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_wifhi")
+stretch_mode = 3
+script = ExtResource("7_35x53")
+agentType = 6
+
+[node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/VirusHBoxContainer"]
+layout_mode = 2
+text = "Virus"
+
+[node name="AntikoerperHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/AntikoerperHBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_e88mo")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/AntikoerperHBoxContainer"]
+layout_mode = 2
+text = "Antikörper"
+
+[node name="DeleteButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("9_c028h")

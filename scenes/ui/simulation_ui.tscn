@@ -1,19 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://clr2uylrh7h6o"]
+[gd_scene load_steps=7 format=3 uid="uid://clr2uylrh7h6o"]
 
-[ext_resource type="Script" path="res://src/ui/ToggleGrid.gd" id="1_6y3ih"]
 [ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="1_ulisa"]
 [ext_resource type="PackedScene" uid="uid://cjdomkrr3l6u0" path="res://scenes/ui/toggle_ui_button.tscn" id="2_ai3h6"]
-[ext_resource type="Texture2D" uid="uid://3358gsyymc0j" path="res://assets/cells/Macrophage.png" id="3_h7ots"]
-[ext_resource type="Script" path="res://src/ui/CreateAgentButton.gd" id="4_cps25"]
-[ext_resource type="Texture2D" uid="uid://gvs6xwelscbh" path="res://assets/cells/APCMacrophage.png" id="4_ian7i"]
-[ext_resource type="Texture2D" uid="uid://b2fvsypxt1eyn" path="res://assets/cells/BCell.png" id="5_reyya"]
-[ext_resource type="Texture2D" uid="uid://btee0f8x4nw8s" path="res://assets/cells/THelperCell.png" id="6_g4xsa"]
+[ext_resource type="PackedScene" uid="uid://cb8fjnap60vwe" path="res://scenes/ui/grid_layers.tscn" id="3_lenj1"]
+[ext_resource type="PackedScene" uid="uid://dr0145lm6r45m" path="res://scenes/ui/agents_tab.tscn" id="4_1uas1"]
 [ext_resource type="Script" path="res://src/ui/FPS.gd" id="6_roesk"]
 [ext_resource type="Script" path="res://src/ui/AgentCounter.gd" id="7_ivp52"]
-[ext_resource type="Texture2D" uid="uid://dlswbg8m06lap" path="res://assets/cells/PlasmaCell.png" id="7_jfiqw"]
-[ext_resource type="Texture2D" uid="uid://3h8du7jt6l1o" path="res://assets/cells/virusGreen1.png" id="8_bkq5s"]
-[ext_resource type="Texture2D" uid="uid://dnygmf53052an" path="res://assets/ui/TrashIcon.png" id="10_aqyy5"]
-[ext_resource type="Texture2D" uid="uid://dlkcqskk6i85o" path="res://assets/cells/Antigen.png" id="10_d5ptk"]
 
 [node name="UI" type="Node2D"]
 script = ExtResource("1_ulisa")
@@ -39,184 +31,11 @@ offset_right = 408.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Agents" type="PanelContainer" parent="CanvasLayer/TabContainer"]
+[node name="Agents" parent="CanvasLayer/TabContainer" instance=ExtResource("4_1uas1")]
 layout_mode = 2
 
-[node name="AgentsList" type="MarginContainer" parent="CanvasLayer/TabContainer/Agents"]
+[node name="Grid Layers" parent="CanvasLayer/TabContainer" instance=ExtResource("3_lenj1")]
 layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList"]
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer"]
-layout_mode = 2
-columns = 10
-
-[node name="MakrophageHBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/MakrophageHBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("3_h7ots")
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/MakrophageHBoxContainer"]
-layout_mode = 2
-text = "Makrophage"
-
-[node name="APCHBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/APCHBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("4_ian7i")
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/APCHBoxContainer"]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-text = "Antigen-Präsentierende-Zelle"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="BZelleHBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/BZelleHBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("5_reyya")
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/BZelleHBoxContainer"]
-layout_mode = 2
-text = "B-Zelle"
-
-[node name="TZelleHBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/TZelleHBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("6_g4xsa")
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/TZelleHBoxContainer"]
-layout_mode = 2
-text = "T-Zelle"
-
-[node name="PZelleHBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/PZelleHBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("7_jfiqw")
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/PZelleHBoxContainer"]
-layout_mode = 2
-text = "P-Zelle"
-
-[node name="VirusHBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/VirusHBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("8_bkq5s")
-stretch_mode = 3
-script = ExtResource("4_cps25")
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/VirusHBoxContainer"]
-layout_mode = 2
-text = "Virus"
-
-[node name="AntikoerperHBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/AntikoerperHBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("10_d5ptk")
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Agents/AgentsList/CenterContainer/GridContainer/AntikoerperHBoxContainer"]
-layout_mode = 2
-text = "Antikörper"
-
-[node name="DeleteButton" type="TextureButton" parent="CanvasLayer/TabContainer/Agents"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-texture_normal = ExtResource("10_aqyy5")
-
-[node name="Grid Layers" type="MarginContainer" parent="CanvasLayer/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TabContainer/Grid Layers"]
-layout_mode = 2
-columns = 6
-
-[node name="ChemoHBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer"]
-layout_mode = 2
-text = "Chemo"
-
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer"]
-layout_mode = 2
-button_pressed = true
-script = ExtResource("1_6y3ih")
-substanceType = 4
-
-[node name="IL2HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer"]
-layout_mode = 2
-text = "IL2"
-
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer"]
-layout_mode = 2
-button_pressed = true
-script = ExtResource("1_6y3ih")
-
-[node name="IL4HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer"]
-layout_mode = 2
-text = "IL4"
-
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer"]
-layout_mode = 2
-button_pressed = true
-script = ExtResource("1_6y3ih")
-substanceType = 1
-
-[node name="IL5HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer"]
-layout_mode = 2
-text = "IL5"
-
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer"]
-layout_mode = 2
-button_pressed = true
-script = ExtResource("1_6y3ih")
-substanceType = 2
-
-[node name="IL6HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer"]
-layout_mode = 2
-text = "IL6"
-
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer"]
-layout_mode = 2
-button_pressed = true
-script = ExtResource("1_6y3ih")
-substanceType = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_right = 40.0
@@ -229,9 +48,3 @@ script = ExtResource("6_roesk")
 [node name="AgentCounter" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("7_ivp52")
-
-[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/ChemoHBoxContainer/CheckButton" method="_on_toggled"]
-[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL2HBoxContainer/CheckButton" method="_on_toggled"]
-[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL4HBoxContainer/CheckButton" method="_on_toggled"]
-[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL5HBoxContainer/CheckButton" method="_on_toggled"]
-[connection signal="toggled" from="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer/CheckButton" to="CanvasLayer/TabContainer/Grid Layers/GridContainer/IL6HBoxContainer/CheckButton" method="_on_toggled"]
