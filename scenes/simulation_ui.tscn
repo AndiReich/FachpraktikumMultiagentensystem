@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/ui/ToggleGrid.gd" id="1_6y3ih"]
 [ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="1_ulisa"]
-[ext_resource type="Script" path="res://scenes/ToggleTab.gd" id="2_i5tha"]
+[ext_resource type="PackedScene" uid="uid://cjdomkrr3l6u0" path="res://scenes/ui/toggle_ui_button.tscn" id="2_ai3h6"]
 [ext_resource type="Texture2D" uid="uid://3358gsyymc0j" path="res://assets/cells/Macrophage.png" id="3_h7ots"]
 [ext_resource type="Script" path="res://src/ui/CreateAgentButton.gd" id="4_cps25"]
 [ext_resource type="Texture2D" uid="uid://gvs6xwelscbh" path="res://assets/cells/APCMacrophage.png" id="4_ian7i"]
@@ -20,20 +20,12 @@ script = ExtResource("1_ulisa")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CheckBox" type="CheckBox" parent="CanvasLayer" node_paths=PackedStringArray("tabContainer")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -450.0
-offset_top = -40.0
-offset_right = -410.0
-grow_horizontal = 2
-grow_vertical = 0
-button_pressed = true
-script = ExtResource("2_i5tha")
-tabContainer = NodePath("../TabContainer")
+[node name="ToggleUiButton" parent="CanvasLayer" node_paths=PackedStringArray("control") instance=ExtResource("2_ai3h6")]
+offset_left = -443.0
+offset_top = 494.0
+offset_right = -411.0
+offset_bottom = 526.0
+control = NodePath("../TabContainer")
 
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
 anchors_preset = 7

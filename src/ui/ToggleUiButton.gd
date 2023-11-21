@@ -1,6 +1,6 @@
-extends CheckBox
+class_name ToggleUiButton extends CheckButton
 
-@export var tabContainer : TabContainer
+@export var control : Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,4 +12,4 @@ func _process(delta):
 	pass
 
 func _toggled(button_pressed):
-	tabContainer.visible = !tabContainer.visible 
+	control.visible = !control.visible 
