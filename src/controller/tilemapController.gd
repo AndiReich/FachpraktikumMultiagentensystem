@@ -1,5 +1,6 @@
 class_name TileMapController extends TileMap
 
+enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CHEMO}
 
 var grid_state = []
 var patterns_loaded = false
@@ -14,7 +15,6 @@ func _enter_tree():
 		if(value != []):
 			cell_pattern_dict[cell_type] = value
 	
-
 func _ready():
 	var cell_size : Vector2i = self.tile_set.tile_size
 	var viewport_size : Vector2i = self.get_viewport_rect().size
@@ -30,7 +30,6 @@ func _ready():
 func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 	var map_position : Vector2i = self.local_to_map(cell_position)
 	set_pattern_by_cell_type(map_position, type_id)
-	
 	
 func set_pattern_by_cell_type(cell_position: Vector2i, type_id: Cell.TYPES):
 	var cell_type = Cell.TYPES.find_key(type_id)
@@ -85,5 +84,5 @@ func find_grid_positions_relative_to_cell(
 			relative_positions.append(Vector3i(pos_x, pos_y, value))
 	return relative_positions
 	
-	
-
+func _on_simulation_ui_on_grid_toggle(substance_type):
+	set_layer_enabled(0, !is_layer_enabled((0)))
