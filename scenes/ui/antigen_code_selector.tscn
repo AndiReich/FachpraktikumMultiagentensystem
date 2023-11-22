@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmgimwrxuvpoj"]
+[gd_scene load_steps=4 format=3 uid="uid://cmgimwrxuvpoj"]
 
-[ext_resource type="Script" path="res://src/ui/AntigenCodeSelector.gd" id="1_xfrc6"]
+[ext_resource type="Script" path="res://src/ui/antigenCodeSelector/AntigenCodeSelector.gd" id="1_iarbg"]
+[ext_resource type="Script" path="res://src/ui/antigenCodeSelector/AntigenCodeButton.gd" id="2_206h8"]
+[ext_resource type="Script" path="res://src/ui/antigenCodeSelector/CloseButton.gd" id="3_3tfym"]
 
 [node name="antigen_code_selector" type="Control"]
 layout_mode = 3
@@ -9,10 +11,61 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xfrc6")
+script = ExtResource("1_iarbg")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.5
+offset_top = -256.0
+offset_right = 103.5
+offset_bottom = -158.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "0"
+script = ExtResource("2_206h8")
+
+[node name="Button2" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "0"
+script = ExtResource("2_206h8")
+codePosition = 1
+
+[node name="Button3" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "0"
+script = ExtResource("2_206h8")
+codePosition = 2
+
+[node name="Button4" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "0"
+script = ExtResource("2_206h8")
+codePosition = 3
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "OK"
+script = ExtResource("3_3tfym")
