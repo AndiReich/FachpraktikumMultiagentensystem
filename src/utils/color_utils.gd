@@ -40,6 +40,6 @@ static func change_color(image: Image, new_color: Color):
 				image.set_pixel(x, y, color_with_alpha)
 	return image
 	
-static func blend_textures(image1: Image, image2: Image):
-	image1.blend_rect(image2, Rect2i(Vector2.ZERO, image2.get_size()), Vector2i.ZERO)
-	return image1
+static func blend_textures(base: Image, overlay: Image):
+	base.blend_rect(overlay, Rect2i(Vector2.ZERO, overlay.get_size()), Vector2i.ZERO)
+	return base
