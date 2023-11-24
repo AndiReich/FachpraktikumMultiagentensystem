@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7x4jwmf2hpix"
-path="res://.godot/imported/APCMacrophage2Overlay.png-6f0cab7c2086627465b9eb9ac078260a.ctex"
+uid="uid://gxpelo8x1418"
+path="res://.godot/imported/Plasmacyte.png-ae930ff914a73c93a30f09167e482661.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cells/APCMacrophage2Overlay.png"
-dest_files=["res://.godot/imported/APCMacrophage2Overlay.png-6f0cab7c2086627465b9eb9ac078260a.ctex"]
+source_file="res://assets/cells/Plasmacyte.png"
+dest_files=["res://.godot/imported/Plasmacyte.png-ae930ff914a73c93a30f09167e482661.ctex"]
 
 [params]
 

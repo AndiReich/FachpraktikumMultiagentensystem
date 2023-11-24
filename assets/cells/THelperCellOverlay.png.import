@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baml3v1qb6y0a"
-path="res://.godot/imported/Debug_Empty_Sprite.png-41ea6664481d7a287a831ac610b35bb2.ctex"
+uid="uid://b2bn70mvhis8d"
+path="res://.godot/imported/THelperCellOverlay.png-941a3ea8384f2602e4032c24e7cdf894.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cells/Debug_Empty_Sprite.png"
-dest_files=["res://.godot/imported/Debug_Empty_Sprite.png-41ea6664481d7a287a831ac610b35bb2.ctex"]
+source_file="res://assets/cells/THelperCellOverlay.png"
+dest_files=["res://.godot/imported/THelperCellOverlay.png-941a3ea8384f2602e4032c24e7cdf894.ctex"]
 
 [params]
 

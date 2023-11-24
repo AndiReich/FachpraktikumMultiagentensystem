@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62s2deui558p"
-path="res://.godot/imported/APCMacrophage2Main.png-b2472a6dd4d3764834d509c80784c8b6.ctex"
+uid="uid://dix522rkhepb5"
+path="res://.godot/imported/MacrophageOverlay.png-1669949569c7c6900492ad84de54f803.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cells/APCMacrophage2Main.png"
-dest_files=["res://.godot/imported/APCMacrophage2Main.png-b2472a6dd4d3764834d509c80784c8b6.ctex"]
+source_file="res://assets/cells/MacrophageOverlay.png"
+dest_files=["res://.godot/imported/MacrophageOverlay.png-1669949569c7c6900492ad84de54f803.ctex"]
 
 [params]
 

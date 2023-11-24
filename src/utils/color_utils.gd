@@ -9,6 +9,17 @@ static func get_base_permutations_with_overlay(base: Image, overlay : Image, ran
 		result_images.append(image)
 		
 	return result_images
+	
+static func get_base_permutations(base: Image, range_of_mutations: int):
+	var result_images = []
+	for i in range(range_of_mutations):
+		var base_copy = Image.new()
+		base_copy.copy_from(base)
+		var new_color = calculate_color(i, range_of_mutations)
+		var base_colored = change_color(base_copy, new_color)
+		result_images.append(base_colored)
+		
+	return result_images
 
 static func calculate_color(index, total_colors):
 	var hue = float(index) / float(total_colors)
@@ -19,8 +30,12 @@ static func calculate_color(index, total_colors):
 static func change_color(image: Image, new_color: Color):
 	for y in image.get_height():
 		for x in image.get_width():
-			var alpha = image.get_pixel(x, y).a
-			if(!alpha == 0):
+			var pixel = image.get_pixel(x, y)
+			var alpha = pixel.a
+			var red = pixel.r8
+			var green = pixel.g8
+			var blue = pixel.b8
+			if(!alpha == 0 && red == 255 && green == 255 && blue == 255):
 				var color_with_alpha = Color(new_color, alpha)
 				image.set_pixel(x, y, color_with_alpha)
 	return image
