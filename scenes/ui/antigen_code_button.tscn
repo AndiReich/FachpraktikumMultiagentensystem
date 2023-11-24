@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg22mua1vs1rx"]
+
+[ext_resource type="Theme" uid="uid://0nmqaghlst86" path="res://assets/ui/base_theme.tres" id="1_peft4"]
+[ext_resource type="Script" path="res://src/ui/antigenCodeSelector/AntigenCodeButton.gd" id="2_wm16l"]
+
+[node name="antigen_code_button" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(35, 35)
+offset_right = 38.0
+offset_bottom = 23.0
+theme = ExtResource("1_peft4")
+theme_type_variation = &"SwitchGreenRed"
+toggle_mode = true
+text = "0"
+script = ExtResource("2_wm16l")
