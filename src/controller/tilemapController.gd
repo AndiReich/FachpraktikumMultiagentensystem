@@ -17,7 +17,6 @@ var update_timer: float = update_cooldown
 var ntiles: int = 10 	# FIXME: assign dynamically based on the number of tiles 
 						# in the current tile set
 
-
 func _enter_tree(): 
 	var reader = CellEmenatePatternReader.new()
 	# initialize patterns from config files
@@ -40,7 +39,6 @@ func _ready():
 			old_grid_state[x].append(0.0)
 			current_grid_state[x].append(0.0)
 
-
 func _process(delta):
 	update_timer += delta
 	if update_timer > update_cooldown: 
@@ -49,13 +47,11 @@ func _process(delta):
 		update_timer = 0.0
 	update_tile_map()
 	old_grid_state = current_grid_state.duplicate(true)
-
-
-func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
+	
+func _on_virus_antigen_emanate(cell_position: Vector2, type_id: Cell.TYPES):
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	add_emante_pattern_to_grid(map_position, type_id)
-
-
+	
 # The logic is as follows: compare the values in the old grid state with the 
 # current ones and update the cells only when they differ to reduce the number
 # of set_cell calls. To reduce the number of calls further round to the nearest
@@ -72,14 +68,12 @@ func update_tile_map():
 				var tile: Vector2i = Vector2i(tile_idx, 0)
 				set_cell(0, pos, 0, tile)
 
-
 func add_decay_to_grid():
 	for x in grid_size_x:
 		for y in grid_size_y:
 			var decay: float = max(min_decay, decay_rate * current_grid_state[x][y])
 			var updated_value: float = current_grid_state[x][y] - decay
 			current_grid_state[x][y] = updated_value if updated_value >= 0.0 else 0.0 
-
 
 func add_diffusion_simple_to_grid():
 	var diffusion_contribution: Array = utils.multiply_matrix_by_float(current_grid_state, diffusion_coefficient)
@@ -93,7 +87,6 @@ func add_diffusion_simple_to_grid():
 	for x in grid_size_x:
 		for y in grid_size_y:
 			current_grid_state[x][y] = remainder[x][y] + north[x][y] + east[x][y] + south[x][y] + west[x][y]
-
 
 func add_emante_pattern_to_grid(cell_position: Vector2i, type_id: Cell.TYPES):
 	var cell_type: String = Cell.TYPES.find_key(type_id)
@@ -113,7 +106,6 @@ func add_emante_pattern_to_grid(cell_position: Vector2i, type_id: Cell.TYPES):
 			var value: float = float(pattern_matrix[local_x][local_y]) / self.ntiles
 			if(is_position_valid(global_x, global_y, value)):
 				current_grid_state[global_x][global_y] += value 
-
 
 # Not that it matters, but we could check for valid positions in each loop to 
 # avoid three if statements per x,y iteration in add_emanate_pattern_to_grid.

@@ -19,12 +19,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ch054"]
 
 [node name="Virus" type="Area2D"]
-position = Vector2(569, 455)
 script = ExtResource("1_mqrm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-9.53674e-07, -2.38419e-07)
-scale = Vector2(0.921875, 0.921875)
 sprite_frames = SubResource("SpriteFrames_cv32x")
 frame_progress = 0.90946
 
