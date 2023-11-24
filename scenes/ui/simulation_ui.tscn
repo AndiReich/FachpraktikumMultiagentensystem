@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://clr2uylrh7h6o"]
 
 [ext_resource type="PackedScene" uid="uid://cjdomkrr3l6u0" path="res://scenes/ui/toggle_ui_button.tscn" id="2_ai3h6"]
+[ext_resource type="Script" path="res://src/ui/MouseHandler.gd" id="2_efkr2"]
 [ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="2_r2nu4"]
 [ext_resource type="PackedScene" uid="uid://cb8fjnap60vwe" path="res://scenes/ui/grid_layers.tscn" id="3_lenj1"]
-[ext_resource type="Script" path="res://scenes/ui/MouseHandle.gd" id="3_ttte6"]
 [ext_resource type="PackedScene" uid="uid://dr0145lm6r45m" path="res://scenes/ui/agents_tab.tscn" id="4_1uas1"]
 [ext_resource type="Script" path="res://src/ui/FPS.gd" id="6_roesk"]
 [ext_resource type="Script" path="res://src/ui/AgentCounter.gd" id="7_ivp52"]
@@ -22,7 +22,7 @@ layer = 0
 [node name="Container" type="Container" parent="CanvasLayer"]
 offset_right = 1908.0
 offset_bottom = 1051.0
-script = ExtResource("3_ttte6")
+script = ExtResource("2_efkr2")
 
 [node name="ToggleUiButton" parent="CanvasLayer" node_paths=PackedStringArray("control") instance=ExtResource("2_ai3h6")]
 offset_left = -443.0
@@ -65,4 +65,5 @@ script = ExtResource("7_ivp52")
 [node name="antigen_code_selector" parent="CanvasLayer" instance=ExtResource("8_7vfiw")]
 visible = false
 
+[connection signal="deleteMode" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_delete_mode"]
 [connection signal="instantiateAgent" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_instantiate_agent"]

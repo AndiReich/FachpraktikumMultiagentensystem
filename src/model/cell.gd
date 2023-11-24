@@ -49,3 +49,9 @@ func next_move(delta: float):
 
 func set_state(cellStateHandler: CellStateHandler):
 	self.cellStateHandler = cellStateHandler
+
+func _input_event(viewport, event, shape_idx):
+	var simulationUI = get_tree().root.find_child("SimulationUI", true, false)
+	if simulationUI.deleteMode and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			queue_free()

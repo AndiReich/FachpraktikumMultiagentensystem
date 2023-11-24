@@ -7,6 +7,7 @@ var macrophageSprite = preload("res://assets/cells/Macrophage.png")
 var plasmaCellSprite = preload("res://assets/cells/PlasmaCell.png")
 var tHelperSprite = preload("res://assets/cells/THelperCell.png")
 var virusSprite = preload("res://assets/cells/virusGreen0.png")
+var deleteSprite = preload("res://assets/ui/TrashIcon.png")
 
 var antibodyScene
 var apcScene
@@ -62,36 +63,42 @@ func _gui_input(event):
 				agent.position = mouse_position
 				
 func _on_agents_instantiate_agent(agentType):
-	selectedAgentType = agentType
-	match selectedAgentType:
-		Cell.TYPES.MACROPHAGE:
-			Input.set_custom_mouse_cursor(macrophageSprite)
+	if selectedAgentType == agentType:
+		selectedAgentType = null
+		Input.set_custom_mouse_cursor(null)
+	else:		
+		selectedAgentType = agentType
+		owner.deleteMode = false
 		
-		Cell.TYPES.PLASMACYTE:
-			var code = await select_antigen_code()			
-			Input.set_custom_mouse_cursor(plasmaCellSprite)
-		
-		Cell.TYPES.THELPERCELL:
-			Input.set_custom_mouse_cursor(tHelperSprite)
-		
-		Cell.TYPES.BCELL:
-			Input.set_custom_mouse_cursor(bCellSprite)
-		
-		Cell.TYPES.ACTIVATEDBCELL:
-			var code = await select_antigen_code()
-			Input.set_custom_mouse_cursor(bCellSprite)
-		
-		Cell.TYPES.ANTIGENPRESENTINGCELL:
-			var code = await select_antigen_code()
-			Input.set_custom_mouse_cursor(apcSprite)
-		
-		Cell.TYPES.ANTIGEN: 
-			var code = await select_antigen_code()
-			Input.set_custom_mouse_cursor(virusSprite)
-		
-		Cell.TYPES.ACTIVATEDTHELPERCELL:
-			var code = await select_antigen_code()
-			Input.set_custom_mouse_cursor(tHelperSprite)
+		match selectedAgentType:
+			Cell.TYPES.MACROPHAGE:
+				Input.set_custom_mouse_cursor(macrophageSprite)
+			
+			Cell.TYPES.PLASMACYTE:
+				var code = await select_antigen_code()			
+				Input.set_custom_mouse_cursor(plasmaCellSprite)
+			
+			Cell.TYPES.THELPERCELL:
+				Input.set_custom_mouse_cursor(tHelperSprite)
+			
+			Cell.TYPES.BCELL:
+				Input.set_custom_mouse_cursor(bCellSprite)
+			
+			Cell.TYPES.ACTIVATEDBCELL:
+				var code = await select_antigen_code()
+				Input.set_custom_mouse_cursor(bCellSprite)
+			
+			Cell.TYPES.ANTIGENPRESENTINGCELL:
+				var code = await select_antigen_code()
+				Input.set_custom_mouse_cursor(apcSprite)
+			
+			Cell.TYPES.ANTIGEN: 
+				var code = await select_antigen_code()
+				Input.set_custom_mouse_cursor(virusSprite)
+			
+			Cell.TYPES.ACTIVATEDTHELPERCELL:
+				var code = await select_antigen_code()
+				Input.set_custom_mouse_cursor(tHelperSprite)
 
 func select_antigen_code():
 	var codeSelection = simulationUINode.find_child("antigen_code_selector", true, false)
@@ -104,3 +111,13 @@ func select_antigen_code():
 	codeSelection.hide()
 	
 	return selectedCode
+
+func _on_agents_delete_mode():
+	selectedAgentType = null
+	
+	if owner.deleteMode:
+		owner.deleteMode = false
+		Input.set_custom_mouse_cursor(null)
+	else:
+		Input.set_custom_mouse_cursor(deleteSprite)
+		owner.deleteMode = true

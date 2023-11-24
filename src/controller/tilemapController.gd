@@ -117,3 +117,6 @@ func is_position_valid(x: int, y: int, value: float) -> bool:
 	if(current_grid_state[x][y] >= 1.0):
 		return false
 	return true
+
+func _on_simulation_ui_on_grid_toggle(substance_type):
+	set_layer_enabled(0, !is_layer_enabled((0)))
