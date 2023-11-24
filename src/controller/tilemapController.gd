@@ -11,14 +11,12 @@ var patterns_loaded: bool = false
 var cell_pattern_dict: Dictionary = {}
 var grid_size_x: int
 var grid_size_y: int
-var decay_rate: float = 0.0001
-var min_decay: float = 0.0025
-var diffusion_coefficient: float = 0.25
-var update_cooldown: float = 0.25
+var update_cooldown: float = 0.01
 var update_timer: float = update_cooldown
+var diffusion_decay_cooldown: float = 0.25
+var diffusion_decay_timer: float = diffusion_decay_cooldown
 var ntiles: int = 10 	# FIXME: assign dynamically based on the number of tiles 
 						# in the current tile set
-
 
 func _enter_tree(): 
 	var reader = CellEmenatePatternReader.new()
@@ -29,6 +27,7 @@ func _enter_tree():
 			cell_pattern_dict[cell_type] = value
 	
 func _ready():
+	self.visible = false
 	var cell_size: Vector2i = self.tile_set.tile_size
 	var viewport_size: Vector2i = self.get_viewport_rect().size
 
@@ -40,15 +39,20 @@ func _ready():
 
 
 func _process(delta):
-	update_timer += delta
-	if update_timer > update_cooldown: 
+	diffusion_decay_timer += delta
+	if diffusion_decay_timer > diffusion_decay_cooldown:
 		for substance in grid_states:
 			grid_states[substance].add_decay()
 			grid_states[substance].add_diffusion()
+	
+	update_timer += delta
+	if update_timer > update_cooldown: 
+		update_tile_map()
 		update_timer = 0.0
-	update_tile_map()
+		
 	for substance in grid_states:
 		grid_states[substance].old = grid_states[substance].current.duplicate(true)
+	
 
 
 func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
@@ -72,3 +76,7 @@ func update_tile_map():
 				set_cell(0, pos, 0, tile)
 
 
+
+
+func _on_simulation_ui_on_grid_toggle(substance_type):
+	self.visible = !self.visible

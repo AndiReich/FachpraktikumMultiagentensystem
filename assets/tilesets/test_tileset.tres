@@ -5,6 +5,7 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhmoe"]
 resource_name = "Debug Tiles"
 texture = ExtResource("2_1uc5s")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -17,4 +18,5 @@ texture = ExtResource("2_1uc5s")
 9:0/0 = 0
 
 [resource]
+tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_nhmoe")

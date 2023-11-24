@@ -17,7 +17,6 @@ text = "Chemo"
 
 [node name="CheckButton" type="CheckButton" parent="GridContainer/ChemoHBoxContainer"]
 layout_mode = 2
-button_pressed = true
 script = ExtResource("1_2c5ce")
 substanceType = 4
 
@@ -30,7 +29,6 @@ text = "IL2"
 
 [node name="CheckButton" type="CheckButton" parent="GridContainer/IL2HBoxContainer"]
 layout_mode = 2
-button_pressed = true
 script = ExtResource("1_2c5ce")
 
 [node name="IL4HBoxContainer" type="HBoxContainer" parent="GridContainer"]
@@ -42,7 +40,6 @@ text = "IL4"
 
 [node name="CheckButton" type="CheckButton" parent="GridContainer/IL4HBoxContainer"]
 layout_mode = 2
-button_pressed = true
 script = ExtResource("1_2c5ce")
 substanceType = 1
 
@@ -55,7 +52,6 @@ text = "IL5"
 
 [node name="CheckButton" type="CheckButton" parent="GridContainer/IL5HBoxContainer"]
 layout_mode = 2
-button_pressed = true
 script = ExtResource("1_2c5ce")
 substanceType = 2
 
@@ -68,7 +64,6 @@ text = "IL6"
 
 [node name="CheckButton" type="CheckButton" parent="GridContainer/IL6HBoxContainer"]
 layout_mode = 2
-button_pressed = true
 script = ExtResource("1_2c5ce")
 substanceType = 3
 

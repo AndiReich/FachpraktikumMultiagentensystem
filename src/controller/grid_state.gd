@@ -9,7 +9,7 @@ var grid_size_x: int
 var grid_size_y: int
 var decay_rate: float = 0.0001
 var min_decay: float = 0.0025
-var diffusion_coefficient: float = 0.25
+var diffusion_coefficient: float = 0.025
 var ntiles: int = 10 	# FIXME: assign dynamically based on the number of tiles 
 						# in the current tile set
 
