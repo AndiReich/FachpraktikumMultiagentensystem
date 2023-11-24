@@ -22,14 +22,10 @@ var simulationUINode
 
 var selectedAgentType
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-#	size = get_viewport().size
+	size = get_viewport().size
 	agentRootNode = get_tree().root.find_child("AgentRootNode", true, false)
 	simulationUINode = get_tree().root.find_child("SimulationUI", true, false)
-
-#func _input(event):
-#	print(event)
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
@@ -65,13 +61,6 @@ func _gui_input(event):
 				agentRootNode.add_child(agent)
 				agent.position = mouse_position
 				
-#	if event is InputEventKey:
-#		print("key")
-#		if event.keycode == KEY_ESCAPE and event.pressed:
-#			print("esc")
-#			selectedAgentType = null
-#			Input.set_default_cursor_shape()
-	
 func _on_agents_instantiate_agent(agentType):
 	selectedAgentType = agentType
 	match selectedAgentType:
