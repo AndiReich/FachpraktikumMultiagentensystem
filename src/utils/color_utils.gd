@@ -5,7 +5,7 @@ static func get_base_permutations_with_overlay(base: Image, overlay : Image, ran
 		overlay_copy.copy_from(overlay)
 		var new_color = calculate_color(i, range_of_mutations)
 		var colored_overlay = change_color(overlay_copy, new_color)
-		var image = blend_textures(colored_overlay, base)
+		var image = blend_textures(base, colored_overlay)
 		result_images.append(image)
 		
 	return result_images
@@ -41,5 +41,5 @@ static func change_color(image: Image, new_color: Color):
 	return image
 	
 static func blend_textures(base: Image, overlay: Image):
-	base.blend_rect(overlay, Rect2i(Vector2.ZERO, overlay.get_size()), Vector2i.ZERO)
-	return base
+	overlay.blend_rect(base, Rect2i(Vector2.ZERO, base.get_size()), Vector2i.ZERO)
+	return overlay
