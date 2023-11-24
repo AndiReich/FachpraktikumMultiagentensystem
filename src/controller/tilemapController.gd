@@ -49,13 +49,11 @@ func _process(delta):
 		update_timer = 0.0
 	update_tile_map()
 	old_grid_state = current_grid_state.duplicate(true)
-
-
-func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
+	
+func _on_virus_antigen_emanate(cell_position: Vector2, type_id: Cell.TYPES):
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	add_emante_pattern_to_grid(map_position, type_id)
-
-
+	
 # The logic is as follows: compare the values in the old grid state with the 
 # current ones and update the cells only when they differ to reduce the number
 # of set_cell calls. To reduce the number of calls further round to the nearest

@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr0145lm6r45m"]
+[gd_scene load_steps=11 format=3 uid="uid://dr0145lm6r45m"]
 
 [ext_resource type="Texture2D" uid="uid://3358gsyymc0j" path="res://assets/cells/Macrophage.png" id="1_62ya2"]
+[ext_resource type="Script" path="res://src/ui/AgentsTab.gd" id="1_u27uq"]
 [ext_resource type="Texture2D" uid="uid://gvs6xwelscbh" path="res://assets/cells/APCMacrophage.png" id="2_5qdip"]
 [ext_resource type="Texture2D" uid="uid://b2fvsypxt1eyn" path="res://assets/cells/BCell.png" id="3_0pfvy"]
 [ext_resource type="Texture2D" uid="uid://btee0f8x4nw8s" path="res://assets/cells/THelperCell.png" id="4_e4kpe"]
@@ -11,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dnygmf53052an" path="res://assets/ui/TrashIcon.png" id="9_c028h"]
 
 [node name="Agents" type="PanelContainer"]
+script = ExtResource("1_u27uq")
 
 [node name="AgentsList" type="MarginContainer" parent="."]
 layout_mode = 2
