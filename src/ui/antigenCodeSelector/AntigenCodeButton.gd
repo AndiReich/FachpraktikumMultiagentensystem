@@ -1,4 +1,4 @@
-extends Button
+class_name AntigenCodeButton extends Button
 
 @export var codePosition : int
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmgimwrxuvpoj"]
 
 [ext_resource type="Script" path="res://src/ui/antigenCodeSelector/AntigenCodeSelector.gd" id="1_iarbg"]
-[ext_resource type="Script" path="res://src/ui/antigenCodeSelector/AntigenCodeButton.gd" id="2_206h8"]
+[ext_resource type="PackedScene" uid="uid://bg22mua1vs1rx" path="res://scenes/ui/antigen_code_button.tscn" id="2_uu1ql"]
 [ext_resource type="Script" path="res://src/ui/antigenCodeSelector/CloseButton.gd" id="3_3tfym"]
 
 [node name="antigen_code_selector" type="Control"]
@@ -38,31 +38,23 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="antigen_code_button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
 layout_mode = 2
-toggle_mode = true
 text = "0"
-script = ExtResource("2_206h8")
 
-[node name="Button2" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="antigen_code_button2" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
 layout_mode = 2
-toggle_mode = true
 text = "0"
-script = ExtResource("2_206h8")
 codePosition = 1
 
-[node name="Button3" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="antigen_code_button3" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
 layout_mode = 2
-toggle_mode = true
 text = "0"
-script = ExtResource("2_206h8")
 codePosition = 2
 
-[node name="Button4" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="antigen_code_button4" parent="CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
 layout_mode = 2
-toggle_mode = true
 text = "0"
-script = ExtResource("2_206h8")
 codePosition = 3
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer"]
