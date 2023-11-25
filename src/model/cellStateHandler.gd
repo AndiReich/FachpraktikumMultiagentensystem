@@ -31,13 +31,13 @@ func move(delta: float, cell: Cell):
 	cell.position += update_total
 	cell.position = cell.position.clamp(Vector2.ZERO, cell.get_viewport_rect().size)
 	
-func differenciate():
+func differenciate(cell : Cell):
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
 	
-func generate():
+func generate(cell : Cell):
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
 	
-func emanate():
+func emanate(cell : Cell):
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
 	
 

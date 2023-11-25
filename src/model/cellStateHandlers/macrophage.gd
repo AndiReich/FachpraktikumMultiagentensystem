@@ -9,12 +9,12 @@ func move(delta: float, cell: Cell):
 	# should move towards antigen
 	super.move(delta,cell)
 	
-func differenciate():
+func differenciate(cell : Cell):
 	# handle collision with antigen via signals and then differenciate
 	return AntigenPresentingCell.new()
 	
-func generate():
+func generate(cell : Cell):
 	print_debug("Macrophage does not generate.")
 	
-func emanate():
+func emanate(cell : Cell):
 	print_debug("Macrophage does not emanate.")

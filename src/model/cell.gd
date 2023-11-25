@@ -6,6 +6,7 @@ enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENP
 
 var cellStateHandler: CellStateHandler = CellStateHandler.new()
 
+var agentRootNode
 
 # As I see it there are two different approaches:
 # have a unified signal "cell_emanate" and add a cell type argument
@@ -36,6 +37,7 @@ func _ready():
 		TYPES.ACTIVATEDTHELPERCELL: print("")
 	
 	var root = get_tree().root
+	agentRootNode = root.find_child("AgentRootNode", true, false)
 	var tileMapController = root.find_child("TileMapController", true, false)
 	antigen_emanate.connect(tileMapController._on_virus_antigen_emanate)
 	set_process_input(false)

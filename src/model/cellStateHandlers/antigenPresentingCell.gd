@@ -8,12 +8,12 @@ func next_move(delta: float, cell: Cell):
 func move(delta: float, cell: Cell):
 	super.move(delta,cell)
 	
-func differenciate():
+func differenciate(cell : Cell):
 	print_debug("Antigen presenting cell does not differenciate.")
 	
-func generate():
+func generate(cell : Cell):
 	print_debug("Antigen presenting cell does not generate.")
 	
-func emanate():
+func emanate(cell : Cell):
 	# APC does not emanate
 	print_debug("Antigen presenting cell does not emanate.")
