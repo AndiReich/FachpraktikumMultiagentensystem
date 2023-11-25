@@ -65,4 +65,5 @@ script = ExtResource("7_ivp52")
 [node name="antigen_code_selector" parent="CanvasLayer" instance=ExtResource("8_7vfiw")]
 visible = false
 
+[connection signal="deleteMode" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_delete_mode"]
 [connection signal="instantiateAgent" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_instantiate_agent"]

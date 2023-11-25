@@ -6,11 +6,11 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="SimulationUI" parent="." instance=ExtResource("2_fajki")]
-
 [node name="TileMapController" parent="." instance=ExtResource("1_pmsyw")]
 
 [node name="AgentRootNode" type="Node2D" parent="."]
 script = ExtResource("2_44t2c")
+
+[node name="SimulationUI" parent="." instance=ExtResource("2_fajki")]
 
 [connection signal="on_grid_toggle" from="SimulationUI" to="TileMapController" method="_on_simulation_ui_on_grid_toggle"]

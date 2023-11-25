@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr0145lm6r45m"]
+[gd_scene load_steps=12 format=3 uid="uid://dr0145lm6r45m"]
 
 [ext_resource type="Texture2D" uid="uid://x75hjm5f6v78" path="res://assets/cells/Macrophage.png" id="1_62ya2"]
 [ext_resource type="Script" path="res://src/ui/AgentsTab.gd" id="1_u27uq"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://vct22tbgxecv" path="res://assets/cells/Antigen.png" id="8_e88mo"]
 [ext_resource type="Texture2D" uid="uid://b4gmr0i0evit3" path="res://assets/cells/Antibody.png" id="8_eeyk7"]
 [ext_resource type="Texture2D" uid="uid://dnygmf53052an" path="res://assets/ui/TrashIcon.png" id="9_c028h"]
+[ext_resource type="Texture2D" uid="uid://c7pqta1752qi8" path="res://assets/ui/TrashIconAll.png" id="10_qt5sm"]
+[ext_resource type="Script" path="res://src/ui/DeleteButton.gd" id="11_ea1gv"]
+[ext_resource type="Script" path="res://src/ui/DeleteAllButton.gd" id="11_fp23d"]
 
 [node name="Agents" type="PanelContainer"]
 script = ExtResource("1_u27uq")
@@ -123,8 +126,21 @@ agentType = 7
 layout_mode = 2
 text = "Antikörper"
 
-[node name="DeleteButton" type="TextureButton" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="DeleteAllButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture_normal = ExtResource("10_qt5sm")
+script = ExtResource("11_fp23d")
+
+[node name="DeleteButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("9_c028h")
+script = ExtResource("11_ea1gv")

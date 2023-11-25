@@ -63,3 +63,9 @@ func _process(delta: float):
 func set_state(cell_state_handler: CellStateHandler):
 	self.cell_state_handler = cell_state_handler
 	$Sprite2D.texture = cell_state_handler.cell_texture
+
+func _input_event(viewport, event, shape_idx):
+	var simulationUI = get_tree().root.find_child("SimulationUI", true, false)
+	if simulationUI.deleteMode and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			queue_free()
