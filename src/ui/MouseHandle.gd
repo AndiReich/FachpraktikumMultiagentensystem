@@ -14,7 +14,6 @@ var macrophage_overlay = Image.load_from_file("res://assets/cells/MacrophageOver
 var plasmacyte_overlay = Image.load_from_file("res://assets/cells/PlasmacyteOverlay.png")
 var t_helper_cell_overlay = Image.load_from_file("res://assets/cells/THelperCellOverlay.png")
 
-
 var agent_scene = preload("res://scenes/agents/agent.tscn")
 var code_selection_scene = preload("res://scenes/ui/antigen_code_selector.tscn")
 

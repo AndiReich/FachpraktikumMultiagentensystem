@@ -1,6 +1,5 @@
 class_name BCell extends CellStateHandler
 
-
 func _init():
 	var base = Image.load_from_file("res://assets/cells/BCell.png")
 	var resulting_texture = ImageTexture.create_from_image(base)

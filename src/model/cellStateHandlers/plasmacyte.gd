@@ -1,6 +1,5 @@
 class_name Plasmacyte extends CellStateHandler
 
-
 func _init(color_code: int):
 	var base = Image.load_from_file("res://assets/cells/Plasmacyte.png")
 	var overlay = Image.load_from_file("res://assets/cells/PlasmacyteOverlay.png")

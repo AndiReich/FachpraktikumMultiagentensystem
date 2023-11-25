@@ -14,7 +14,6 @@ func set_images(preview_image: Image, overlay_image: Image):
 	self.overlay_image = overlay_image
 	preview_texture_node = find_child("TextureRect", true, false)
 	recalculate_sprite()
-	
 
 func recalculate_sprite():
 	var code_array = selected_code.duplicate()
