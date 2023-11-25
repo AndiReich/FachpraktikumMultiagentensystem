@@ -6,7 +6,6 @@ var GridState = preload("res://src/controller/grid_state.gd")
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
 var grid_states: Dictionary = {}
-
 var current_substance_type: SUBSTANCE_TYPE = SUBSTANCE_TYPE.CS
 var patterns_loaded: bool = false
 var cell_pattern_dict: Dictionary = {}
@@ -56,6 +55,8 @@ func _process(delta):
 func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	grid_states[SUBSTANCE_TYPE.CS].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
+	# FIXME: only for debugging
+	grid_states[SUBSTANCE_TYPE.IL4].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
 
 # The logic is as follows: compare the values in the old grid state with the 
 # current ones and update the cells only when they differ to reduce the number
@@ -85,6 +86,10 @@ func update_entire_tile_map():
 				set_cell(0, pos, current_substance_type, tile)
 
 func _on_simulation_ui_on_grid_toggle(substance_type):
-	self.current_substance_type = substance_type
-	self.update_entire_tile_map()
-	self.visible = !self.visible
+	if self.current_substance_type == substance_type:
+		self.visible = !self.visible
+		print(substance_type)
+	else:
+		self.current_substance_type = substance_type
+		self.update_entire_tile_map()
+	

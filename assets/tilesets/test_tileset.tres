@@ -6,10 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://df20nqkyv331c" path="res://assets/concentration_gradient_yellow_32x32.png" id="4_qsoxb"]
 [ext_resource type="Texture2D" uid="uid://cpx7w6jcfksjd" path="res://assets/concentration_gradient_blue_32x32.png" id="5_havr2"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87sqx"]
-texture = ExtResource("1_r5dcw")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_25r5n"]
+texture = ExtResource("5_havr2")
 texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -19,6 +18,7 @@ texture_region_size = Vector2i(32, 32)
 7:0/0 = 0
 8:0/0 = 0
 9:0/0 = 0
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxktc"]
 texture = ExtResource("2_3r5fp")
@@ -46,6 +46,7 @@ texture_region_size = Vector2i(32, 32)
 7:0/0 = 0
 8:0/0 = 0
 9:0/0 = 0
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_83qhv"]
 texture = ExtResource("4_qsoxb")
@@ -59,10 +60,12 @@ texture_region_size = Vector2i(32, 32)
 7:0/0 = 0
 8:0/0 = 0
 9:0/0 = 0
+0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_25r5n"]
-texture = ExtResource("5_havr2")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87sqx"]
+texture = ExtResource("1_r5dcw")
 texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -75,8 +78,8 @@ texture_region_size = Vector2i(32, 32)
 
 [resource]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_87sqx")
 sources/1 = SubResource("TileSetAtlasSource_gxktc")
 sources/2 = SubResource("TileSetAtlasSource_m1pyx")
 sources/3 = SubResource("TileSetAtlasSource_83qhv")
-sources/4 = SubResource("TileSetAtlasSource_25r5n")
+sources/0 = SubResource("TileSetAtlasSource_25r5n")
+sources/4 = SubResource("TileSetAtlasSource_87sqx")

@@ -4,7 +4,6 @@ const utils = preload("res://src/utils/matrix_utils.gd")
 
 var old: Array = []
 var current: Array = [] 
-var patterns_loaded: bool = false
 var grid_size_x: int
 var grid_size_y: int
 var decay_rate: float = 0.0001
