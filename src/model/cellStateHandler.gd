@@ -10,6 +10,9 @@ var rng = RandomNumberGenerator.new() # TODO: should probably be moved to main s
 # set initial value to cooldown to start emanating at the beginning of the 
 # simulation
 var emanate_timer: float = emanate_cooldown 
+var cell_texture: ImageTexture
+var color_utils = preload("res://src/utils/color_utils.gd")
+var range_of_mutations = 16
 
 func _init():
 	rng.randomize()

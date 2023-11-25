@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpud0uhdb51k"
-path="res://.godot/imported/THelperCell.png-dd3a0bc80c0b6e4b08cc3e6496d6d996.ctex"
+uid="uid://b2bn70mvhis8d"
+path="res://.godot/imported/THelperCellOverlay.png-941a3ea8384f2602e4032c24e7cdf894.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cells/THelperCell.png"
-dest_files=["res://.godot/imported/THelperCell.png-dd3a0bc80c0b6e4b08cc3e6496d6d996.ctex"]
+source_file="res://assets/cells/THelperCellOverlay.png"
+dest_files=["res://.godot/imported/THelperCellOverlay.png-941a3ea8384f2602e4032c24e7cdf894.ctex"]
 
 [params]
 
