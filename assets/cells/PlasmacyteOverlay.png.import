@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h2cxv30yjclc"
-path="res://.godot/imported/TestConcentrationTilesheet.png-ab762c90561ff8784d9b0609bfc97009.ctex"
+uid="uid://bmhr34epyrq6f"
+path="res://.godot/imported/PlasmacyteOverlay.png-a2442c4f639b019b09ce508e10eec253.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TestConcentrationTilesheet.png"
-dest_files=["res://.godot/imported/TestConcentrationTilesheet.png-ab762c90561ff8784d9b0609bfc97009.ctex"]
+source_file="res://assets/cells/PlasmacyteOverlay.png"
+dest_files=["res://.godot/imported/PlasmacyteOverlay.png-a2442c4f639b019b09ce508e10eec253.ctex"]
 
 [params]
 

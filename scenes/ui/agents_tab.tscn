@@ -1,14 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dr0145lm6r45m"]
+[gd_scene load_steps=12 format=3 uid="uid://dr0145lm6r45m"]
 
-[ext_resource type="Texture2D" uid="uid://3358gsyymc0j" path="res://assets/cells/Macrophage.png" id="1_62ya2"]
+[ext_resource type="Texture2D" uid="uid://x75hjm5f6v78" path="res://assets/cells/Macrophage.png" id="1_62ya2"]
 [ext_resource type="Script" path="res://src/ui/AgentsTab.gd" id="1_u27uq"]
-[ext_resource type="Texture2D" uid="uid://gvs6xwelscbh" path="res://assets/cells/APCMacrophage.png" id="2_5qdip"]
-[ext_resource type="Texture2D" uid="uid://b2fvsypxt1eyn" path="res://assets/cells/BCell.png" id="3_0pfvy"]
-[ext_resource type="Texture2D" uid="uid://btee0f8x4nw8s" path="res://assets/cells/THelperCell.png" id="4_e4kpe"]
-[ext_resource type="Texture2D" uid="uid://dlswbg8m06lap" path="res://assets/cells/PlasmaCell.png" id="5_hx3g3"]
-[ext_resource type="Texture2D" uid="uid://3h8du7jt6l1o" path="res://assets/cells/virusGreen1.png" id="6_wifhi"]
+[ext_resource type="Texture2D" uid="uid://fr2i5y6miww2" path="res://assets/cells/BCell.png" id="3_0pfvy"]
+[ext_resource type="Texture2D" uid="uid://cpud0uhdb51k" path="res://assets/cells/THelperCell.png" id="4_e4kpe"]
+[ext_resource type="Texture2D" uid="uid://gxpelo8x1418" path="res://assets/cells/Plasmacyte.png" id="6_o6pdg"]
 [ext_resource type="Script" path="res://src/ui/CreateAgentButton.gd" id="7_35x53"]
-[ext_resource type="Texture2D" uid="uid://dlkcqskk6i85o" path="res://assets/cells/Antigen.png" id="8_e88mo"]
+[ext_resource type="Texture2D" uid="uid://vct22tbgxecv" path="res://assets/cells/Antigen.png" id="8_e88mo"]
+[ext_resource type="Texture2D" uid="uid://b4gmr0i0evit3" path="res://assets/cells/Antibody.png" id="8_eeyk7"]
 [ext_resource type="Texture2D" uid="uid://dnygmf53052an" path="res://assets/ui/TrashIcon.png" id="9_c028h"]
 [ext_resource type="Texture2D" uid="uid://c7pqta1752qi8" path="res://assets/ui/TrashIconAll.png" id="10_qt5sm"]
 [ext_resource type="Script" path="res://src/ui/DeleteButton.gd" id="11_ea1gv"]
@@ -45,7 +44,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/ApcHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("2_5qdip")
+texture_normal = ExtResource("1_62ya2")
 stretch_mode = 3
 script = ExtResource("7_35x53")
 agentType = 5
@@ -90,7 +89,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/PlasmacyteHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("5_hx3g3")
+texture_normal = ExtResource("6_o6pdg")
 stretch_mode = 3
 script = ExtResource("7_35x53")
 agentType = 1
@@ -104,7 +103,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/AntigenHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("6_wifhi")
+texture_normal = ExtResource("8_e88mo")
 stretch_mode = 3
 script = ExtResource("7_35x53")
 agentType = 6
@@ -118,7 +117,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="AgentsList/CenterContainer/GridContainer/AntibodyHBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("8_e88mo")
+texture_normal = ExtResource("8_eeyk7")
 stretch_mode = 3
 script = ExtResource("7_35x53")
 agentType = 7

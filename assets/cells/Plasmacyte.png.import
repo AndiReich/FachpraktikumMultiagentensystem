@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3h8du7jt6l1o"
-path="res://.godot/imported/virusGreen1.png-bbfa6163dd6d796dd723b4dd442b7b2f.ctex"
+uid="uid://gxpelo8x1418"
+path="res://.godot/imported/Plasmacyte.png-ae930ff914a73c93a30f09167e482661.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cells/virusGreen1.png"
-dest_files=["res://.godot/imported/virusGreen1.png-bbfa6163dd6d796dd723b4dd442b7b2f.ctex"]
+source_file="res://assets/cells/Plasmacyte.png"
+dest_files=["res://.godot/imported/Plasmacyte.png-ae930ff914a73c93a30f09167e482661.ctex"]
 
 [params]
 

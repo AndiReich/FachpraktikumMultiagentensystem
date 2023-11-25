@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://pjumqbgek863"]
+
+[ext_resource type="Script" path="res://src/model/cell.gd" id="1_8dwd5"]
+[ext_resource type="Texture2D" uid="uid://vct22tbgxecv" path="res://assets/cells/Antigen.png" id="2_rld0u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ch054"]
+
+[node name="Agent" type="Area2D"]
+script = ExtResource("1_8dwd5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rld0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ch054")

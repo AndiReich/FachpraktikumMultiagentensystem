@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://clr2uylrh7h6o"]
 
+[ext_resource type="Script" path="res://src/ui/MouseHandle.gd" id="2_47uwh"]
 [ext_resource type="PackedScene" uid="uid://cjdomkrr3l6u0" path="res://scenes/ui/toggle_ui_button.tscn" id="2_ai3h6"]
-[ext_resource type="Script" path="res://src/ui/MouseHandler.gd" id="2_efkr2"]
 [ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="2_r2nu4"]
 [ext_resource type="PackedScene" uid="uid://cb8fjnap60vwe" path="res://scenes/ui/grid_layers.tscn" id="3_lenj1"]
 [ext_resource type="PackedScene" uid="uid://dr0145lm6r45m" path="res://scenes/ui/agents_tab.tscn" id="4_1uas1"]
@@ -22,7 +22,7 @@ layer = 0
 [node name="Container" type="Container" parent="CanvasLayer"]
 offset_right = 1908.0
 offset_bottom = 1051.0
-script = ExtResource("2_efkr2")
+script = ExtResource("2_47uwh")
 
 [node name="ToggleUiButton" parent="CanvasLayer" node_paths=PackedStringArray("control") instance=ExtResource("2_ai3h6")]
 offset_left = -443.0

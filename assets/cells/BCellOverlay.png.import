@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlswbg8m06lap"
-path="res://.godot/imported/PlasmaCell.png-dc889537c7d076939612dac515b71c29.ctex"
+uid="uid://cvi312lbmbhb6"
+path="res://.godot/imported/BCellOverlay.png-3d9e642a0f5eb618ac737dd11136792d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cells/PlasmaCell.png"
-dest_files=["res://.godot/imported/PlasmaCell.png-dc889537c7d076939612dac515b71c29.ctex"]
+source_file="res://assets/cells/BCellOverlay.png"
+dest_files=["res://.godot/imported/BCellOverlay.png-3d9e642a0f5eb618ac737dd11136792d.ctex"]
 
 [params]
 
