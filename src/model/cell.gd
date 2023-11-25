@@ -2,10 +2,9 @@ class_name Cell extends Area2D
 
 enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, ANTIGEN, ACTIVATEDTHELPERCELL} 
 
-@export var initialCellType: TYPES = TYPES.ANTIGEN
-@export var isInitialize: bool = false
+var initial_cell_type: TYPES = TYPES.ANTIGEN
 
-var cellStateHandler: CellStateHandler = CellStateHandler.new()
+var cell_state_handler: CellStateHandler = CellStateHandler.new()
 
 
 # As I see it there are two different approaches:
@@ -18,48 +17,55 @@ var cellStateHandler: CellStateHandler = CellStateHandler.new()
 signal antigen_emanate(position, type)
 
 func _ready():
-	$AnimatedSprite2D.play()
-	match initialCellType:
-		TYPES.MACROPHAGE: print("")
-		
-		TYPES.PLASMACYTE: print("")
-		
-		TYPES.THELPERCELL: print("")
-		
-		TYPES.BCELL: print("")
-		
-		TYPES.ACTIVATEDBCELL: print("")
-		
-		TYPES.ANTIGENPRESENTINGCELL: print("")
-		
-		TYPES.ANTIGEN: cellStateHandler = Antigen.new()
-		
-		TYPES.ACTIVATEDTHELPERCELL: print("")
-	
 	var root = get_tree().root
 	var tileMapController = root.find_child("TileMapController", true, false)
 	antigen_emanate.connect(tileMapController._on_virus_antigen_emanate)
-	input_event.connect(_on_input_event)
-	followMouse()
+
+func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutations: int):
+	# This basically acts like a constructor for the node
+	# the reason why we are doing it like this is so that we can easily
+	# create new agents in the scene with little effort
+	initial_cell_type = cell_type
+	match initial_cell_type:
+		TYPES.MACROPHAGE: 
+			cell_state_handler = Macrophage.new()
+		
+		TYPES.PLASMACYTE: 
+			cell_state_handler = Plasmacyte.new(color_code)
+		
+		TYPES.THELPERCELL: 
+			cell_state_handler = THelperCellT4.new()
+		
+		TYPES.BCELL: 
+			cell_state_handler = BCell.new()
+		
+		TYPES.ACTIVATEDBCELL: 
+			cell_state_handler = ActivatedBCell.new(color_code)
+		
+		TYPES.ANTIGENPRESENTINGCELL: 
+			cell_state_handler = AntigenPresentingCell.new(color_code)
+		
+		TYPES.ANTIGEN: 
+			cell_state_handler = Antigen.new(color_code)
+		
+		TYPES.ACTIVATEDTHELPERCELL: 
+			cell_state_handler = ActivatedTHelperCellT4.new(color_code)
+		
+	get_child(0).texture = cell_state_handler.cell_texture
+	
 
 func _process(delta: float):
-	if isInitialize:
-		followMouse()
-	else:
-		next_move(delta)
+	## this is the only function that should be called for the cell_state_handler
+	if initial_cell_type != null:
+		cell_state_handler.next_move(delta, self)
+	
 
-func followMouse():
-	position = get_global_mouse_position()
-	position = position.clamp(Vector2.ZERO, get_viewport_rect().size)
+func set_state(cell_state_handler: CellStateHandler):
+	self.cell_state_handler = cell_state_handler
+	$Sprite2D.texture = cell_state_handler.cell_texture
 
-func next_move(delta: float):
-	## this is the only function that should be called for the cellStateHandler
-	cellStateHandler.next_move(delta, self)
-
-func set_state(cellStateHandler: CellStateHandler):
-	self.cellStateHandler = cellStateHandler
-
-
-func _on_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		isInitialize = false
+func _input_event(viewport, event, shape_idx):
+	var simulationUI = get_tree().root.find_child("SimulationUI", true, false)
+	if simulationUI.deleteMode and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			queue_free()

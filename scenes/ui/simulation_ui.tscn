@@ -1,22 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://clr2uylrh7h6o"]
+[gd_scene load_steps=9 format=3 uid="uid://clr2uylrh7h6o"]
 
-[ext_resource type="Theme" uid="uid://0nmqaghlst86" path="res://assets/ui/base_theme.tres" id="1_mtddf"]
+[ext_resource type="Script" path="res://src/ui/MouseHandle.gd" id="2_47uwh"]
 [ext_resource type="PackedScene" uid="uid://cjdomkrr3l6u0" path="res://scenes/ui/toggle_ui_button.tscn" id="2_ai3h6"]
 [ext_resource type="Script" path="res://src/ui/SimulationUI.gd" id="2_r2nu4"]
 [ext_resource type="PackedScene" uid="uid://cb8fjnap60vwe" path="res://scenes/ui/grid_layers.tscn" id="3_lenj1"]
 [ext_resource type="PackedScene" uid="uid://dr0145lm6r45m" path="res://scenes/ui/agents_tab.tscn" id="4_1uas1"]
 [ext_resource type="Script" path="res://src/ui/FPS.gd" id="6_roesk"]
 [ext_resource type="Script" path="res://src/ui/AgentCounter.gd" id="7_ivp52"]
+[ext_resource type="PackedScene" uid="uid://cmgimwrxuvpoj" path="res://scenes/ui/antigen_code_selector.tscn" id="8_7vfiw"]
 
-[node name="SimulationUI" type="Control"]
+[node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("1_mtddf")
 script = ExtResource("2_r2nu4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Container" type="Container" parent="CanvasLayer"]
+offset_right = 1908.0
+offset_bottom = 1051.0
+script = ExtResource("2_47uwh")
 
 [node name="ToggleUiButton" parent="CanvasLayer" node_paths=PackedStringArray("control") instance=ExtResource("2_ai3h6")]
 offset_left = -443.0
@@ -46,7 +52,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 50.0
 
 [node name="FPS" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -55,3 +61,9 @@ script = ExtResource("6_roesk")
 [node name="AgentCounter" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("7_ivp52")
+
+[node name="antigen_code_selector" parent="CanvasLayer" instance=ExtResource("8_7vfiw")]
+visible = false
+
+[connection signal="deleteMode" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_delete_mode"]
+[connection signal="instantiateAgent" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_instantiate_agent"]

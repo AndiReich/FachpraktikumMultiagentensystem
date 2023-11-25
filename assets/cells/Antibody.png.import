@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3h8du7jt6l1o"
-path="res://.godot/imported/virusGreen1.png-bbfa6163dd6d796dd723b4dd442b7b2f.ctex"
+uid="uid://b4gmr0i0evit3"
+path="res://.godot/imported/Antibody.png-d42420cd15d765c2362d06c19aefe946.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cells/virusGreen1.png"
-dest_files=["res://.godot/imported/virusGreen1.png-bbfa6163dd6d796dd723b4dd442b7b2f.ctex"]
+source_file="res://assets/cells/Antibody.png"
+dest_files=["res://.godot/imported/Antibody.png-d42420cd15d765c2362d06c19aefe946.ctex"]
 
 [params]
 

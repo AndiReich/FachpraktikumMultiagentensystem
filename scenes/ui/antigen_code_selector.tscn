@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmgimwrxuvpoj"]
+[gd_scene load_steps=5 format=3 uid="uid://cmgimwrxuvpoj"]
 
-[ext_resource type="Script" path="res://src/ui/AntigenCodeSelector.gd" id="1_xfrc6"]
+[ext_resource type="Script" path="res://src/ui/antigenCodeSelector/AntigenCodeSelector.gd" id="1_iarbg"]
+[ext_resource type="PackedScene" uid="uid://bg22mua1vs1rx" path="res://scenes/ui/antigen_code_button.tscn" id="2_uu1ql"]
+[ext_resource type="Script" path="res://src/ui/antigenCodeSelector/CloseButton.gd" id="3_3tfym"]
+[ext_resource type="Texture2D" uid="uid://vct22tbgxecv" path="res://assets/cells/Antigen.png" id="3_xquw3"]
 
 [node name="antigen_code_selector" type="Control"]
 layout_mode = 3
@@ -9,10 +12,59 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xfrc6")
+script = ExtResource("1_iarbg")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.5
+offset_top = -260.0
+offset_right = 103.5
+offset_bottom = -158.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="antigen_code_button" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
+layout_mode = 2
+
+[node name="antigen_code_button2" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
+layout_mode = 2
+code_position = 1
+
+[node name="antigen_code_button3" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
+layout_mode = 2
+code_position = 2
+
+[node name="antigen_code_button4" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_uu1ql")]
+layout_mode = 2
+code_position = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("3_xquw3")
+
+[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "OK"
+script = ExtResource("3_3tfym")
