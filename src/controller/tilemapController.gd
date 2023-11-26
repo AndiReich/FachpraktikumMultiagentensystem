@@ -43,6 +43,7 @@ func _process(delta):
 		for substance in grid_states:
 			grid_states[substance].add_decay()
 			grid_states[substance].add_diffusion()
+		diffusion_decay_timer = 0
 	
 	update_timer += delta
 	if update_timer > update_cooldown: 

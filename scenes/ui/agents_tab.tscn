@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr0145lm6r45m"]
+[gd_scene load_steps=13 format=3 uid="uid://dr0145lm6r45m"]
 
 [ext_resource type="Texture2D" uid="uid://x75hjm5f6v78" path="res://assets/cells/Macrophage.png" id="1_62ya2"]
 [ext_resource type="Script" path="res://src/ui/AgentsTab.gd" id="1_u27uq"]
