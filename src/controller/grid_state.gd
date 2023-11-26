@@ -31,6 +31,8 @@ func add_decay():
 			self.current[x][y] = updated_value if updated_value >= 0.0 else 0.0 
 
 func add_diffusion():
+	# FIXME: from my tests it does not seem to be necessary to set the bounds to zero
+	# self.current = utils.set_matrix_edges_to_float(self.current, 0.0)
 	var diffusion_contribution: Array = utils.multiply_matrix_by_float(self.current, self.diffusion_coefficient)
 	var weighted_diffusion_contribution: Array = utils.multiply_matrix_by_float(diffusion_contribution, 0.25)
 	var remainder: Array = utils.subtract_matrix(self.current, diffusion_contribution)
@@ -51,8 +53,8 @@ func add_emanate_pattern(cell_position: Vector2i, type_id: Cell.TYPES, cell_patt
 	var pattern_matrix: Array = cell_pattern_dict[cell_type]
 	var matrix_x_size: int = pattern_matrix.size()
 	var matrix_y_size: int = pattern_matrix[0].size()
-	var offset_x: int = cell_position.x - (matrix_x_size/2) 
-	var offset_y: int = cell_position.y - (matrix_y_size/2)
+	var offset_x: int = cell_position.x - (matrix_x_size/2) + 1
+	var offset_y: int = cell_position.y - (matrix_y_size/2) + 1
 	
 	for local_x in pattern_matrix.size():
 		var global_x: int = offset_x + local_x
