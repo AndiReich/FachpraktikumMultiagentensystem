@@ -6,6 +6,8 @@ var GridState = preload("res://src/controller/grid_state.gd")
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
 var grid_states: Dictionary = {}
+var worker_threads: Dictionary = {}
+var mutexes: Dictionary = {}
 var current_substance_type: SUBSTANCE_TYPE = SUBSTANCE_TYPE.CS
 var patterns_loaded: bool = false
 var cell_pattern_dict: Dictionary = {}
@@ -13,7 +15,7 @@ var grid_size_x: int
 var grid_size_y: int
 var update_cooldown: float = 0.01
 var update_timer: float = update_cooldown
-var diffusion_decay_cooldown: float = 0.1
+var diffusion_decay_cooldown: float = 0.03
 var diffusion_decay_timer: float = diffusion_decay_cooldown
 var ntiles: int = 10 	# FIXME: assign dynamically based on the number of tiles 
 						# in the current tile set
@@ -36,14 +38,33 @@ func _ready():
 	
 	for substance_type in SUBSTANCE_TYPE.values():
 		grid_states[substance_type] = GridState.new(grid_size_x + 2, grid_size_y + 2)
+		worker_threads[substance_type] = Thread.new()
+		mutexes[substance_type] = Mutex.new()
 
 func _process(delta):
 	diffusion_decay_timer += delta
 	if diffusion_decay_timer > diffusion_decay_cooldown:
+#		for substance in grid_states:
+#			grid_states[substance].add_decay()
+#			grid_states[substance].add_diffusion()
+#		for substance in grid_states:
+#			mutexes[substance].lock()
+#			var thread = worker_threads[substance]
+#			thread.start(grid_states[substance].add_diffusion)
+#		for substance in grid_states:
+#			var thread = worker_threads[substance]
+#			thread.wait_to_finish()
+#			mutexes[substance].unlock()
 		for substance in grid_states:
-			grid_states[substance].add_decay()
-			grid_states[substance].add_diffusion()
-		diffusion_decay_timer = 0
+			#mutexes[substance].lock()
+			var thread = worker_threads[substance]
+			thread.start(grid_states[substance].add_diffusion_and_decay)
+		for substance in grid_states:
+			var thread = worker_threads[substance]
+			thread.wait_to_finish()
+			#mutexes[substance].unlock()
+		
+		diffusion_decay_timer = 0.0
 	
 	update_timer += delta
 	if update_timer > update_cooldown: 
@@ -55,7 +76,9 @@ func _process(delta):
 
 func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 	var map_position: Vector2i = self.local_to_map(cell_position)
+	#mutexes[SUBSTANCE_TYPE.CS].lock()
 	grid_states[SUBSTANCE_TYPE.CS].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
+	#mutexes[SUBSTANCE_TYPE.CS].unlock()
 	# FIXME: only for debugging
 	grid_states[SUBSTANCE_TYPE.IL4].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
 

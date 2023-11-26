@@ -45,6 +45,24 @@ func add_diffusion():
 		for y in grid_size_y:
 			self.current[x][y] = remainder[x][y] + north[x][y] + east[x][y] + south[x][y] + west[x][y]
 
+func add_diffusion_and_decay():
+	# FIXME: from my tests it does not seem to be necessary to set the bounds to zero
+	# self.current = utils.set_matrix_edges_to_float(self.current, 0.0)
+	var diffusion_contribution: Array = utils.multiply_matrix_by_float(self.current, self.diffusion_coefficient)
+	var weighted_diffusion_contribution: Array = utils.multiply_matrix_by_float(diffusion_contribution, 0.25)
+	var remainder: Array = utils.subtract_matrix(self.current, diffusion_contribution)
+	var north: Array = utils.roll_matrix(weighted_diffusion_contribution, -1, 0)
+	var east: Array = utils.roll_matrix(weighted_diffusion_contribution, 1, 1)
+	var south: Array = utils.roll_matrix(weighted_diffusion_contribution, 1, 0)
+	var west: Array = utils.roll_matrix(weighted_diffusion_contribution, -1, 1)
+	
+	for x in grid_size_x:
+		for y in grid_size_y:
+			var diffusion_update: float = remainder[x][y] + north[x][y] + east[x][y] + south[x][y] + west[x][y]
+			var decay: float = max(self.min_decay, self.decay_rate * diffusion_update)
+			var updated_value: float = diffusion_update - decay
+			self.current[x][y] = updated_value if updated_value >= 0.0 else 0.0 
+
 func add_emanate_pattern(cell_position: Vector2i, type_id: Cell.TYPES, cell_pattern_dict: Dictionary):
 	var cell_type: String = Cell.TYPES.find_key(type_id)
 	if(!cell_pattern_dict.has(cell_type)):
