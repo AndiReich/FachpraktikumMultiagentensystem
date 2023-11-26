@@ -35,7 +35,7 @@ func _ready():
 	grid_size_y = viewport_size.y / cell_size.y 
 	
 	for substance_type in SUBSTANCE_TYPE.values():
-		grid_states[substance_type] = GridState.new(grid_size_x, grid_size_y)
+		grid_states[substance_type] = GridState.new(grid_size_x + 2, grid_size_y + 2)
 
 func _process(delta):
 	diffusion_decay_timer += delta
@@ -65,9 +65,9 @@ func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 func update_tile_map():
 	for x in grid_size_x:
 		for y in grid_size_y:
-			var old_value: float = grid_states[current_substance_type].old[x][y]
+			var old_value: float = grid_states[current_substance_type].old[x+1][y+1]
 			old_value = round(old_value * ntiles ) / ntiles
-			var current_value: float = grid_states[current_substance_type].current[x][y]
+			var current_value: float = grid_states[current_substance_type].current[x+1][y+1]
 			current_value = round(current_value * ntiles ) / ntiles
 			if current_value != old_value:
 				var pos: Vector2i = Vector2i(x, y)
@@ -80,7 +80,7 @@ func update_entire_tile_map():
 	for x in grid_size_x:
 		for y in grid_size_y:
 				var pos: Vector2i = Vector2i(x, y)
-				var value: float = max(0, min(1, grid_states[current_substance_type].current[x][y]))
+				var value: float = max(0, min(1, grid_states[current_substance_type].current[x+1][y+1]))
 				var tile_idx: int = int(value * (ntiles - 1))
 				var tile: Vector2i = Vector2i(tile_idx, 0)
 				set_cell(0, pos, current_substance_type, tile)
