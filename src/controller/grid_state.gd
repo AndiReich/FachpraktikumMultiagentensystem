@@ -2,6 +2,7 @@ class_name GridStateHandler
 
 const utils = preload("res://src/utils/matrix_utils.gd")
 
+const NUM_THREADS = 4
 var old: Array = []
 var current: Array = [] 
 var grid_size_x: int
@@ -44,6 +45,68 @@ func add_diffusion():
 	for x in grid_size_x:
 		for y in grid_size_y:
 			self.current[x][y] = remainder[x][y] + north[x][y] + east[x][y] + south[x][y] + west[x][y]
+
+func add_diffusion_and_decay():
+	# FIXME: from my tests it does not seem to be necessary to set the bounds to zero
+	# self.current = utils.set_matrix_edges_to_float(self.current, 0.0)
+	var diffusion_contribution: Array = utils.multiply_matrix_by_float(self.current, self.diffusion_coefficient)
+	var weighted_diffusion_contribution: Array = utils.multiply_matrix_by_float(diffusion_contribution, 0.25)
+	var remainder: Array = utils.subtract_matrix(self.current, diffusion_contribution)
+	var north: Array = utils.roll_matrix(weighted_diffusion_contribution, -1, 0)
+	var east: Array = utils.roll_matrix(weighted_diffusion_contribution, 1, 1)
+	var south: Array = utils.roll_matrix(weighted_diffusion_contribution, 1, 0)
+	var west: Array = utils.roll_matrix(weighted_diffusion_contribution, -1, 1)
+	
+	for x in grid_size_x:
+		for y in grid_size_y:
+			var diffusion_update: float = remainder[x][y] + north[x][y] + east[x][y] + south[x][y] + west[x][y]
+			var decay: float = max(self.min_decay, self.decay_rate * diffusion_update)
+			var updated_value: float = diffusion_update - decay
+			self.current[x][y] = updated_value if updated_value >= 0.0 else 0.0 
+
+func add_diffusion_and_decay_kernel():
+	var diffusion_coefficient_quarter: float = self.diffusion_coefficient * 0.25
+
+	for x in range(grid_size_x):
+		for y in range(grid_size_y):
+			var diffusion_update = self.current[x][y] - self.diffusion_coefficient * self.current[x][y]
+			diffusion_update += diffusion_coefficient_quarter * self.current[(x - 1 + grid_size_x) % grid_size_x][y]
+			diffusion_update += diffusion_coefficient_quarter * self.current[(x + 1) % grid_size_x][y]
+			diffusion_update += diffusion_coefficient_quarter * self.current[x][(y - 1 + grid_size_y) % grid_size_y]
+			diffusion_update += diffusion_coefficient_quarter * self.current[x][(y + 1) % grid_size_y]
+
+			var decay: float = max(self.min_decay, self.decay_rate * diffusion_update)
+			var updated_value: float = diffusion_update - decay
+			self.current[x][y] = max(updated_value, 0.0)
+
+func add_diffusion_and_decay_parallel():
+	var diffusion_coefficient_quarter: float = 0.25 * self.diffusion_coefficient
+	var threads = []
+
+	for i in range(NUM_THREADS):
+		var start_row: int = i * grid_size_x / NUM_THREADS
+		var end_row: int = (i + 1) * grid_size_x / NUM_THREADS
+
+		var thread = Thread.new()
+		thread.start(_add_diffusion_and_decay_in_rows.bind(start_row, end_row, diffusion_coefficient_quarter, self.decay_rate))
+		threads.append(thread)
+
+	for thread in threads:
+		thread.wait_to_finish()
+
+func _add_diffusion_and_decay_in_rows(start_row, end_row, diffusion_coefficient_quarter, decay_rate):
+	for x in range(start_row, end_row):
+		for y in range(grid_size_y):
+			var current_value: float = self.current[x][y]
+			var diffusion_update: float = current_value - self.diffusion_coefficient * current_value
+			diffusion_update += diffusion_coefficient_quarter * self.current[(x - 1 + grid_size_x) % grid_size_x][y]
+			diffusion_update += diffusion_coefficient_quarter * self.current[(x + 1) % grid_size_x][y]
+			diffusion_update += diffusion_coefficient_quarter * self.current[x][(y - 1 + grid_size_y) % grid_size_y]
+			diffusion_update += diffusion_coefficient_quarter * self.current[x][(y + 1) % grid_size_y]
+
+			var decay: float = max(self.min_decay, decay_rate * diffusion_update)
+			var updated_value: float = diffusion_update - decay
+			self.current[x][y] = max(updated_value, 0.0)
 
 func add_emanate_pattern(cell_position: Vector2i, type_id: Cell.TYPES, cell_pattern_dict: Dictionary):
 	var cell_type: String = Cell.TYPES.find_key(type_id)

@@ -6,14 +6,15 @@ var GridState = preload("res://src/controller/grid_state.gd")
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
 var grid_states: Dictionary = {}
-var current_substance_type: SUBSTANCE_TYPE = SUBSTANCE_TYPE.CS
+var grid_to_update: int = 0
+var current_display_substance_type: SUBSTANCE_TYPE = SUBSTANCE_TYPE.CS
 var patterns_loaded: bool = false
 var cell_pattern_dict: Dictionary = {}
 var grid_size_x: int
 var grid_size_y: int
 var update_cooldown: float = 0.01
 var update_timer: float = update_cooldown
-var diffusion_decay_cooldown: float = 0.1
+var diffusion_decay_cooldown: float = 0.01
 var diffusion_decay_timer: float = diffusion_decay_cooldown
 var ntiles: int = 10 	# FIXME: assign dynamically based on the number of tiles 
 						# in the current tile set
@@ -40,10 +41,10 @@ func _ready():
 func _process(delta):
 	diffusion_decay_timer += delta
 	if diffusion_decay_timer > diffusion_decay_cooldown:
-		for substance in grid_states:
-			grid_states[substance].add_decay()
-			grid_states[substance].add_diffusion()
-		diffusion_decay_timer = 0
+		grid_to_update = (grid_to_update + 1) % 5
+		var substance = SUBSTANCE_TYPE.values()[grid_to_update]
+		grid_states[substance].add_diffusion_and_decay_parallel()
+		diffusion_decay_timer = 0.0
 	
 	update_timer += delta
 	if update_timer > update_cooldown: 
@@ -66,31 +67,31 @@ func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 func update_tile_map():
 	for x in grid_size_x:
 		for y in grid_size_y:
-			var old_value: float = grid_states[current_substance_type].old[x+1][y+1]
+			var old_value: float = grid_states[current_display_substance_type].old[x+1][y+1]
 			old_value = round(old_value * ntiles ) / ntiles
-			var current_value: float = grid_states[current_substance_type].current[x+1][y+1]
+			var current_value: float = grid_states[current_display_substance_type].current[x+1][y+1]
 			current_value = round(current_value * ntiles ) / ntiles
 			if current_value != old_value:
 				var pos: Vector2i = Vector2i(x, y)
 				var value: float = max(0, min(1, current_value))
 				var tile_idx: int = int(value * (ntiles - 1))
 				var tile: Vector2i = Vector2i(tile_idx, 0)
-				set_cell(0, pos, current_substance_type, tile)
+				set_cell(0, pos, current_display_substance_type, tile)
 
 func update_entire_tile_map():
 	for x in grid_size_x:
 		for y in grid_size_y:
 				var pos: Vector2i = Vector2i(x, y)
-				var value: float = max(0, min(1, grid_states[current_substance_type].current[x+1][y+1]))
+				var value: float = max(0, min(1, grid_states[current_display_substance_type].current[x+1][y+1]))
 				var tile_idx: int = int(value * (ntiles - 1))
 				var tile: Vector2i = Vector2i(tile_idx, 0)
-				set_cell(0, pos, current_substance_type, tile)
+				set_cell(0, pos, current_display_substance_type, tile)
 
 func _on_simulation_ui_on_grid_toggle(substance_type):
-	if self.current_substance_type == substance_type:
+	if self.current_display_substance_type == substance_type:
 		self.visible = !self.visible
 		print(substance_type)
 	else:
-		self.current_substance_type = substance_type
+		self.current_display_substance_type = substance_type
 		self.update_entire_tile_map()
 	
