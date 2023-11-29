@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=11 format=3 uid="uid://b8yfcmtd5qdls"]
 
-[ext_resource type="Texture2D" uid="uid://dcgxr2q4wqlxt" path="res://assets/concentration_gradient_0_0_255_127_16x16.png" id="1_qv87i"]
-[ext_resource type="Texture2D" uid="uid://cbf45qnqua5x7" path="res://assets/concentration_gradient_0_255_0_127_16x16.png" id="2_k4cca"]
-[ext_resource type="Texture2D" uid="uid://crokulbwd8cce" path="res://assets/concentration_gradient_255_0_255_127_16x16.png" id="3_1rtke"]
-[ext_resource type="Texture2D" uid="uid://dvv4d3tct8mol" path="res://assets/concentration_gradient_255_255_0_127_16x16.png" id="4_hbq15"]
-[ext_resource type="Texture2D" uid="uid://cfaxcmdjk7cfi" path="res://assets/concentration_gradient_255_0_0_127_16x16.png" id="5_r405w"]
+[ext_resource type="Texture2D" path="res://assets/concentration_gradient_0_0_255_127_16x16.png" id="1_qv87i"]
+[ext_resource type="Texture2D" path="res://assets/concentration_gradient_0_255_0_127_16x16.png" id="2_k4cca"]
+[ext_resource type="Texture2D" path="res://assets/concentration_gradient_255_0_255_127_16x16.png" id="3_1rtke"]
+[ext_resource type="Texture2D" path="res://assets/concentration_gradient_255_255_0_127_16x16.png" id="4_hbq15"]
+[ext_resource type="Texture2D" path="res://assets/concentration_gradient_255_0_0_127_16x16.png" id="5_r405w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_25r5n"]
 texture = ExtResource("1_qv87i")
