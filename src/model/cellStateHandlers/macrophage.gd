@@ -5,7 +5,7 @@ func _init():
 	var resulting_texture = ImageTexture.create_from_image(base)
 	cell_texture = resulting_texture
 
-func next_move(delta: float, cell: Cell):
+func next_move(delta: float, cell: Cell, neighbors: Array):
 	move(delta, cell)
 	# implement
 	print("Not implemented yet.")

@@ -8,14 +8,17 @@ func _init(color_code: int):
 	var resulting_texture = ImageTexture.create_from_image(modified_image)
 	cell_texture = resulting_texture
 
-func next_move(delta: float, cell: Cell):
+func next_move(delta: float, cell: Cell, neighbors: Array):
 	self.cell = cell
+
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors)
+
 	move(delta, cell)
 	emanate_timer += delta
 	if emanate_timer > emanate_cooldown:
 		emanate()
 		emanate_timer = 0.0
-	
+
 func move(delta: float, cell: Cell):
 	# moves towards next antibody?
 	super.move(delta,cell)

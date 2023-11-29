@@ -8,7 +8,7 @@ func _init(color_code: int):
 	var resulting_texture = ImageTexture.create_from_image(modified_image)
 	cell_texture = resulting_texture
 
-func next_move(delta: float, cell: Cell):
+func next_move(delta: float, cell: Cell, neighbors: Array):
 	move(delta, cell)
 	
 	# implement

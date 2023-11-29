@@ -19,7 +19,7 @@ func _init():
 
 # modular interface for actions as defined in Ballet 1997 (miro board diagram)
 # default implementation should always fail as it is not intended to be instanciated.
-func next_move(delta: float, cell: Cell):
+func next_move(delta: float, cell: Cell, neighbors: Array):
 	move(delta, cell)
 	
 func move(delta: float, cell: Cell):
@@ -43,6 +43,20 @@ func generate():
 func emanate():
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
 	
+func find_closest_neighbor(cell: Cell, neighbors: Array):
+	if !neighbors: 
+		return null
+		
+	var closest_neighbor = null
+	var closest_distance = INF 
 
-	
+	for neighbor in neighbors:
+		# using length_squared compared to length saves a sqrt
+		var distance = (cell.position - neighbor.position).length_squared()
+
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_neighbor = neighbor
+
+	return closest_neighbor
 
