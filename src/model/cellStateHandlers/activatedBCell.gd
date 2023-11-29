@@ -1,5 +1,6 @@
 class_name ActivatedBCell extends CellStateHandler
 
+var cell_type: Cell.TYPES = Cell.TYPES.ACTIVATEDBCELL
 	
 func _init(color_code: int):
 	var base = Image.load_from_file("res://assets/cells/BCell.png")
@@ -15,7 +16,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array):
 	print("Not implemented yet.")
 	
 func move(delta: float, cell: Cell, target: Cell):
-	super.move(delta, cell, null)
+	super.move(delta, cell, target)
 	
 func differenciate():
 	# maybe something like each x ticks there is a chance for differenciation to either B cell or P Cell

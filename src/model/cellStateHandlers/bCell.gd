@@ -1,5 +1,7 @@
 class_name BCell extends CellStateHandler
 
+var cell_type: Cell.TYPES = Cell.TYPES.BCELL
+
 func _init():
 	var base = Image.load_from_file("res://assets/cells/BCell.png")
 	var resulting_texture = ImageTexture.create_from_image(base)
@@ -11,7 +13,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array):
 	print("Not implemented yet.")
 	
 func move(delta: float, cell: Cell, target: Cell):
-	super.move(delta, cell, null)
+	super.move(delta, cell, target)
 	
 func differenciate():
 	# handle collision with antigen presenting cell via signals and then differenciate

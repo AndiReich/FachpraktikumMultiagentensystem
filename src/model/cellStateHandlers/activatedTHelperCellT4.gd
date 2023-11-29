@@ -13,7 +13,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array):
 	print("Not implemented yet.")
 	
 func move(delta: float, cell: Cell, target: Cell):
-	super.move(delta, cell, null)
+	super.move(delta, cell, target)
 	
 func differenciate():
 	print_debug("Activated t-helper cell T4 does not differenciate.")

@@ -1,6 +1,7 @@
 class_name Antigen extends CellStateHandler
 
 var cell: Cell
+var cell_type: Cell.TYPES = Cell.TYPES.ANTIGEN
 
 func _init(color_code: int):
 	var base = Image.load_from_file("res://assets/cells/Antigen.png")
@@ -10,17 +11,13 @@ func _init(color_code: int):
 
 func next_move(delta: float, cell: Cell, neighbors: Array):
 	self.cell = cell
-
-	var closest_neighbor = super.find_closest_neighbor(cell, neighbors)
-
-	move(delta, cell, closest_neighbor)
+	move(delta, cell, null)
 	emanate_timer += delta
 	if emanate_timer > emanate_cooldown:
 		emanate()
 		emanate_timer = 0.0
 
 func move(delta: float, cell: Cell, target: Cell):
-	# moves towards next antibody?
 	super.move(delta, cell, target)
 	
 func differenciate():
