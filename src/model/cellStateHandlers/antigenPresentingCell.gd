@@ -8,12 +8,12 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array):
-	move(delta, cell)
+	move(delta, cell, null)
 	# implement
 	print("Not implemented yet.")
 	
-func move(delta: float, cell: Cell):
-	super.move(delta,cell)
+func move(delta: float, cell: Cell, taget: Cell):
+	super.move(delta, cell, null)
 	
 func differenciate():
 	print_debug("Antigen presenting cell does not differenciate.")

@@ -13,15 +13,15 @@ func next_move(delta: float, cell: Cell, neighbors: Array):
 
 	var closest_neighbor = super.find_closest_neighbor(cell, neighbors)
 
-	move(delta, cell)
+	move(delta, cell, closest_neighbor)
 	emanate_timer += delta
 	if emanate_timer > emanate_cooldown:
 		emanate()
 		emanate_timer = 0.0
 
-func move(delta: float, cell: Cell):
+func move(delta: float, cell: Cell, target: Cell):
 	# moves towards next antibody?
-	super.move(delta,cell)
+	super.move(delta, cell, target)
 	
 func differenciate():
 	print_debug("Antigen does not differenciate.")

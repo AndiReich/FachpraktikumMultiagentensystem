@@ -6,13 +6,13 @@ func _init():
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array):
-	move(delta, cell)
+	move(delta, cell, null)
 	# implement
 	print("Not implemented yet.")
 	
-func move(delta: float, cell: Cell):
+func move(delta: float, cell: Cell, target: Cell):
 	# should move towards antigen
-	super.move(delta,cell)
+	super.move(delta, cell, null)
 	
 func differenciate():
 	# handle collision with antigen via signals and then differenciate
