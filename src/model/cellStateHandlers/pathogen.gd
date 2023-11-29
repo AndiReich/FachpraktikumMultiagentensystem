@@ -1,7 +1,7 @@
-class_name Antigen extends CellStateHandler
+class_name Pathogen extends CellStateHandler
 
 var cell: Cell
-var cell_type: Cell.TYPES = Cell.TYPES.ANTIGEN
+var cell_type: Cell.TYPES = Cell.TYPES.PATHOGEN
 
 func _init(color_code: int):
 	var base = Image.load_from_file("res://assets/cells/Antigen.png")
@@ -29,4 +29,4 @@ func generate():
 
 func emanate():
 	# emanates chemotactic substances
-	cell.antigen_emanate.emit(cell.global_position, cell.TYPES.ANTIGEN)
+	cell.pathogen_emanate.emit(cell.global_position, cell.TYPES.PATHOGEN)

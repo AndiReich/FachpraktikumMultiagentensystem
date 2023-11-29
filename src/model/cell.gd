@@ -1,8 +1,8 @@
 class_name Cell extends Area2D
 
-enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, ANTIGEN, ACTIVATEDTHELPERCELL} 
+enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, PATHOGEN, ACTIVATEDTHELPERCELL} 
 
-var initial_cell_type: TYPES = TYPES.ANTIGEN
+var initial_cell_type: TYPES = TYPES.PATHOGEN
 
 var cell_state_handler: CellStateHandler = CellStateHandler.new()
 
@@ -14,12 +14,12 @@ var cell_state_handler: CellStateHandler = CellStateHandler.new()
 # (this way we have more freedom of what data we send on a per celltype basis)
 
 # only scripts that are attached to a node are able to define signals 
-signal antigen_emanate(position, type)
+signal pathogen_emanate(position, type)
 
 func _ready():
 	var root = get_tree().root
 	var tileMapController = root.find_child("TileMapController", true, false)
-	antigen_emanate.connect(tileMapController._on_virus_antigen_emanate)
+	pathogen_emanate.connect(tileMapController._on_pathogen_emanate)
 
 func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutations: int):
 	# This basically acts like a constructor for the node
@@ -45,8 +45,8 @@ func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutatio
 		TYPES.ANTIGENPRESENTINGCELL: 
 			cell_state_handler = AntigenPresentingCell.new(color_code)
 		
-		TYPES.ANTIGEN: 
-			cell_state_handler = Antigen.new(color_code)
+		TYPES.PATHOGEN: 
+			cell_state_handler = Pathogen.new(color_code)
 		
 		TYPES.ACTIVATEDTHELPERCELL: 
 			cell_state_handler = ActivatedTHelperCellT4.new(color_code)

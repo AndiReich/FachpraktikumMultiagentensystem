@@ -9,7 +9,7 @@ func _init():
 
 # macrophage moves towards closet pathogen
 func next_move(delta: float, cell: Cell, neighbors: Array):
-	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.ANTIGEN)
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
 	move(delta, cell, closest_neighbor)
 
 func move(delta: float, cell: Cell, target: Cell):

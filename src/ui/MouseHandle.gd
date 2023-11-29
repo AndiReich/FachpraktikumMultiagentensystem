@@ -80,7 +80,7 @@ func _on_agents_instantiate_agent(agentType):
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
 				Input.set_custom_mouse_cursor(resulting_texture)
 			
-			Cell.TYPES.ANTIGEN: 
+			Cell.TYPES.PATHOGEN: 
 				var code = await select_antigen_code(virus_image)
 				var image_to_display = color_utils.get_specific_permutation(virus_image, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
