@@ -13,6 +13,7 @@ func _init():
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
 	move(delta, cell, closest_neighbor)
+	
 	var colliding_cell = find_colliding_cell(cell, collisions, DIFFERENCIATION_TRIGGER)
 	if colliding_cell:
 		var color_code = colliding_cell.cell_state_handler.color_code
@@ -23,8 +24,6 @@ func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
-	# handle collision with antigen via signals and then differenciate
-	# TODO: Change once its done
 	cell_type = DIFFERENCIATION_TARGET
 	super.differenciate(cell, color_code)
 	

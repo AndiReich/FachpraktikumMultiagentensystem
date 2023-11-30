@@ -1,5 +1,7 @@
 class_name ActivatedBCell extends CellStateHandler
 
+const DIFFERENCIATION_TRIGGER = Cell.TYPES.ANTIGENPRESENTINGCELL
+const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
 	
 func _init(color_code: int):
 	cell_type = Cell.TYPES.ACTIVATEDBCELL
@@ -12,19 +14,18 @@ func _init(color_code: int):
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	move(delta, cell, null)
 	
-	# implement
-	print("Not implemented yet.")
+	# Differenciation logic
+	var colliding_cell = find_colliding_cell(cell, collisions, DIFFERENCIATION_TRIGGER)
+	if colliding_cell:
+		var color_code = colliding_cell.cell_state_handler.color_code
+		differenciate(cell, color_code)
 	
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
-	# maybe something like each x ticks there is a chance for differenciation to either B cell or P Cell
-	if(true):
-		return BCell.new()
-	else:
-		# TODO: Change when implementing
-		return Plasmacyte.new(12)
+	cell_type = DIFFERENCIATION_TARGET
+	super.differenciate(cell, color_code)
 	
 func generate():
 	# generate new B Cells if a concentration of IL2, IL4 and IL5 is high enough
