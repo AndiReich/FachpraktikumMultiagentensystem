@@ -1,18 +1,20 @@
 class_name THelperCellT4 extends CellStateHandler
 
+var cell_type: Cell.TYPES = Cell.TYPES.THELPERCELL
+
 func _init():
 	var base = Image.load_from_file("res://assets/cells/Antigen.png")
 	var resulting_texture = ImageTexture.create_from_image(base)
 	cell_texture = resulting_texture
 
-func next_move(delta: float, cell: Cell):
-	move(delta, cell)
+func next_move(delta: float, cell: Cell, neighbors: Array):
+	move(delta, cell, null)
 	# implement
 	print("Not implemented yet.")
 	
-func move(delta: float, cell: Cell):
+func move(delta: float, cell: Cell, target: Cell):
 	# should probably move randomly
-	super.move(delta,cell)
+	super.move(delta, cell, target)
 	
 func differenciate():
 	# handle collision with antigen presenting cell via signals and then differenciate

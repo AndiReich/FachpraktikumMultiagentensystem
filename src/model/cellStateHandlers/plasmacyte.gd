@@ -1,5 +1,7 @@
 class_name Plasmacyte extends CellStateHandler
 
+var cell_type: Cell.TYPES = Cell.TYPES.PLASMACYTE
+
 func _init(color_code: int):
 	var base = Image.load_from_file("res://assets/cells/Plasmacyte.png")
 	var overlay = Image.load_from_file("res://assets/cells/PlasmacyteOverlay.png")
@@ -7,13 +9,13 @@ func _init(color_code: int):
 	var resulting_texture = ImageTexture.create_from_image(modified_image)
 	cell_texture = resulting_texture
 
-func next_move(delta: float, cell: Cell):
-	move(delta, cell)
+func next_move(delta: float, cell: Cell, neighbors: Array):
+	move(delta, cell, null)
 	# implement
 	print("Not implemented yet.")
 	
-func move(delta: float, cell: Cell):
-	super.move(delta,cell)
+func move(delta: float, cell: Cell, target: Cell):
+	super.move(delta, cell, target)
 	
 func differenciate():
 	print_debug("Plasmacyte does not differenciate.")

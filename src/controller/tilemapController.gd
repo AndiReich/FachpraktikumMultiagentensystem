@@ -55,7 +55,7 @@ func _process(delta):
 	for substance in grid_states:
 		grid_states[substance].old = grid_states[substance].current.duplicate(true)
 
-func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
+func _on_pathogen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	grid_states[SUBSTANCE_TYPE.CS].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
 	# FIXME: only for debugging

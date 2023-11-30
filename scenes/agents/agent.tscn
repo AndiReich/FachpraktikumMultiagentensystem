@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://pjumqbgek863"]
+[gd_scene load_steps=6 format=3 uid="uid://pjumqbgek863"]
 
 [ext_resource type="Script" path="res://src/model/cell.gd" id="1_8dwd5"]
 [ext_resource type="Texture2D" uid="uid://vct22tbgxecv" path="res://assets/cells/Antigen.png" id="2_rld0u"]
+[ext_resource type="Script" path="res://src/controller/cell_tracker.gd" id="3_y4a3y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ch054"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wx3f"]
+radius = 96.0
 
 [node name="Agent" type="Area2D"]
 script = ExtResource("1_8dwd5")
@@ -13,3 +17,13 @@ texture = ExtResource("2_rld0u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ch054")
+
+[node name="CellTracker" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("3_y4a3y")
+
+[node name="CellDetectionShape2D" type="CollisionShape2D" parent="CellTracker"]
+shape = SubResource("CircleShape2D_5wx3f")
+
+[connection signal="area_entered" from="CellTracker" to="CellTracker" method="_on_area_entered"]
+[connection signal="area_exited" from="CellTracker" to="CellTracker" method="_on_area_exited"]

@@ -7,13 +7,13 @@ func _init(color_code: int):
 	var resulting_texture = ImageTexture.create_from_image(modified_image)
 	cell_texture = resulting_texture
 
-func next_move(delta: float, cell: Cell):
-	move(delta, cell)
+func next_move(delta: float, cell: Cell, neighbors: Array):
+	move(delta, cell, null)
 	# implement
 	print("Not implemented yet.")
 	
-func move(delta: float, cell: Cell):
-	super.move(delta,cell)
+func move(delta: float, cell: Cell, target: Cell):
+	super.move(delta, cell, target)
 	
 func differenciate():
 	print_debug("Activated t-helper cell T4 does not differenciate.")
