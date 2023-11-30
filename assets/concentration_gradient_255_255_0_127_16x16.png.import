@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjwl76p3v421a"
-path="res://.godot/imported/concentration_gradient_green_32x32.png-d45df1644e096704fd43a8920865d55d.ctex"
+uid="uid://dvv4d3tct8mol"
+path="res://.godot/imported/concentration_gradient_255_255_0_127_16x16.png-99bdb8a56cf0f26663c01524d311dfd7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/concentration_gradient_green_32x32.png"
-dest_files=["res://.godot/imported/concentration_gradient_green_32x32.png-d45df1644e096704fd43a8920865d55d.ctex"]
+source_file="res://assets/concentration_gradient_255_255_0_127_16x16.png"
+dest_files=["res://.godot/imported/concentration_gradient_255_255_0_127_16x16.png-99bdb8a56cf0f26663c01524d311dfd7.ctex"]
 
 [params]
 

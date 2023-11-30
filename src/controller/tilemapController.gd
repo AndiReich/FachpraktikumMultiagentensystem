@@ -5,6 +5,7 @@ var GridState = preload("res://src/controller/grid_state.gd")
 
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
+const NUM_THREADS: int = 4
 var grid_states: Dictionary = {}
 var grid_to_update: int = 0
 var cell_pattern_dict: Dictionary = {}
@@ -29,7 +30,7 @@ func _ready():
 	var cell_size: Vector2i = self.tile_set.tile_size
 	var viewport_size: Vector2i = self.get_viewport_rect().size
 	self.remove_layer(0)
-	
+
 	grid_size_x = viewport_size.x / cell_size.x
 	grid_size_y = viewport_size.y / cell_size.y 
 	
@@ -37,8 +38,7 @@ func _ready():
 		grid_states[substance] = GridState.new(grid_size_x + 2, grid_size_y + 2)
 		self.add_layer(substance)
 		self.set_layer_enabled(substance, false)
-		self.set_layer_modulate(substance, Color(255, 255, 255, 0.5))
-
+		
 func _process(delta):
 	diffusion_decay_timer += delta
 	if diffusion_decay_timer > diffusion_decay_cooldown:
@@ -66,31 +66,68 @@ func _on_virus_antigen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 # of set_cell calls. To reduce the number of calls further round to the nearest
 # interval of size 1/ntiles in 0..1. 
 func update_tile_map():
+	var substance = SUBSTANCE_TYPE.values()[grid_to_update]
+	if !grid_states[substance].is_displayed:
+		return
+		
+	for x in grid_size_x:
+		for y in grid_size_y:
+			var old_value: float = grid_states[substance].old[x+1][y+1]
+			old_value = round(old_value * ntiles ) / ntiles
+			var current_value: float = grid_states[substance].current[x+1][y+1]
+			current_value = round(current_value * ntiles ) / ntiles
+			if current_value != old_value:
+				var pos: Vector2i = Vector2i(x, y)
+				var value: float = max(0, min(1, current_value))
+				var tile_idx: int = int(value * (ntiles - 1))
+				var tile: Vector2i = Vector2i(tile_idx, 0)
+				set_cell(substance, pos, substance, tile)
+
+func _update_tile_map_rows(start_row: int, end_row: int, substance: int, current_grid_state: Array, old_grid_state: Array):
+	for x in range(start_row, end_row):
+		for y in grid_size_y:
+			var old_value: float = old_grid_state[x+1][y+1]
+			old_value = round(old_value * ntiles ) / ntiles
+			var current_value: float = current_grid_state[x+1][y+1]
+			current_value = round(current_value * ntiles ) / ntiles
+			if current_value != old_value:
+				var pos: Vector2i = Vector2i(x, y)
+				var value: float = max(0, min(1, current_value))
+				var tile_idx: int = int(value * (ntiles - 1))
+				var tile: Vector2i = Vector2i(tile_idx, 0)
+				call_deferred("set_cell", substance, pos, substance, tile)
+
+func update_tile_map_parallel():
+	var threads = []
 	for substance in SUBSTANCE_TYPE.values():
-		if grid_states[substance].is_displayed:
-			for x in grid_size_x:
-				for y in grid_size_y:
-					var old_value: float = grid_states[substance].old[x+1][y+1]
-					old_value = round(old_value * ntiles ) / ntiles
-					var current_value: float = grid_states[substance].current[x+1][y+1]
-					current_value = round(current_value * ntiles ) / ntiles
-					if current_value != old_value:
-						var pos: Vector2i = Vector2i(x, y)
-						var value: float = max(0, min(1, current_value))
-						var tile_idx: int = int(value * (ntiles - 1))
-						var tile: Vector2i = Vector2i(tile_idx, 0)
-						set_cell(substance, pos, substance, tile)
+		if !grid_states[substance].is_displayed:
+			continue
+
+		var current_grid_state = grid_states[substance].current
+		var old_grid_state = grid_states[substance].old
+
+		for i in range(NUM_THREADS):
+			var start_row: int = i * grid_size_x / NUM_THREADS
+			var end_row: int = (i + 1) * grid_size_x / NUM_THREADS
+
+			var thread = Thread.new()
+			thread.start(_update_tile_map_rows.bind(start_row, end_row, substance, current_grid_state, old_grid_state))
+			threads.append(thread)
+
+	for thread in threads:
+		thread.wait_to_finish()
 
 func update_entire_tile_map():
 	for substance in SUBSTANCE_TYPE.values():
-		if grid_states[substance].is_displayed:
-			for x in grid_size_x:
-				for y in grid_size_y:
-						var pos: Vector2i = Vector2i(x, y)
-						var value: float = max(0, min(1, grid_states[substance].current[x+1][y+1]))
-						var tile_idx: int = int(value * (ntiles - 1))
-						var tile: Vector2i = Vector2i(tile_idx, 0)
-						set_cell(substance, pos, substance, tile)
+		if !grid_states[substance].is_displayed:
+			continue
+		for x in grid_size_x:
+			for y in grid_size_y:
+				var pos: Vector2i = Vector2i(x, y)
+				var value: float = max(0, min(1, grid_states[substance].current[x+1][y+1]))
+				var tile_idx: int = int(value * (ntiles - 1))
+				var tile: Vector2i = Vector2i(tile_idx, 0)
+				set_cell(substance, pos, substance, tile)
 
 func _on_simulation_ui_on_grid_toggle(substance_type):
 	var is_substance_enabled = grid_states[substance_type].is_displayed
