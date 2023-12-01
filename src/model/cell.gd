@@ -57,7 +57,7 @@ func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutatio
 func _process(delta: float):
 	## this is the only function that should be called for the cell_state_handler
 	if initial_cell_type != null:
-		cell_state_handler.next_move(delta, self, $CellTracker.detected_cells)
+		cell_state_handler.next_move(delta, self, $CellTracker.detected_cells, $CellCollider.detected_cells)
 
 func set_state(cell_state_handler: CellStateHandler):
 	self.cell_state_handler = cell_state_handler
