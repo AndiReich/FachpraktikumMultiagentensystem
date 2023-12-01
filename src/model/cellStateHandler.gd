@@ -2,7 +2,7 @@ class_name CellStateHandler
 
 @export var random_walk_diffusion_rate: float = 10.0
 @export var alpha: float = 1.0 # weight of active movement in total velocity
-@export var beta: float = 0.0 # weight of Brownian motion/random walk in total velocity
+@export var beta: float = 1.0 # weight of Brownian motion/random walk in total velocity
 @export var gamma: float = 0.0 # weight of Chemotaxis movement in total velocity
 @export var emanate_cooldown: float = 1.0 # cooldown for emanation
 @export var active_move_speed: float = 10.0

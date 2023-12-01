@@ -2,7 +2,6 @@ class_name Plasmacyte extends CellStateHandler
 
 var agent_scene = preload("res://scenes/agents/agent.tscn")
 
-var cell_type: Cell.TYPES = Cell.TYPES.PLASMACYTE
 var generate_cooldown: float = 1.0
 var generate_timer: float = generate_cooldown
 var antigen_code: int
@@ -37,6 +36,5 @@ func try_generate(cell: Cell):
 	antibody.position = cell.position
 	cell.agent_root_node.add_child(antibody)
 	
-func emanate():
-	# print_debug("Plasmacyte does not emanate.")
+func emanate(cell: Cell):
 	return
