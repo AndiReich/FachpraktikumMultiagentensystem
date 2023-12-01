@@ -1,9 +1,10 @@
 class_name Cell extends Area2D
 
-enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, PATHOGEN, ACTIVATEDTHELPERCELL} 
+enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, PATHOGEN, ACTIVATEDTHELPERCELL, ANTIBODY} 
 
 var initial_cell_type: TYPES = TYPES.PATHOGEN
-
+var tilemap_controller: TileMapController 
+var agent_root_node: Node
 var cell_state_handler: CellStateHandler = CellStateHandler.new()
 
 
@@ -18,8 +19,9 @@ signal pathogen_emanate(position, type)
 
 func _ready():
 	var root = get_tree().root
-	var tileMapController = root.find_child("TileMapController", true, false)
-	pathogen_emanate.connect(tileMapController._on_pathogen_emanate)
+	agent_root_node = root.find_child("AgentRootNode", true, false)
+	tilemap_controller = root.find_child("TileMapController", true, false)
+	pathogen_emanate.connect(tilemap_controller._on_pathogen_emanate)
 
 func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutations: int):
 	# This basically acts like a constructor for the node
@@ -50,6 +52,9 @@ func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutatio
 		
 		TYPES.ACTIVATEDTHELPERCELL: 
 			cell_state_handler = ActivatedTHelperCellT4.new(color_code)
+			
+		TYPES.ANTIBODY:
+			cell_state_handler = Antibody.new(color_code)
 		
 	get_child(0).texture = cell_state_handler.cell_texture
 	

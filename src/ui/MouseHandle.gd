@@ -59,6 +59,8 @@ func _on_agents_instantiate_agent(agentType):
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(plasmacyte_image, plasmacyte_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
 				Input.set_custom_mouse_cursor(resulting_texture)
+				
+				current_color_code = code
 			
 			Cell.TYPES.THELPERCELL:
 				var resulting_texture = ImageTexture.create_from_image(t_helper_cell_image)
