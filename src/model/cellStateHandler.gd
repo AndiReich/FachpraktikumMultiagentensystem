@@ -41,6 +41,11 @@ func move(delta: float, cell: Cell, target: Cell):
 	var update_random_walk: Vector2 = beta * random_walk_diffusion_rate**2 * delta * Vector2(x, y).normalized()
 	cell.position += update_random_walk
 	cell.position = cell.position.clamp(Vector2.ZERO, cell.get_viewport_rect().size)
+
+func disable_movement():
+	self.alpha = 0.0
+	self.beta = 0.0
+	self.gamma = 0.0
 	
 func differenciate(cell: Cell, color_code: int):
 		cell.initialize_by_cell_type(cell.cell_state_handler.cell_type, color_code, range_of_mutations)

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://x75hjm5f6v78" path="res://assets/cells/Macrophage.png" id="1_62ya2"]
 [ext_resource type="Script" path="res://src/ui/AgentsTab.gd" id="1_u27uq"]
 [ext_resource type="Texture2D" uid="uid://fr2i5y6miww2" path="res://assets/cells/BCell.png" id="3_0pfvy"]
-[ext_resource type="Texture2D" uid="uid://cpud0uhdb51k" path="res://assets/cells/THelperCell.png" id="4_e4kpe"]
+[ext_resource type="Texture2D" uid="uid://btee0f8x4nw8s" path="res://assets/cells/THelperCell.png" id="4_e4kpe"]
 [ext_resource type="Texture2D" uid="uid://gxpelo8x1418" path="res://assets/cells/Plasmacyte.png" id="6_o6pdg"]
 [ext_resource type="Script" path="res://src/ui/CreateAgentButton.gd" id="7_35x53"]
 [ext_resource type="Texture2D" uid="uid://vct22tbgxecv" path="res://assets/cells/Antigen.png" id="8_e88mo"]
@@ -120,7 +120,7 @@ layout_mode = 2
 texture_normal = ExtResource("8_eeyk7")
 stretch_mode = 3
 script = ExtResource("7_35x53")
-agentType = 7
+agentType = 8
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/AntibodyHBoxContainer"]
 layout_mode = 2

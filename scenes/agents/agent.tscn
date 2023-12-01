@@ -19,6 +19,7 @@ script = ExtResource("1_8dwd5")
 texture = ExtResource("2_rld0u")
 
 [node name="CellCollider" type="Area2D" parent="."]
+collision_layer = 4
 script = ExtResource("3_3q1y5")
 
 [node name="CellCollisionShape2D" type="CollisionShape2D" parent="CellCollider"]

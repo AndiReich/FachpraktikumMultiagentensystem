@@ -1,5 +1,7 @@
 class_name Pathogen extends CellStateHandler
 
+@export var num_antibodies_to_kill: int = 4
+
 func _init(color_code: int):
 	cell_type = Cell.TYPES.PATHOGEN
 	var base = Image.load_from_file("res://assets/cells/Antigen.png")
@@ -13,6 +15,8 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	if emanate_timer > emanate_cooldown:
 		emanate(cell)
 		emanate_timer = 0.0
+	if collisions:
+		try_die(cell, collisions)
 
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
@@ -27,3 +31,17 @@ func generate():
 func emanate(cell: Cell):
 	# emanates chemotactic substances
 	cell.pathogen_emanate.emit(cell.global_position, cell.TYPES.PATHOGEN)
+
+func _antibody_filer(collider): 
+	if collider.cell_state_handler.cell_type == Cell.TYPES.ANTIBODY: 
+		return collider
+
+func try_die(cell: Cell, collisions: Array):
+	collisions = collisions.filter(_antibody_filer)
+	print(collisions.size())
+	if collisions.size() >= num_antibodies_to_kill:
+		cell.queue_free()
+		cell = null
+		for collider in collisions:
+			collider.queue_free()
+			collider = null

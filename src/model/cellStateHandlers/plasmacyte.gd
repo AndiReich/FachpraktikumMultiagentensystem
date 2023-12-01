@@ -4,11 +4,10 @@ var agent_scene = preload("res://scenes/agents/agent.tscn")
 
 var generate_cooldown: float = 1.0
 var generate_timer: float = generate_cooldown
-var antigen_code: int
 
 func _init(color_code: int):
-	antigen_code = color_code
-	cell_type = Cell.TYPES.PLASMACYTE
+	self.color_code = color_code
+	self.cell_type = Cell.TYPES.PLASMACYTE
 	var base = Image.load_from_file("res://assets/cells/Plasmacyte.png")
 	var overlay = Image.load_from_file("res://assets/cells/PlasmacyteOverlay.png")
 	var modified_image = color_utils.get_specific_permutation_with_overlay(base, overlay, range_of_mutations, color_code)
@@ -32,7 +31,7 @@ func try_generate(cell: Cell):
 	# 1. check IL6 value on grid
 	# 2. produce antibody of specific type
 	var antibody = agent_scene.instantiate()
-	antibody.initialize_by_cell_type(Cell.TYPES.ANTIBODY, antigen_code, range_of_mutations)
+	antibody.initialize_by_cell_type(Cell.TYPES.ANTIBODY, self.color_code, range_of_mutations)
 	antibody.position = cell.position
 	cell.agent_root_node.add_child(antibody)
 	
