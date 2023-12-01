@@ -9,7 +9,8 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array):
-	move(delta, cell, null)
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
+	move(delta, cell, closest_neighbor)
 	
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
