@@ -41,6 +41,7 @@ func _gui_input(event):
 				var mouse_position = get_global_mouse_position()
 				agent_root_node.add_child(agent)
 				agent.position = mouse_position
+				agent.cell_state_handler.color_code = current_color_code
 				
 func _on_agents_instantiate_agent(agentType):
 	owner.deleteMode = false
@@ -59,7 +60,6 @@ func _on_agents_instantiate_agent(agentType):
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(plasmacyte_image, plasmacyte_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
 				Input.set_custom_mouse_cursor(resulting_texture)
-				
 				current_color_code = code
 			
 			Cell.TYPES.THELPERCELL:
@@ -75,19 +75,20 @@ func _on_agents_instantiate_agent(agentType):
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(b_cell_image, b_cell_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
 				Input.set_custom_mouse_cursor(resulting_texture)
+				current_color_code = code
 			
 			Cell.TYPES.ANTIGENPRESENTINGCELL:
 				var code = await select_antigen_code(macrophage_image, macrophage_overlay)
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(macrophage_image, macrophage_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
 				Input.set_custom_mouse_cursor(resulting_texture)
+				current_color_code = code
 			
 			Cell.TYPES.PATHOGEN: 
 				var code = await select_antigen_code(virus_image)
 				var image_to_display = color_utils.get_specific_permutation(virus_image, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
 				Input.set_custom_mouse_cursor(resulting_texture)
-				
 				current_color_code = code
 			
 			Cell.TYPES.ACTIVATEDTHELPERCELL:
@@ -95,6 +96,7 @@ func _on_agents_instantiate_agent(agentType):
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(t_helper_cell_image, t_helper_cell_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
 				Input.set_custom_mouse_cursor(resulting_texture)
+				current_color_code = code
 
 func select_antigen_code(preview_image: Image, overlay_image: Image = null):
 	var code_selection = simulation_ui_node.find_child("antigen_code_selector", true, false)
