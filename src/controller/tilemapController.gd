@@ -155,9 +155,8 @@ func _on_fetch_grid_state(cell_position : Vector2,
 			if(Vector2i(x,y) == map_position):
 				continue
 			# set value to 0.0 since it is currently not required
-			if(grid_state_handler.is_position_valid(x, y, false)):
+			if(grid_state_handler.is_position_valid(x, y)):
 				var grid_value = grid_state_handler.current[x][y]
-				grid_value = minf(1.0, grid_value)
 				var local_position = self.map_to_local(Vector2i(x-1,y-1))
 				movement_map[local_position] = int(floor(grid_value*9))
 				
