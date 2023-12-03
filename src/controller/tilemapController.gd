@@ -134,3 +134,34 @@ func _on_simulation_ui_on_grid_toggle(substance_type):
 	grid_states[substance_type].is_displayed = !is_substance_enabled
 	self.set_layer_enabled(substance_type, !is_substance_enabled)
 	self.update_entire_tile_map()
+	
+func _on_fetch_grid_state(cell_position : Vector2, 
+	radius : int, 
+	substance_type : TileMapController.SUBSTANCE_TYPE,
+	caller_id : int):
+	cell_position += Vector2(1,1)
+	var map_position: Vector2i = self.local_to_map(cell_position)
+	
+	var offset_x = map_position.x - radius
+	var offset_y = map_position.y - radius
+	var end_offset_x = map_position.x + radius
+	var end_offset_y = map_position.y + radius
+	
+	var grid_state_handler = grid_states[substance_type]
+	
+	var movement_map = {}
+	for x in range(offset_x, end_offset_x + 1):
+		for y in range(offset_y, end_offset_y + 1):
+			if(Vector2i(x,y) == map_position):
+				continue
+			# set value to 0.0 since it is currently not required
+			if(grid_state_handler.is_position_valid(x, y, false)):
+				var grid_value = grid_state_handler.current[x][y]
+				grid_value = minf(1.0, grid_value)
+				var local_position = self.map_to_local(Vector2i(x,y))
+				movement_map[local_position] = int(floor(grid_value*9))
+				
+	instance_from_id(caller_id).grid_state_response.emit(movement_map)
+	
+	
+	

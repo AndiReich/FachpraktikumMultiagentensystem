@@ -16,10 +16,19 @@ var cell_state_handler: CellStateHandler = CellStateHandler.new()
 # only scripts that are attached to a node are able to define signals 
 signal pathogen_emanate(position, type)
 
+signal fetch_grid_state(
+	cell_position : Vector2, 
+	radius: int,
+	substance_type: TileMapController.SUBSTANCE_TYPE,
+	caller_id: int) 
+	
+signal grid_state_response(movement_map: Dictionary)
+
 func _ready():
 	var root = get_tree().root
 	var tileMapController = root.find_child("TileMapController", true, false)
 	pathogen_emanate.connect(tileMapController._on_pathogen_emanate)
+	fetch_grid_state.connect(tileMapController._on_fetch_grid_state)
 
 func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutations: int):
 	# This basically acts like a constructor for the node

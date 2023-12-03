@@ -103,6 +103,7 @@ func select_antigen_code(preview_image: Image, overlay_image: Image = null):
 	code_selection.set_images(preview_image, overlay_image)
 	code_selection.show()
 	var code = await code_selection.close
+	code_selection.close
 	code_selection.hide()
 	return code
 

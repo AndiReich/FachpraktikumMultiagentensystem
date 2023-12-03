@@ -1,7 +1,7 @@
 class_name CellStateHandler
 
 @export var random_walk_diffusion_rate: float = 10.0
-@export var alpha: float = 1.0 # weight of active movement in total velocity
+@export var alpha: float = 0.0 # weight of active movement in total velocity
 @export var beta: float = 0.0 # weight of Brownian motion/random walk in total velocity
 @export var gamma: float = 0.0 # weight of Chemotaxis movement in total velocity
 @export var emanate_cooldown: float = 1.0 # cooldown for emanation
@@ -30,12 +30,14 @@ func move(delta: float, cell: Cell, target: Cell):
 	# e.g. some array or something of movement probabilites
 	# implementation for Brownian motion taken from:
 	#     https://scipy-cookbook.readthedocs.io/items/BrownianMotion.html
+	
+	# active movement 
 	if target:
 		var target_direction = (target.position - cell.position).normalized()
 		var target_distance = cell.position.distance_to(target.position)
-		var update_active_movement = target_direction * active_move_speed * delta
+		var update_active_movement = alpha * (target_direction * active_move_speed * delta)
 		cell.position += update_active_movement
-	
+	# brownian motion
 	var x: float = rng.randfn()
 	var y: float = rng.randfn()
 	var update_random_walk: Vector2 = beta * random_walk_diffusion_rate**2 * delta * Vector2(x, y).normalized()
