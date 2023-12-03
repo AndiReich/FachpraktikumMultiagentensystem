@@ -33,7 +33,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		colliding_cell.call_deferred("queue_free")
 
 func move(delta: float, cell: Cell, target: Cell):
-	_grid_movement(cell)
+	_grid_movement(delta, cell)
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
@@ -46,19 +46,19 @@ func generate():
 func emanate(cell: Cell):
 	print_debug("Macrophage does not emanate.")
 	
-func _grid_movement(cell: Cell):
+func _grid_movement(delta: float, cell: Cell):
 	# grid movement	
 	# we get a  return value form the signal handler in the movement map
 	# in this case godot opperates on a single thread so there should be no race condition here
 	var caller_id = cell.get_instance_id()
-	cell.fetch_grid_state.emit(cell.position, 1, TileMapController.SUBSTANCE_TYPE.CS, caller_id)
+	cell.fetch_grid_state.emit(cell.position, 3, TileMapController.SUBSTANCE_TYPE.CS, caller_id)
 	
 	var movement_map = await cell.grid_state_response
 	var class_counts = {}
 	
 	for key in movement_map.keys():
 		var class_identifier = movement_map[key]
-		print("key %s value %s" % [key, class_identifier])
+		# print("key %s value %s" % [key, class_identifier])
 		
 		if(class_counts.has(class_identifier)):
 			class_counts[class_identifier] += 1
@@ -96,7 +96,15 @@ func _grid_movement(cell: Cell):
 		if(random <= cumulative_probability):
 			resulting_map_position = key
 			break
-	print(resulting_map_position)
-	
 	if(resulting_map_position == null):
-		print("null")
+		return 0.0 
+		
+	print(resulting_map_position - cell.position)
+			
+			
+	var target_direction = ((resulting_map_position - Vector2(8,8)) - cell.position).normalized()
+	print("target_direction %s" % target_direction)
+	var update_active_movement = gamma * (target_direction * active_move_speed * delta)
+	print("update_active_movement %s" % update_active_movement)
+	cell.position += update_active_movement
+	return 0.0

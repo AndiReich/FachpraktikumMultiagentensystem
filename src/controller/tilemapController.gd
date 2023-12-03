@@ -5,7 +5,7 @@ var GridState = preload("res://src/controller/grid_state.gd")
 
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
-const NUM_THREADS: int = 4
+const NUM_THREADS: int = 1
 var grid_states: Dictionary = {}
 var grid_to_update: int = 0
 var cell_pattern_dict: Dictionary = {}
@@ -139,8 +139,8 @@ func _on_fetch_grid_state(cell_position : Vector2,
 	radius : int, 
 	substance_type : TileMapController.SUBSTANCE_TYPE,
 	caller_id : int):
-	cell_position += Vector2(1,1)
 	var map_position: Vector2i = self.local_to_map(cell_position)
+	map_position += Vector2i(1,1)
 	
 	var offset_x = map_position.x - radius
 	var offset_y = map_position.y - radius
@@ -158,7 +158,7 @@ func _on_fetch_grid_state(cell_position : Vector2,
 			if(grid_state_handler.is_position_valid(x, y, false)):
 				var grid_value = grid_state_handler.current[x][y]
 				grid_value = minf(1.0, grid_value)
-				var local_position = self.map_to_local(Vector2i(x,y))
+				var local_position = self.map_to_local(Vector2i(x-1,y-1))
 				movement_map[local_position] = int(floor(grid_value*9))
 				
 	instance_from_id(caller_id).grid_state_response.emit(movement_map)
