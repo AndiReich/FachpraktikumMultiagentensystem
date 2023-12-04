@@ -35,12 +35,12 @@ func emanate(cell: Cell):
 	# emanates chemotactic substances
 	cell.pathogen_emanate.emit(cell.global_position, cell.TYPES.PATHOGEN)
 
-func _antibody_filer(collider): 
+func _antibody_filter(collider): 
 	if collider.cell_state_handler.cell_type == Cell.TYPES.ANTIBODY: 
 		return collider
 
 func handle_antibody_collisions(cell: Cell, collisions: Array):
-	collisions = collisions.filter(_antibody_filer)
+	collisions = collisions.filter(_antibody_filter)
 	for collider in collisions:
 		if collider not in attached_antibodies:
 			attached_antibodies.append(collider)
