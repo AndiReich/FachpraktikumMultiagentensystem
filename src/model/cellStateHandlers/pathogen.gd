@@ -2,6 +2,8 @@ class_name Pathogen extends CellStateHandler
 
 @export var num_antibodies_to_kill: int = 4
 
+var attached_antibodies: Array = []
+
 func _init(color_code: int):
 	cell_type = Cell.TYPES.PATHOGEN
 	var base = Image.load_from_file("res://assets/cells/Antigen.png")
@@ -16,7 +18,8 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		emanate(cell)
 		emanate_timer = 0.0
 	if collisions:
-		try_die(cell, collisions)
+		handle_antibody_collisions(cell, collisions)
+	try_die(cell)
 
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
@@ -36,12 +39,16 @@ func _antibody_filer(collider):
 	if collider.cell_state_handler.cell_type == Cell.TYPES.ANTIBODY: 
 		return collider
 
-func try_die(cell: Cell, collisions: Array):
+func handle_antibody_collisions(cell: Cell, collisions: Array):
 	collisions = collisions.filter(_antibody_filer)
-	print(collisions.size())
-	if collisions.size() >= num_antibodies_to_kill:
+	for collider in collisions:
+		if collider not in attached_antibodies:
+			attached_antibodies.append(collider)
+
+func try_die(cell: Cell):
+	if attached_antibodies.size() >= num_antibodies_to_kill:
 		cell.queue_free()
 		cell = null
-		for collider in collisions:
-			collider.queue_free()
-			collider = null
+		for antibody in attached_antibodies:
+			antibody.queue_free()
+			antibody = null

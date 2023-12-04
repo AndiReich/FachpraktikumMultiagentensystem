@@ -14,13 +14,18 @@ func _init(color_code: int):
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	if !is_attached_to_pathogen:
-		var closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
+		var closest_neighbor = null
 		var colliding_pathogen = find_colliding_cell(cell, collisions, Cell.TYPES.PATHOGEN)
 		if colliding_pathogen:
 			handle_pathogen_collision(cell, colliding_pathogen)
+		else:
+			closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
 		move(delta, cell, closest_neighbor)
 	else:
-		cell.global_transform = attached_pathogen.get_global_transform() * collider_to_cell_transform
+		# need to make sure the node is still valid when potentially removing them at the death event 
+		# of a virus
+		if is_instance_valid(attached_pathogen) and is_instance_valid(cell):
+			cell.global_transform = attached_pathogen.get_global_transform() * collider_to_cell_transform
 	
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
