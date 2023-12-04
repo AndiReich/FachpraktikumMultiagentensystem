@@ -30,7 +30,7 @@ func _ready():
 	agent_root_node = root.find_child("AgentRootNode", true, false)
 	tilemap_controller = root.find_child("TileMapController", true, false)
 	pathogen_emanate.connect(tilemap_controller._on_pathogen_emanate)
-	fetch_grid_state.connect(tileMapController._on_fetch_grid_state)
+	fetch_grid_state.connect(tilemap_controller._on_fetch_grid_state)
 
 func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutations: int):
 	# This basically acts like a constructor for the node
