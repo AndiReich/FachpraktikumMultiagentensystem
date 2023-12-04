@@ -125,16 +125,14 @@ func add_emanate_pattern(cell_position: Vector2i, type_id: Cell.TYPES, cell_patt
 		for local_y in pattern_matrix[0].size():
 			var global_y: int = offset_y + local_y
 			var value: float = float(pattern_matrix[local_x][local_y]) / self.ntiles
-			if(is_position_valid(global_x, global_y, value)):
-				self.current[global_x][global_y] += value 
+			if(is_position_valid(global_x, global_y)):
+				self.current[global_x][global_y] = min(self.current[global_x][global_y] + value, 1.0)
 
 # Not that it matters, but we could check for valid positions in each loop to 
 # avoid three if statements per x,y iteration in add_emanate_pattern_to_grid.
-func is_position_valid(x: int, y: int, value: float) -> bool:
+func is_position_valid(x: int, y: int) -> bool:
 	if(x < 0 || x >= self.current.size()):
 		return false
 	if(y < 0 || y >= self.current[0].size()):
-		return false
-	if(self.current[x][y] >= 1.0):
 		return false
 	return true
