@@ -1,5 +1,7 @@
 class_name Plasmacyte extends CellStateHandler
 
+const MOVEMENT_TARGETS = null
+
 func _init(color_code: int):
 	cell_type = Cell.TYPES.PLASMACYTE
 	var base = Image.load_from_file("res://assets/cells/Plasmacyte.png")
@@ -9,7 +11,7 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	move(delta, cell, null)
+	move(delta, cell, MOVEMENT_TARGETS)
 	# implement
 	print("Not implemented yet.")
 	
