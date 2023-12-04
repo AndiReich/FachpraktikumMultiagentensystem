@@ -47,55 +47,56 @@ func _on_agents_instantiate_agent(agentType):
 	owner.deleteMode = false
 	if selected_agent_type == agentType:
 		selected_agent_type = null
-		Input.set_custom_mouse_cursor(null)
+		Input.set_custom_mouse_cursor(null, 0, Vector2(0,0))
 	else:		
 		selected_agent_type = agentType
 		match selected_agent_type:
 			Cell.TYPES.MACROPHAGE:
 				var resulting_texture = ImageTexture.create_from_image(macrophage_image)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
 			
 			Cell.TYPES.PLASMACYTE:
 				var code = await select_antigen_code(plasmacyte_image, plasmacyte_overlay)
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(plasmacyte_image, plasmacyte_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
 				current_color_code = code
 			
 			Cell.TYPES.THELPERCELL:
 				var resulting_texture = ImageTexture.create_from_image(t_helper_cell_image)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
 			
 			Cell.TYPES.BCELL:
 				var resulting_texture = ImageTexture.create_from_image(b_cell_image)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
 			
 			Cell.TYPES.ACTIVATEDBCELL:
 				var code = await select_antigen_code(b_cell_image, b_cell_overlay)
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(b_cell_image, b_cell_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
 				current_color_code = code
 			
 			Cell.TYPES.ANTIGENPRESENTINGCELL:
 				var code = await select_antigen_code(macrophage_image, macrophage_overlay)
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(macrophage_image, macrophage_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
+				
 				current_color_code = code
 			
 			Cell.TYPES.PATHOGEN: 
 				var code = await select_antigen_code(virus_image)
 				var image_to_display = color_utils.get_specific_permutation(virus_image, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
 				current_color_code = code
 			
 			Cell.TYPES.ACTIVATEDTHELPERCELL:
 				var code = await select_antigen_code(t_helper_cell_image, t_helper_cell_overlay)
 				var image_to_display = color_utils.get_specific_permutation_with_overlay(t_helper_cell_image, t_helper_cell_overlay, range_of_mutations, code)
 				var resulting_texture = ImageTexture.create_from_image(image_to_display)
-				Input.set_custom_mouse_cursor(resulting_texture)
+				Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(16,16))
 				current_color_code = code
 
 func select_antigen_code(preview_image: Image, overlay_image: Image = null):
@@ -103,6 +104,7 @@ func select_antigen_code(preview_image: Image, overlay_image: Image = null):
 	code_selection.set_images(preview_image, overlay_image)
 	code_selection.show()
 	var code = await code_selection.close
+	code_selection.close
 	code_selection.hide()
 	return code
 
@@ -111,8 +113,8 @@ func _on_agents_delete_mode():
 	
 	if owner.deleteMode:
 		owner.deleteMode = false
-		Input.set_custom_mouse_cursor(null)
+		Input.set_custom_mouse_cursor(null, 0, Vector2(0,0))
 	else:
 		var resulting_texture = ImageTexture.create_from_image(delete_image)
-		Input.set_custom_mouse_cursor(resulting_texture)
+		Input.set_custom_mouse_cursor(resulting_texture, 0, Vector2(0,0))
 		owner.deleteMode = true
