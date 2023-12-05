@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://73cbm33k6jn5"]
+[gd_scene load_steps=5 format=3 uid="uid://73cbm33k6jn5"]
 
+[ext_resource type="Script" path="res://src/MainScene.gd" id="1_ja5qj"]
 [ext_resource type="PackedScene" uid="uid://bp60hcbn7cjcp" path="res://scenes/tilemaps/tile_map_controller.tscn" id="1_pmsyw"]
 [ext_resource type="Script" path="res://src/AgentRootNode.gd" id="2_44t2c"]
 [ext_resource type="PackedScene" uid="uid://clr2uylrh7h6o" path="res://scenes/ui/simulation_ui.tscn" id="2_fajki"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_ja5qj")
 
 [node name="TileMapController" parent="." instance=ExtResource("1_pmsyw")]
 
