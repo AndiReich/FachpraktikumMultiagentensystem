@@ -27,7 +27,7 @@ func _enter_tree():
 			cell_pattern_dict[cell_type] = value
 	
 func _ready():
-	var cell_size: Vector2i = Vector2i(16,16)
+	var cell_size: Vector2i = self.tile_set.tile_size
 	var viewport_size: Vector2i = self.get_viewport_rect().size
 	self.remove_layer(0)
 
