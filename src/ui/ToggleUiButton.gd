@@ -1,6 +1,6 @@
 class_name ToggleUiButton extends CheckButton
 
-@export var control : Control
+@export var control: Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,6 +1,6 @@
 class_name ToggleGrid extends CheckButton
 
-@export var substanceType : TileMapController.SUBSTANCE_TYPE
+@export var substanceType: TileMapController.SUBSTANCE_TYPE
 
 var simulationUINode
 

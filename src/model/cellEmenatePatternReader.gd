@@ -27,7 +27,6 @@ func get_content_as_2d_Array(text: String) -> Array:
 		if(characters.size() > 0):
 			gradient_grid.append(characters)
 	
-	# FIXME: Why is the transpose here, the pattern is symmetric?
 	utils.transpose_matrix_in_place(gradient_grid)
 	return gradient_grid
 
