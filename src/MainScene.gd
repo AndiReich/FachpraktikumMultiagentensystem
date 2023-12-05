@@ -7,10 +7,10 @@ func _ready():
 	var agent_root_node = get_tree().root.find_child("AgentRootNode", true, false)
 	for agent_type in Cell.TYPES:
 		var num_nodes = randi() % 10 + 1  # Returns random integer between 1 and 10
-		var color_code = randi() % 3 + 1  # Returns random integer between 1 and 3
 		
 		# Generate nodes
 		for i in range(num_nodes):
+			var color_code = randi() % 6  # Returns random integer between 0 and 3
 			var x = randf() * get_viewport_rect().size.x
 			var y = randf() * get_viewport_rect().size.y
 			var typ = typeof(agent_type)

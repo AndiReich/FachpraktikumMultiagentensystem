@@ -5,7 +5,7 @@ var GridState = preload("res://src/controller/grid_state.gd")
 
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
-const NUM_THREADS: int = 1
+const NUM_THREADS: int = 4
 var grid_states: Dictionary = {}
 var grid_to_update: int = 0
 var cell_pattern_dict: Dictionary = {}
@@ -27,7 +27,7 @@ func _enter_tree():
 			cell_pattern_dict[cell_type] = value
 	
 func _ready():
-	var cell_size: Vector2i = self.tile_set.tile_size
+	var cell_size: Vector2i = Vector2i(16,16)
 	var viewport_size: Vector2i = self.get_viewport_rect().size
 	self.remove_layer(0)
 
