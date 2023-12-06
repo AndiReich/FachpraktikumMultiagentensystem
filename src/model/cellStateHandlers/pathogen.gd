@@ -45,10 +45,14 @@ func handle_antibody_collisions(cell: Cell, collisions: Array):
 		if collider not in attached_antibodies:
 			attached_antibodies.append(collider)
 
+func remove_attached_antibodies():
+	for antibody in attached_antibodies:
+		antibody.queue_free()
+		antibody = null
+
 func try_die(cell: Cell):
 	if attached_antibodies.size() >= num_antibodies_to_kill:
 		cell.queue_free()
 		cell = null
-		for antibody in attached_antibodies:
-			antibody.queue_free()
-			antibody = null
+		remove_attached_antibodies()
+

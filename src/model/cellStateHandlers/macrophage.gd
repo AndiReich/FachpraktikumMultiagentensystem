@@ -31,6 +31,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		var color_code = colliding_cell.cell_state_handler.color_code
 		differenciate(cell, color_code)
 		colliding_cell.call_deferred("queue_free")
+		colliding_cell.cell_state_handler.call_deferred("remove_attached_antibodies")
 
 func move(delta: float, cell: Cell, target: Cell):
 	_grid_movement(delta, cell)
