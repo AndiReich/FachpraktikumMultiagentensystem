@@ -1,6 +1,6 @@
 class_name ActivatedTHelperCellT4 extends CellStateHandler
 
-const MOVEMENT_TARGETS = [Cell.TYPES.ANTIGENPRESENTINGCELL]
+const MOVEMENT_TARGETS = null
 
 func _init(color_code: int):
 	cell_type = Cell.TYPES.ACTIVATEDTHELPERCELL
