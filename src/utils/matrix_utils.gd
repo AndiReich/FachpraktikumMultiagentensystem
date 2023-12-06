@@ -79,5 +79,5 @@ static func set_matrix_edges_to_float(m: Array, v: float) -> Array:
 	for x in dim_x:
 		for y in dim_y:
 			if x == 0 or x == dim_x - 1 or y == 0 or y == dim_y - 1:
-				r[x][y] = 0.0
+				r[x][y] = v
 	return r
