@@ -33,8 +33,7 @@ func add_decay():
 			self.current[x][y] = updated_value if updated_value >= 0.0 else 0.0 
 
 func add_diffusion():
-	# FIXME: from my tests it does not seem to be necessary to set the bounds to zero
-	# self.current = utils.set_matrix_edges_to_float(self.current, 0.0)
+	self.current = utils.set_matrix_edges_to_float(self.current, 0.0)
 	var diffusion_contribution: Array = utils.multiply_matrix_by_float(self.current, self.diffusion_coefficient)
 	var weighted_diffusion_contribution: Array = utils.multiply_matrix_by_float(diffusion_contribution, 0.25)
 	var remainder: Array = utils.subtract_matrix(self.current, diffusion_contribution)
@@ -48,8 +47,7 @@ func add_diffusion():
 			self.current[x][y] = remainder[x][y] + north[x][y] + east[x][y] + south[x][y] + west[x][y]
 
 func add_diffusion_and_decay():
-	# FIXME: from my tests it does not seem to be necessary to set the bounds to zero
-	# self.current = utils.set_matrix_edges_to_float(self.current, 0.0)
+	self.current = utils.set_matrix_edges_to_float(self.current, 0.0)
 	var diffusion_contribution: Array = utils.multiply_matrix_by_float(self.current, self.diffusion_coefficient)
 	var weighted_diffusion_contribution: Array = utils.multiply_matrix_by_float(diffusion_contribution, 0.25)
 	var remainder: Array = utils.subtract_matrix(self.current, diffusion_contribution)
