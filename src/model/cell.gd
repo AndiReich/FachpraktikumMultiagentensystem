@@ -3,7 +3,6 @@ class_name Cell extends Area2D
 enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, PATHOGEN, ACTIVATEDTHELPERCELL, ANTIBODY} 
 
 var initial_cell_type: TYPES = TYPES.PATHOGEN
-var tilemap_controller: TileMapController 
 var agent_root_node: Node
 var cell_state_handler: CellStateHandler = CellStateHandler.new()
 
@@ -33,7 +32,7 @@ signal grid_state_value_response(value: float)
 func _ready():
 	var root = get_tree().root
 	agent_root_node = root.find_child("AgentRootNode", true, false)
-	tilemap_controller = root.find_child("TileMapController", true, false)
+	var tilemap_controller = root.find_child("TileMapController", true, false)
 	pathogen_emanate.connect(tilemap_controller._on_pathogen_emanate)
 	fetch_grid_state.connect(tilemap_controller._on_fetch_grid_state)
 	fetch_grid_value.connect(tilemap_controller._on_fetch_grid_value)

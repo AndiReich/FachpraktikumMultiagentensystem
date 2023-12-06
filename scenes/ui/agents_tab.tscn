@@ -120,7 +120,7 @@ layout_mode = 2
 texture_normal = ExtResource("8_eeyk7")
 stretch_mode = 3
 script = ExtResource("7_35x53")
-agentType = 8
+agentType = 7
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/AntibodyHBoxContainer"]
 layout_mode = 2
