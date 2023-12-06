@@ -2,7 +2,7 @@ class_name ActivatedBCell extends CellStateHandler
 
 const DIFFERENCIATION_TRIGGER = Cell.TYPES.ANTIGENPRESENTINGCELL
 const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
-const MOVEMENT_TARGETS = null
+const MOVEMENT_TARGETS = []
 	
 func _init(color_code: int):
 	cell_type = Cell.TYPES.ACTIVATEDBCELL

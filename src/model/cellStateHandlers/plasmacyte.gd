@@ -1,6 +1,6 @@
 class_name Plasmacyte extends CellStateHandler
 
-const MOVEMENT_TARGETS = null
+const MOVEMENT_TARGETS = []
 
 func _init(color_code: int):
 	cell_type = Cell.TYPES.PLASMACYTE
@@ -11,9 +11,8 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	move(delta, cell, MOVEMENT_TARGETS)
-	# implement
-	print("Not implemented yet.")
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
+	move(delta, cell, closest_neighbor)
 	
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
