@@ -83,7 +83,10 @@ func add_diffusion_and_decay_kernel():
 func add_diffusion_and_decay_parallel():
 	var diffusion_coefficient_quarter: float = 0.25 * self.diffusion_coefficient
 	var threads = []
-
+	
+	# prevent diffusion across simulation box borders
+	current = utils.set_matrix_edges_to_float(current, 0.0)
+	
 	for i in range(NUM_THREADS):
 		var start_row: int = i * grid_size_x / NUM_THREADS
 		var end_row: int = (i + 1) * grid_size_x / NUM_THREADS
@@ -127,7 +130,7 @@ func add_emanate_pattern(cell_position: Vector2i, type_id: Cell.TYPES, cell_patt
 			var value: float = float(pattern_matrix[local_x][local_y]) / self.ntiles
 			if(is_position_valid(global_x, global_y)):
 				self.current[global_x][global_y] = min(self.current[global_x][global_y] + value, 1.0)
-
+	
 # Not that it matters, but we could check for valid positions in each loop to 
 # avoid three if statements per x,y iteration in add_emanate_pattern_to_grid.
 func is_position_valid(x: int, y: int) -> bool:
@@ -135,4 +138,12 @@ func is_position_valid(x: int, y: int) -> bool:
 		return false
 	if(y < 0 || y >= self.current[0].size()):
 		return false
+	return true
+
+func assert_grid_state() -> bool:
+	for x in range(grid_size_x):
+		for y in range(grid_size_y):
+			var value = current[x][y]
+			if value < 0.0 or value > 1.0:
+				return false
 	return true
