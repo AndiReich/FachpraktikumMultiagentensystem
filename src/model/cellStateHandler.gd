@@ -14,6 +14,7 @@ var emanate_timer: float = emanate_cooldown
 var cell_texture: ImageTexture
 var color_utils = preload("res://src/utils/color_utils.gd")
 var range_of_mutations = 16
+var antigen_code_bitlength = 4
 var color_code = -1
 var cell_type = null
 
