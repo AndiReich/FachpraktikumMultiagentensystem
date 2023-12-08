@@ -1,5 +1,7 @@
 class_name Pathogen extends CellStateHandler
 
+const MOVEMENT_TARGETS = []
+
 func _init(color_code: int):
 	cell_type = Cell.TYPES.PATHOGEN
 	var base = Image.load_from_file("res://assets/cells/Antigen.png")
@@ -8,7 +10,8 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	move(delta, cell, null)
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
+	move(delta, cell, closest_neighbor)
 	emanate_timer += delta
 	if emanate_timer > emanate_cooldown:
 		emanate(cell)
