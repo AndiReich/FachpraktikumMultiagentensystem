@@ -22,8 +22,8 @@ func differenciate(cell: Cell, color_code: int):
 	
 func generate():
 	# generate new T4 Helper cells randomly when ILs levels are high enough
-	print("Not implemented yet.")
+	pass
 	
 func emanate(cell: Cell):
 	# emanate ILs 2, 4, 5 and 6
-	print("Not implemented yet.")
+	pass
