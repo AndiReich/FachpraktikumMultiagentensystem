@@ -112,7 +112,6 @@ func _add_diffusion_and_decay_in_rows(start_row, end_row, diffusion_coefficient_
 func add_emanate_pattern(cell_position: Vector2i, type_id: Cell.TYPES, cell_pattern_dict: Dictionary):
 	var cell_type: String = Cell.TYPES.find_key(type_id)
 	if(!cell_pattern_dict.has(cell_type)):
-		print_debug("Pattern of %s not found." % cell_type)
 		return
 	var pattern_matrix: Array = cell_pattern_dict[cell_type]
 	var matrix_x_size: int = pattern_matrix.size()
