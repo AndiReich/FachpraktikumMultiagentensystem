@@ -35,7 +35,7 @@ func _try_generate(cell: Cell):
 	var il6_value = await cell.grid_state_value_response
 	# if threshold is met, produce antibody of specific type
 	if il6_value >= il6_threshold:
-		var antibody = agent_scene.instantiate()
+		var antibody = agent_scene.instantiate(self.color_code)
 		antibody.initialize_by_cell_type(Cell.TYPES.ANTIBODY, self.color_code, range_of_mutations)
 		antibody.position = cell.position
 		cell.agent_root_node.add_child(antibody)

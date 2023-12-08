@@ -1,6 +1,7 @@
 class_name AntigenPresentingCell extends CellStateHandler
 
 func _init(color_code: int):
+	self.color_code = color_code
 	cell_type = Cell.TYPES.ANTIGENPRESENTINGCELL
 	var base = Image.load_from_file("res://assets/cells/Macrophage.png")
 	var overlay = Image.load_from_file("res://assets/cells/MacrophageOverlay.png")
