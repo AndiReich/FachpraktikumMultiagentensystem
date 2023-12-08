@@ -5,7 +5,7 @@ var GridState = preload("res://src/controller/grid_state.gd")
 
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
-const NUM_THREADS: int = 1
+const NUM_THREADS: int = 4
 var grid_states: Dictionary = {}
 var grid_to_update: int = 0
 var cell_pattern_dict: Dictionary = {}
