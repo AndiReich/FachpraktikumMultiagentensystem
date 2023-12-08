@@ -10,13 +10,13 @@ func _ready():
 		
 		# Generate nodes
 		for i in range(num_nodes):
-			var color_code = randi() % 6  # Returns random integer between 0 and 3
+			var color_code = randi() % 6  # Returns random integer between 0 and 5
 			var x = randf() * get_viewport_rect().size.x
 			var y = randf() * get_viewport_rect().size.y
 			var typ = typeof(agent_type)
 			
 			var agent = agent_scene.instantiate()
-			agent.initialize_by_cell_type(Cell.TYPES[agent_type], int(color_code), range_of_mutations)
+			agent.initialize_by_cell_type(Cell.TYPES[agent_type], color_code, range_of_mutations)
 			agent.position.x = x
 			agent.position.y = y
 			
