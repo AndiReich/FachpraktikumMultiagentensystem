@@ -25,10 +25,10 @@ offset_bottom = 1051.0
 script = ExtResource("2_47uwh")
 
 [node name="ToggleUiButton" parent="CanvasLayer" node_paths=PackedStringArray("control") instance=ExtResource("2_ai3h6")]
-offset_left = -443.0
-offset_top = 494.0
-offset_right = -411.0
-offset_bottom = 526.0
+offset_left = -565.0
+offset_top = 492.0
+offset_right = -532.0
+offset_bottom = 524.0
 control = NodePath("../TabContainer")
 
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
