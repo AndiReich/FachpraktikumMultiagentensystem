@@ -10,6 +10,8 @@ var collider_to_cell_transform: Transform2D = Transform2D()
 var antigen_recognition_cooldown: float = 5.0
 var antigen_recognition_timer: float = antigen_recognition_cooldown
 
+signal antibody_attach_to_pathogen(cell: Cell)
+
 func _init(color_code: int):
 	self.color_code = color_code
 	cell_type = Cell.TYPES.ANTIBODY
@@ -48,6 +50,7 @@ func emanate(cell: Cell):
 	print_debug("Antibody does not emanate.")
 
 func handle_pathogen_collision(cell: Cell, collider: Cell):
+	# check if the antigen codes match
 	var antibody_antigen_code = cell.cell_state_handler.color_code
 	var pathogen_antigen_code = collider.cell_state_handler.color_code
 	var is_antigen_code_match = recognize_antigen(antibody_antigen_code, pathogen_antigen_code)
@@ -57,13 +60,18 @@ func handle_pathogen_collision(cell: Cell, collider: Cell):
 	self.is_attached_to_pathogen = true
 	self.attached_pathogen = collider
 	
+	# disable active movement of antibody to move with pathogen after attachment
 	cell.cell_state_handler.disable_movement()
 	
+	# logic for movement after sticking to pathogen
 	var world_to_cell_transform = cell.get_global_transform()
 	var world_to_collider_transform = collider.get_global_transform()
 	collider_to_cell_transform = world_to_collider_transform.inverse() * world_to_cell_transform
-	
 	cell.global_transform = collider.get_global_transform() * collider_to_cell_transform
+	
+	# inform the pathogen that an antibody was attached
+	antibody_attach_to_pathogen.connect(collider.cell_state_handler._on_antibody_attach_to_pathogen)
+	antibody_attach_to_pathogen.emit(cell)
 
 func recognize_antigen(antibody_antigen_code: int, pathogen_antigen_code: int):
 	var matching_bits: int = math_utils.count_matching_bits(antibody_antigen_code, pathogen_antigen_code, antigen_code_bitlength)
