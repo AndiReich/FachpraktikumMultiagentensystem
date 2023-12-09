@@ -70,14 +70,14 @@ static func roll_matrix(m, shift: int, axis: int) -> Array:
 		printerr("Unsupported axis value. Please use 0 or 1 for axis.")
 		return []
 
-# TODO: This implementation is very inefficient since we iterate over the whole 
-# matrix.
 static func set_matrix_edges_to_float(m: Array, v: float) -> Array:
 	var dim_x: int = m.size()
 	var dim_y: int = m[0].size()
 	var r = m.duplicate(true)
-	for x in dim_x:
-		for y in dim_y:
-			if x == 0 or x == dim_x - 1 or y == 0 or y == dim_y - 1:
-				r[x][y] = v
+	r[0].fill(v) # first row
+	r[dim_x-1].fill(v) # last row
+	for x in range(1, dim_x - 1):
+		r[x][0] = v # first column
+		r[x][dim_y-1] = v # last column
+	
 	return r

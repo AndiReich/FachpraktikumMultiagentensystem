@@ -57,9 +57,9 @@ func generate():
 	
 func emanate(cell: Cell):
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
-	
-func find_closest_neighbor(cell: Cell, neighbors: Array, target_cell_type: Cell.TYPES) -> Cell:
-	if !neighbors or !target_cell_type: 
+
+func find_closest_neighbor(cell: Cell, neighbors: Array, target_cell_types: Array) -> Cell:
+	if !neighbors or !target_cell_types: 
 		return null
 		
 	var closest_neighbor = null
@@ -68,8 +68,10 @@ func find_closest_neighbor(cell: Cell, neighbors: Array, target_cell_type: Cell.
 	for neighbor in neighbors:
 		if neighbor.owner != cell.owner:
 			continue
-		if neighbor.cell_state_handler.cell_type != target_cell_type:
+		
+		if neighbor.cell_state_handler.cell_type not in target_cell_types:
 			continue
+
 		# using length_squared compared to length saves a sqrt
 		var distance = (cell.position - neighbor.position).length_squared()
 

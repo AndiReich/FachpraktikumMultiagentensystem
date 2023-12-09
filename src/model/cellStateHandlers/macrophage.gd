@@ -2,6 +2,8 @@ class_name Macrophage extends CellStateHandler
 
 const DIFFERENCIATION_TRIGGER = Cell.TYPES.PATHOGEN
 const DIFFERENCIATION_TARGET = Cell.TYPES.ANTIGENPRESENTINGCELL
+const MOVEMENT_TARGETS = [Cell.TYPES.PATHOGEN]
+
 const class_weights = {
 	0 : 0.0,
 	1 : 0.0029296875,
@@ -23,7 +25,7 @@ func _init():
 
 # macrophage moves towards closet pathogen
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 	move(delta, cell, closest_neighbor)
 	
 	var colliding_cell = find_colliding_cell(cell, collisions, DIFFERENCIATION_TRIGGER)

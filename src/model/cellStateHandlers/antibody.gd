@@ -1,5 +1,7 @@
 class_name Antibody extends CellStateHandler
 
+const MOVEMENT_TARGETS = [Cell.TYPES.PATHOGEN]
+
 const math_utils = preload("res://src/utils/math_utils.gd")
 
 var is_attached_to_pathogen: bool = false
@@ -25,7 +27,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 			handle_pathogen_collision(cell, colliding_pathogen)
 			antigen_recognition_timer = 0.0
 		else:
-			closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
+			closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 		move(delta, cell, closest_neighbor)
 	else:
 		# need to make sure the node is still valid when potentially removing them at the death event 

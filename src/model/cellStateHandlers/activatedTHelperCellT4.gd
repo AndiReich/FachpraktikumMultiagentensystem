@@ -1,5 +1,7 @@
 class_name ActivatedTHelperCellT4 extends CellStateHandler
 
+const MOVEMENT_TARGETS = []
+
 func _init(color_code: int):
 	cell_type = Cell.TYPES.ACTIVATEDTHELPERCELL
 	var base = Image.load_from_file("res://assets/cells/THelperCell.png")
@@ -9,9 +11,8 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	move(delta, cell, null)
-	# implement
-	print("Not implemented yet.")
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
+	move(delta, cell, closest_neighbor)
 	
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
@@ -21,8 +22,8 @@ func differenciate(cell: Cell, color_code: int):
 	
 func generate():
 	# generate new T4 Helper cells randomly when ILs levels are high enough
-	print("Not implemented yet.")
+	pass
 	
 func emanate(cell: Cell):
 	# emanate ILs 2, 4, 5 and 6
-	print("Not implemented yet.")
+	pass

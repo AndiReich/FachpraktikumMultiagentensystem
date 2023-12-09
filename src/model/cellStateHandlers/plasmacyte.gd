@@ -2,6 +2,8 @@ class_name Plasmacyte extends CellStateHandler
 
 var agent_scene = preload("res://scenes/agents/agent.tscn")
 
+const MOVEMENT_TARGETS = []
+
 var IL6 = TileMapController.SUBSTANCE_TYPE.IL6
 var il6_threshold: float = 0.5
 var generate_cooldown: float = 5.0
@@ -17,10 +19,11 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 	generate_timer += delta
 	if generate_timer > generate_cooldown:
 		_try_generate(cell)
-	move(delta, cell, null)
+	move(delta, cell, closest_neighbor)
 	
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
