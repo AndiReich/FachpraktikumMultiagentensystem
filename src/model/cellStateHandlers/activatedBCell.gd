@@ -5,6 +5,7 @@ const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
 const MOVEMENT_TARGETS = []
 	
 func _init(color_code: int):
+	self.color_code = color_code
 	cell_type = Cell.TYPES.ACTIVATEDBCELL
 	var base = Image.load_from_file("res://assets/cells/BCell.png")
 	var overlay = Image.load_from_file("res://assets/cells/BCellOverlay.png")
