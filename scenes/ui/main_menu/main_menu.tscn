@@ -1,0 +1,353 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxol80wgu071k"]
+
+[ext_resource type="Theme" uid="uid://0nmqaghlst86" path="res://assets/ui/base_theme.tres" id="1_pv4j3"]
+[ext_resource type="Script" path="res://src/ui/main_menu/main_menu.gd" id="2_ajkly"]
+[ext_resource type="Texture2D" uid="uid://vct22tbgxecv" path="res://assets/cells/Antigen.png" id="3_874a2"]
+[ext_resource type="PackedScene" uid="uid://bg22mua1vs1rx" path="res://scenes/ui/antigen_code_button.tscn" id="4_jte03"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pv4j3")
+script = ExtResource("2_ajkly")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 50
+
+[node name="AgentsVBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="AgentCount" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 60
+text = "Agenten"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Makrophage"
+
+[node name="MacrophageLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label10" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Antigen-präsentierende Zelle"
+
+[node name="ApcLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label11" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label3" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "B-Zelle"
+
+[node name="BCellLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label13" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label4" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Aktivierte B-Zelle"
+
+[node name="ActBCellLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label12" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label5" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "T-Zelle"
+
+[node name="TCellLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label14" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label6" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Aktivierte T-Zelle"
+
+[node name="ActTCellLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label15" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label7" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "P-Zelle"
+
+[node name="PCellLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label16" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label8" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Virus"
+
+[node name="VirusLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label17" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="Label9" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Antikörper"
+
+[node name="AntibodyLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label18" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer/AgentsVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0-100)"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="ParametersVBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="AgentCount" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 60
+text = "Parameter"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Brown'sche Bewegung"
+
+[node name="BrownianMotionLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 3
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label4" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0.0  - 1.0)"
+
+[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Interleukin Bewegung"
+
+[node name="ILLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 3
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label5" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0.0  - 1.0)"
+
+[node name="Label3" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Direkte Bewegung"
+
+[node name="DirectLineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 3
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Label6" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "(0.0  - 1.0)"
+
+[node name="Label7" type="Label" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Antigen-Kodierung"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_874a2")
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="antigen_code_button" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer/HBoxContainer" instance=ExtResource("4_jte03")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="antigen_code_button2" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer/HBoxContainer" instance=ExtResource("4_jte03")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+code_position = 1
+
+[node name="antigen_code_button3" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer/HBoxContainer" instance=ExtResource("4_jte03")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+code_position = 2
+
+[node name="antigen_code_button4" parent="CanvasLayer/HBoxContainer/MarginContainer2/ParametersVBoxContainer/GridContainer/HBoxContainer" instance=ExtResource("4_jte03")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+code_position = 3
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(200, 50)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -252.0
+offset_top = -129.0
+offset_right = -52.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "START"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

@@ -110,7 +110,9 @@ agentType = 4
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/ActivatedBCellHBoxContainer"]
 layout_mode = 2
-text = "B-Zelle"
+text = "Aktivierte 
+B-Zelle"
+horizontal_alignment = 1
 
 [node name="THelperHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
 layout_mode = 2
@@ -150,7 +152,9 @@ agentType = 7
 
 [node name="Label" type="Label" parent="AgentsList/CenterContainer/GridContainer/THelperHBoxContainer2"]
 layout_mode = 2
-text = "T-Zelle"
+text = "Aktivierte 
+T-Zelle"
+horizontal_alignment = 1
 
 [node name="PlasmacyteHBoxContainer" type="VBoxContainer" parent="AgentsList/CenterContainer/GridContainer"]
 layout_mode = 2
