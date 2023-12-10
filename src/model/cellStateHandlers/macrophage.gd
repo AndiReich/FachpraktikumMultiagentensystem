@@ -33,6 +33,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		var color_code = colliding_cell.cell_state_handler.color_code
 		differenciate(cell, color_code)
 		colliding_cell.call_deferred("queue_free")
+		colliding_cell.cell_state_handler.call_deferred("remove_attached_antibodies")
 
 func move(delta: float, cell: Cell, target: Cell):
 	_grid_movement(delta, cell)
@@ -100,13 +101,8 @@ func _grid_movement(delta: float, cell: Cell):
 			break
 	if(resulting_map_position == null):
 		return 0.0 
-		
-	print(resulting_map_position - cell.position)
-			
-			
+
 	var target_direction = ((resulting_map_position - Vector2(8,8)) - cell.position).normalized()
-	print("target_direction %s" % target_direction)
 	var update_active_movement = gamma * (target_direction * active_move_speed * delta)
-	print("update_active_movement %s" % update_active_movement)
 	cell.position += update_active_movement
 	return 0.0

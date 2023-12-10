@@ -3,6 +3,7 @@ class_name ActivatedTHelperCellT4 extends CellStateHandler
 const MOVEMENT_TARGETS = []
 
 func _init(color_code: int):
+	self.color_code = color_code
 	cell_type = Cell.TYPES.ACTIVATEDTHELPERCELL
 	var base = Image.load_from_file("res://assets/cells/THelperCell.png")
 	var overlay = Image.load_from_file("res://assets/cells/THelperCellOverlay.png")

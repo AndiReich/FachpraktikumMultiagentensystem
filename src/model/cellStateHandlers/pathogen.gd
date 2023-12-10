@@ -1,8 +1,12 @@
 class_name Pathogen extends CellStateHandler
 
+@export var num_antibodies_to_kill: int = 4
+
 const MOVEMENT_TARGETS = []
+var attached_antibodies: Array = []
 
 func _init(color_code: int):
+	self.color_code = color_code
 	cell_type = Cell.TYPES.PATHOGEN
 	var base = Image.load_from_file("res://assets/cells/Antigen.png")
 	var modified_image = color_utils.get_specific_permutation(base, range_of_mutations, color_code)
@@ -16,6 +20,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	if emanate_timer > emanate_cooldown:
 		emanate(cell)
 		emanate_timer = 0.0
+	try_die(cell)
 
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)
@@ -30,3 +35,18 @@ func generate():
 func emanate(cell: Cell):
 	# emanates chemotactic substances
 	cell.pathogen_emanate.emit(cell.global_position, cell.TYPES.PATHOGEN)
+
+func remove_attached_antibodies():
+	for antibody in attached_antibodies:
+		antibody.queue_free()
+		antibody = null
+
+func try_die(cell: Cell):
+	if attached_antibodies.size() >= num_antibodies_to_kill:
+		cell.queue_free()
+		cell = null
+		remove_attached_antibodies()
+
+func _on_antibody_attach_to_pathogen(cell: Cell):
+	attached_antibodies.append(cell)
+

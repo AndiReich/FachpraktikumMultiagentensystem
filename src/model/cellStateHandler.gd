@@ -3,7 +3,7 @@ class_name CellStateHandler
 @export var random_walk_diffusion_rate: float = 10.0
 @export var alpha: float = 1.0 # weight of active movement in total velocity
 @export var beta: float = 1.0 # weight of Brownian motion/random walk in total velocity
-@export var gamma: float = 1.0 #s weight of Chemotaxis movement in total velocity
+@export var gamma: float = 1.0 # weight of Chemotaxis movement in total velocity
 @export var emanate_cooldown: float = 1.0 # cooldown for emanation
 @export var active_move_speed: float = 10.0
 
@@ -14,6 +14,7 @@ var emanate_timer: float = emanate_cooldown
 var cell_texture: ImageTexture
 var color_utils = preload("res://src/utils/color_utils.gd")
 var range_of_mutations = 16
+var antigen_code_bitlength = 4
 var color_code = -1
 var cell_type = null
 
@@ -42,6 +43,11 @@ func move(delta: float, cell: Cell, target: Cell):
 	var update_random_walk: Vector2 = beta * random_walk_diffusion_rate**2 * delta * Vector2(x, y).normalized()
 	cell.position += update_random_walk
 	cell.position = cell.position.clamp(Vector2.ZERO, cell.get_viewport_rect().size)
+
+func disable_movement():
+	self.alpha = 0.0
+	self.beta = 0.0
+	self.gamma = 0.0
 	
 func differenciate(cell: Cell, color_code: int):
 		cell.initialize_by_cell_type(cell.cell_state_handler.cell_type, color_code, range_of_mutations)
