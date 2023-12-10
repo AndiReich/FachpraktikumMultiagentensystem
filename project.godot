@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Fachpraktikum Multiagentensystem"
-run/main_scene="res://scenes/main_scene.tscn"
+run/main_scene="res://scenes/ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://src/globals/global.gd"
 
 [display]
 

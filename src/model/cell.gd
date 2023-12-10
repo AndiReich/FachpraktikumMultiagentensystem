@@ -69,7 +69,11 @@ func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutatio
 			
 		TYPES.ANTIBODY:
 			cell_state_handler = Antibody.new(color_code)
-		
+	
+	cell_state_handler.direct_movement_weight = Global.initial_direct_motion
+	cell_state_handler.brownian_movement_weight = Global.initial_brownian_motion
+	cell_state_handler.il_movement_weight = Global.initial_il_motion
+	
 	get_child(0).texture = cell_state_handler.cell_texture
 	
 

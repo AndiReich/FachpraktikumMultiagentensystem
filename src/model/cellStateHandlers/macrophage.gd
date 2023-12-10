@@ -103,6 +103,6 @@ func _grid_movement(delta: float, cell: Cell):
 		return 0.0 
 
 	var target_direction = ((resulting_map_position - Vector2(8,8)) - cell.position).normalized()
-	var update_active_movement = gamma * (target_direction * active_move_speed * delta)
+	var update_active_movement = il_movement_weight * (target_direction * active_move_speed * delta)
 	cell.position += update_active_movement
 	return 0.0

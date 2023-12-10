@@ -1,9 +1,9 @@
 class_name CellStateHandler
 
 @export var random_walk_diffusion_rate: float = 10.0
-@export var alpha: float = 1.0 # weight of active movement in total velocity
-@export var beta: float = 1.0 # weight of Brownian motion/random walk in total velocity
-@export var gamma: float = 1.0 # weight of Chemotaxis movement in total velocity
+@export var direct_movement_weight: float # weight of active movement in total velocity
+@export var brownian_movement_weight: float # weight of Brownian motion/random walk in total velocity
+@export var il_movement_weight: float # weight of Chemotaxis movement in total velocity
 @export var emanate_cooldown: float = 1.0 # cooldown for emanation
 @export var active_move_speed: float = 10.0
 
@@ -35,19 +35,19 @@ func move(delta: float, cell: Cell, target: Cell):
 	# active movement 
 	if target:
 		var target_direction = (target.position - cell.position).normalized()
-		var update_active_movement = alpha * (target_direction * active_move_speed * delta)
+		var update_active_movement = direct_movement_weight * (target_direction * active_move_speed * delta)
 		cell.position += update_active_movement
 	# brownian motion
 	var x: float = rng.randfn()
 	var y: float = rng.randfn()
-	var update_random_walk: Vector2 = beta * random_walk_diffusion_rate**2 * delta * Vector2(x, y).normalized()
+	var update_random_walk: Vector2 = brownian_movement_weight * random_walk_diffusion_rate**2 * delta * Vector2(x, y).normalized()
 	cell.position += update_random_walk
 	cell.position = cell.position.clamp(Vector2.ZERO, cell.get_viewport_rect().size)
 
 func disable_movement():
-	self.alpha = 0.0
-	self.beta = 0.0
-	self.gamma = 0.0
+	self.direct_movement_weight = 0.0
+	self.brownian_movement_weight = 0.0
+	self.il_movement_weight = 0.0
 	
 func differenciate(cell: Cell, color_code: int):
 		cell.initialize_by_cell_type(cell.cell_state_handler.cell_type, color_code, range_of_mutations)
