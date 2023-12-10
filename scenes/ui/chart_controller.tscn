@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://jt06338uwr2u"]
 
-[ext_resource type="Script" path="res://src/ui/charts/chart_controller.gd" id="1_kaq7k"]
-[ext_resource type="PackedScene" uid="uid://dlwq4kmdb3bhs" path="res://addons/easy_charts/control_charts/chart.tscn" id="2_53n3s"]
-[ext_resource type="Script" path="res://src/ui/charts/toggle_chart_update.gd" id="3_uisqd"]
+[ext_resource type="Script" path="res://src/ui/charts/chart_controller.gd" id="1_p6yn4"]
+[ext_resource type="PackedScene" uid="uid://dlwq4kmdb3bhs" path="res://addons/easy_charts/control_charts/chart.tscn" id="2_h3aw1"]
+[ext_resource type="Script" path="res://src/ui/charts/toggle_chart_update.gd" id="3_80red"]
 
 [node name="ChartController" type="Control"]
 layout_mode = 3
@@ -11,9 +11,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_kaq7k")
+script = ExtResource("1_p6yn4")
 
-[node name="Chart" parent="." instance=ExtResource("2_53n3s")]
+[node name="Chart" parent="." instance=ExtResource("2_h3aw1")]
 layout_mode = 2
 anchors_preset = 0
 
@@ -26,7 +26,7 @@ offset_left = -68.0
 offset_bottom = 48.0
 grow_horizontal = 0
 button_pressed = true
-script = ExtResource("3_uisqd")
+script = ExtResource("3_80red")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

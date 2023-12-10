@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cb8fjnap60vwe" path="res://scenes/ui/grid_layers.tscn" id="3_lenj1"]
 [ext_resource type="PackedScene" uid="uid://dr0145lm6r45m" path="res://scenes/ui/agents_tab.tscn" id="4_1uas1"]
 [ext_resource type="Script" path="res://src/ui/FPS.gd" id="6_roesk"]
-[ext_resource type="PackedScene" uid="uid://jt06338uwr2u" path="res://src/ui/charts/chart_controller.tscn" id="6_w6lb3"]
+[ext_resource type="PackedScene" uid="uid://jt06338uwr2u" path="res://scenes/ui/chart_controller.tscn" id="6_w6lb3"]
 [ext_resource type="Script" path="res://src/ui/AgentCounter.gd" id="7_ivp52"]
 [ext_resource type="PackedScene" uid="uid://cmgimwrxuvpoj" path="res://scenes/ui/antigen_code_selector.tscn" id="8_7vfiw"]
 

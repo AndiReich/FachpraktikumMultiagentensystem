@@ -76,10 +76,12 @@ func initialize_chart_properties() -> ChartProperties:
 	chart_properties.colors.ticks = Color("#283442")
 	chart_properties.colors.text = Color.WHITE_SMOKE
 	chart_properties.draw_bounding_box = false
+	chart_properties.show_title = true
 	chart_properties.title = "Agents by type"
 	chart_properties.y_label = "Cell count"
 	chart_properties.interactive = true 
 	chart_properties.smooth_domain = true
+	chart_properties.y_scale = 1
 	return chart_properties
 
 		
