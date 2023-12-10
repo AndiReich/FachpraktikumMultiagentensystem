@@ -2,6 +2,8 @@ class_name Macrophage extends CellStateHandler
 
 const DIFFERENCIATION_TRIGGER = Cell.TYPES.PATHOGEN
 const DIFFERENCIATION_TARGET = Cell.TYPES.ANTIGENPRESENTINGCELL
+const MOVEMENT_TARGETS = [Cell.TYPES.PATHOGEN]
+
 const class_weights = {
 	0 : 0.0,
 	1 : 0.0029296875,
@@ -23,7 +25,7 @@ func _init():
 
 # macrophage moves towards closet pathogen
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, Cell.TYPES.PATHOGEN)
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 	move(delta, cell, closest_neighbor)
 	
 	var colliding_cell = find_colliding_cell(cell, collisions, DIFFERENCIATION_TRIGGER)
@@ -31,6 +33,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		var color_code = colliding_cell.cell_state_handler.color_code
 		differenciate(cell, color_code)
 		colliding_cell.call_deferred("queue_free")
+		colliding_cell.cell_state_handler.call_deferred("remove_attached_antibodies")
 
 func move(delta: float, cell: Cell, target: Cell):
 	_grid_movement(delta, cell)
@@ -98,13 +101,8 @@ func _grid_movement(delta: float, cell: Cell):
 			break
 	if(resulting_map_position == null):
 		return 0.0 
-		
-	print(resulting_map_position - cell.position)
-			
-			
+
 	var target_direction = ((resulting_map_position - Vector2(8,8)) - cell.position).normalized()
-	print("target_direction %s" % target_direction)
 	var update_active_movement = gamma * (target_direction * active_move_speed * delta)
-	print("update_active_movement %s" % update_active_movement)
 	cell.position += update_active_movement
 	return 0.0

@@ -1,6 +1,9 @@
 class_name AntigenPresentingCell extends CellStateHandler
 
+const MOVEMENT_TARGETS = [Cell.TYPES.BCELL, Cell.TYPES.THELPERCELL]
+
 func _init(color_code: int):
+	self.color_code = color_code
 	cell_type = Cell.TYPES.ANTIGENPRESENTINGCELL
 	var base = Image.load_from_file("res://assets/cells/Macrophage.png")
 	var overlay = Image.load_from_file("res://assets/cells/MacrophageOverlay.png")
@@ -9,9 +12,8 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	move(delta, cell, null)
-	# implement
-	print("Not implemented yet.")
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
+	move(delta, cell, closest_neighbor)
 	
 func move(delta: float, cell: Cell, target: Cell):
 	super.move(delta, cell, target)

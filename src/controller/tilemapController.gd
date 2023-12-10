@@ -5,7 +5,7 @@ var GridState = preload("res://src/controller/grid_state.gd")
 
 enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 
-const NUM_THREADS: int = 1
+const NUM_THREADS: int = 4
 var grid_states: Dictionary = {}
 var grid_to_update: int = 0
 var cell_pattern_dict: Dictionary = {}
@@ -59,7 +59,7 @@ func _on_pathogen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	grid_states[SUBSTANCE_TYPE.CS].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
 	# FIXME: only for debugging
-	grid_states[SUBSTANCE_TYPE.IL4].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
+	grid_states[SUBSTANCE_TYPE.IL6].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
 
 # The logic is as follows: compare the values in the old grid state with the 
 # current ones and update the cells only when they differ to reduce the number
@@ -137,7 +137,7 @@ func _on_simulation_ui_on_grid_toggle(substance_type):
 	
 func _on_fetch_grid_state(cell_position : Vector2, 
 	radius : int, 
-	substance_type : TileMapController.SUBSTANCE_TYPE,
+	substance_type : SUBSTANCE_TYPE,
 	caller_id : int):
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	map_position += Vector2i(1,1)
@@ -162,5 +162,7 @@ func _on_fetch_grid_state(cell_position : Vector2,
 				
 	instance_from_id(caller_id).grid_state_response.emit(movement_map)
 	
-	
-	
+func _on_fetch_grid_value(cell_position: Vector2, substance_type: SUBSTANCE_TYPE, caller_id: int):
+	var grid_position: Vector2i = self.local_to_map(cell_position) + Vector2i(1,1)
+	var value = grid_states[substance_type].current[grid_position.x][grid_position.y]
+	instance_from_id(caller_id).grid_state_value_response.emit(value)

@@ -3,7 +3,7 @@ class_name Cell extends Area2D
 enum TYPES {MACROPHAGE, PLASMACYTE, THELPERCELL, BCELL, ACTIVATEDBCELL, ANTIGENPRESENTINGCELL, PATHOGEN, ACTIVATEDTHELPERCELL, ANTIBODY} 
 
 var initial_cell_type: TYPES = TYPES.PATHOGEN
-
+var agent_root_node: Node
 var cell_state_handler: CellStateHandler = CellStateHandler.new()
 
 
@@ -21,14 +21,21 @@ signal fetch_grid_state(
 	radius: int,
 	substance_type: TileMapController.SUBSTANCE_TYPE,
 	caller_id: int) 
+signal fetch_grid_value(
+	cell_position : Vector2, 
+	substance_type: TileMapController.SUBSTANCE_TYPE,
+	caller_id: int) 
 	
 signal grid_state_response(movement_map: Dictionary)
+signal grid_state_value_response(value: float)
 
 func _ready():
 	var root = get_tree().root
-	var tileMapController = root.find_child("TileMapController", true, false)
-	pathogen_emanate.connect(tileMapController._on_pathogen_emanate)
-	fetch_grid_state.connect(tileMapController._on_fetch_grid_state)
+	agent_root_node = root.find_child("AgentRootNode", true, false)
+	var tilemap_controller = root.find_child("TileMapController", true, false)
+	pathogen_emanate.connect(tilemap_controller._on_pathogen_emanate)
+	fetch_grid_state.connect(tilemap_controller._on_fetch_grid_state)
+	fetch_grid_value.connect(tilemap_controller._on_fetch_grid_value)
 
 func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutations: int):
 	# This basically acts like a constructor for the node
@@ -59,6 +66,9 @@ func initialize_by_cell_type(cell_type: TYPES, color_code: int, range_of_mutatio
 		
 		TYPES.ACTIVATEDTHELPERCELL: 
 			cell_state_handler = ActivatedTHelperCellT4.new(color_code)
+			
+		TYPES.ANTIBODY:
+			cell_state_handler = Antibody.new(color_code)
 		
 	get_child(0).texture = cell_state_handler.cell_texture
 	

@@ -2,8 +2,10 @@ class_name ActivatedBCell extends CellStateHandler
 
 const DIFFERENCIATION_TRIGGER = Cell.TYPES.ANTIGENPRESENTINGCELL
 const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
+const MOVEMENT_TARGETS = []
 	
 func _init(color_code: int):
+	self.color_code = color_code
 	cell_type = Cell.TYPES.ACTIVATEDBCELL
 	var base = Image.load_from_file("res://assets/cells/BCell.png")
 	var overlay = Image.load_from_file("res://assets/cells/BCellOverlay.png")
@@ -12,7 +14,8 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
-	move(delta, cell, null)
+	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
+	move(delta, cell, closest_neighbor)
 	
 	# Differenciation logic
 	var colliding_cell = find_colliding_cell(cell, collisions, DIFFERENCIATION_TRIGGER)
