@@ -38,6 +38,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 			cell.global_transform = attached_pathogen.get_global_transform() * collider_to_cell_transform
 	
 func move(delta: float, cell: Cell, target: Cell):
+	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.CS)
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):

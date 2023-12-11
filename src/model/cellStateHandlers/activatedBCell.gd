@@ -1,6 +1,5 @@
 class_name ActivatedBCell extends CellStateHandler
 
-const DIFFERENCIATION_TRIGGER = Cell.TYPES.ANTIGENPRESENTINGCELL
 const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
 const MOVEMENT_TARGETS = []
 	
@@ -18,12 +17,19 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	move(delta, cell, closest_neighbor)
 	
 	# Differenciation logic
-	var colliding_cell = find_colliding_cell(cell, collisions, DIFFERENCIATION_TRIGGER)
-	if colliding_cell:
-		var color_code = colliding_cell.cell_state_handler.color_code
-		differenciate(cell, color_code)
+	# change this to IL based differenciation
+	#var colliding_cell = find_colliding_cell(cell, collisions, DIFFERENCIATION_TRIGGER)
+	#if colliding_cell:
+	#	var color_code = colliding_cell.cell_state_handler.color_code
+	#	differenciate(cell, color_code)
+	
 	
 func move(delta: float, cell: Cell, target: Cell):
+	var random_value = randi_range(0,1)
+	if random_value == 0:
+		grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL4)
+	else:
+		grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL5)
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
@@ -36,3 +42,4 @@ func generate():
 	
 func emanate(cell: Cell):
 	print_debug("Activated b cell does not emanate.")
+	

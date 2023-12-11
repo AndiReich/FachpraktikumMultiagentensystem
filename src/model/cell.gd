@@ -14,7 +14,7 @@ var cell_state_handler: CellStateHandler = CellStateHandler.new()
 # (this way we have more freedom of what data we send on a per celltype basis)
 
 # only scripts that are attached to a node are able to define signals 
-signal pathogen_emanate(position, type)
+signal emanate(position, substance_type)
 
 signal fetch_grid_state(
 	cell_position : Vector2, 
@@ -33,7 +33,7 @@ func _ready():
 	var root = get_tree().root
 	agent_root_node = root.find_child("AgentRootNode", true, false)
 	var tilemap_controller = root.find_child("TileMapController", true, false)
-	pathogen_emanate.connect(tilemap_controller._on_pathogen_emanate)
+	emanate.connect(tilemap_controller._on_emanate)
 	fetch_grid_state.connect(tilemap_controller._on_fetch_grid_state)
 	fetch_grid_value.connect(tilemap_controller._on_fetch_grid_value)
 

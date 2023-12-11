@@ -34,7 +34,7 @@ func generate():
 
 func emanate(cell: Cell):
 	# emanates chemotactic substances
-	cell.pathogen_emanate.emit(cell.global_position, cell.TYPES.PATHOGEN)
+	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.CS)
 
 func remove_attached_antibodies():
 	for antibody in attached_antibodies:

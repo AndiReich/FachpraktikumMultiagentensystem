@@ -8,7 +8,7 @@ enum SUBSTANCE_TYPE {IL2, IL4, IL5, IL6, CS}
 const NUM_THREADS: int = 4
 var grid_states: Dictionary = {}
 var grid_to_update: int = 0
-var cell_pattern_dict: Dictionary = {}
+var substance_pattern_dict: Dictionary = {}
 var grid_size_x: int
 var grid_size_y: int
 var update_cooldown: float = 0.01
@@ -21,10 +21,12 @@ var ntiles: int = 10 	# FIXME: assign dynamically based on the number of tiles
 func _enter_tree(): 
 	var reader = CellEmenatePatternReader.new()
 	# initialize patterns from config files
-	for cell_type in Cell.TYPES:
-		var value = reader.read_pattern_for_cell_type(cell_type)
+	for substance_type in SUBSTANCE_TYPE:
+		var value = reader.read_pattern_for_substance_type(substance_type)
 		if(value != []):
-			cell_pattern_dict[cell_type] = value
+			substance_pattern_dict[substance_type] = value
+		else:
+			substance_pattern_dict[substance_type] = [[0]]
 	
 func _ready():
 	var cell_size: Vector2i = self.tile_set.tile_size
@@ -55,11 +57,10 @@ func _process(delta):
 	for substance in grid_states:
 		grid_states[substance].old = grid_states[substance].current.duplicate(true)
 
-func _on_pathogen_emanate(cell_position : Vector2, type_id: Cell.TYPES):
+func _on_emanate(cell_position : Vector2, substance_type_id : TileMapController.SUBSTANCE_TYPE):
 	var map_position: Vector2i = self.local_to_map(cell_position)
-	grid_states[SUBSTANCE_TYPE.CS].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
-	# FIXME: only for debugging
-	grid_states[SUBSTANCE_TYPE.IL6].add_emanate_pattern(map_position, type_id, cell_pattern_dict)
+	grid_states[substance_type_id].add_emanate_pattern(map_position, substance_type_id, substance_pattern_dict)
+
 
 # The logic is as follows: compare the values in the old grid state with the 
 # current ones and update the cells only when they differ to reduce the number
