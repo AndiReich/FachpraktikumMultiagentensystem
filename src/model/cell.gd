@@ -6,13 +6,6 @@ var initial_cell_type: TYPES = TYPES.PATHOGEN
 var agent_root_node: Node
 var cell_state_handler: CellStateHandler = CellStateHandler.new()
 
-
-# As I see it there are two different approaches:
-# have a unified signal "cell_emanate" and add a cell type argument
-#
-# or this way where we have multiple handler functions for different signals
-# (this way we have more freedom of what data we send on a per celltype basis)
-
 # only scripts that are attached to a node are able to define signals 
 signal emanate(position, substance_type)
 
