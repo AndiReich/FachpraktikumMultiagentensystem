@@ -26,6 +26,7 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	move(delta, cell, closest_neighbor)
 	
 func move(delta: float, cell: Cell, target: Cell):
+	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL6)
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
