@@ -7,6 +7,7 @@ const MOVEMENT_TARGETS = [Cell.TYPES.PATHOGEN]
 
 
 func _init():
+	color_code = -1
 	cell_type = Cell.TYPES.MACROPHAGE
 	var base = Image.load_from_file("res://assets/cells/Macrophage.png")
 	var resulting_texture = ImageTexture.create_from_image(base)
