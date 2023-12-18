@@ -14,8 +14,13 @@ func _init(color_code: int):
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 	move(delta, cell, closest_neighbor)
+	emanate_timer += delta
+	if emanate_timer > emanate_cooldown:
+		emanate(cell)
+		emanate_timer = 0.0
 	
 func move(delta: float, cell: Cell, target: Cell):
+	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL2)
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
@@ -27,4 +32,7 @@ func generate():
 	
 func emanate(cell: Cell):
 	# emanate ILs 2, 4, 5 and 6
-	pass
+	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL2)
+	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL4)
+	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL5)
+	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL6)

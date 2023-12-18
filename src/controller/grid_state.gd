@@ -110,11 +110,11 @@ func _add_diffusion_and_decay_in_rows(start_row, end_row, diffusion_coefficient_
 			var updated_value: float = diffusion_update - decay
 			self.current[x][y] = max(updated_value, 0.0)
 
-func add_emanate_pattern(cell_position: Vector2i, type_id: Cell.TYPES, cell_pattern_dict: Dictionary):
-	var cell_type: String = Cell.TYPES.find_key(type_id)
-	if(!cell_pattern_dict.has(cell_type)):
+func add_emanate_pattern(cell_position: Vector2i, substance_type_id: TileMapController.SUBSTANCE_TYPE, substance_pattern_dict: Dictionary):
+	var substance_type: String = TileMapController.SUBSTANCE_TYPE.find_key(substance_type_id)
+	if(!substance_pattern_dict.has(substance_type)):
 		return
-	var pattern_matrix: Array = cell_pattern_dict[cell_type]
+	var pattern_matrix: Array = substance_pattern_dict[substance_type]
 	var matrix_x_size: int = pattern_matrix.size()
 	var matrix_y_size: int = pattern_matrix[0].size()
 	var offset_x: int = cell_position.x - (matrix_x_size/2) + 1

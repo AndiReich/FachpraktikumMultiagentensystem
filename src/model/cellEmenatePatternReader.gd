@@ -3,8 +3,8 @@ class_name CellEmenatePatternReader
 const utils = preload("res://src/utils/matrix_utils.gd")
 
 
-func read_pattern_for_cell_type(cell_type: String) -> Array:
-	var filepath = get_filepath_of_celltype(cell_type)
+func read_pattern_for_substance_type(substance_type: String) -> Array:
+	var filepath = get_filepath_of_substance_type(substance_type)
 	if (!FileAccess.file_exists(filepath)):
 		return []
 	var file = FileAccess.open(filepath, FileAccess.READ)
@@ -31,6 +31,6 @@ func get_content_as_2d_Array(text: String) -> Array:
 	return gradient_grid
 
 
-func get_filepath_of_celltype(cell_type: String) -> String:
-	var cell_type_name = str(cell_type).to_lower()
+func get_filepath_of_substance_type(substance_type: String) -> String:
+	var cell_type_name = str(substance_type).to_lower()
 	return "res://resources/%s_gradient.txt" % cell_type_name
