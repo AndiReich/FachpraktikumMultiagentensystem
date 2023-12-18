@@ -51,11 +51,10 @@ func _process(delta):
 	
 	update_timer += delta
 	if update_timer > update_cooldown: 
-		update_tile_map()
+		update_entire_tile_map()
 		update_timer = 0.0
 		
-	for substance in grid_states:
-		grid_states[substance].old = grid_states[substance].current.duplicate(true)
+	grid_states[grid_to_update].old = grid_states[grid_to_update].current.duplicate(true)
 
 func _on_emanate(cell_position : Vector2, substance_type_id : TileMapController.SUBSTANCE_TYPE):
 	var map_position: Vector2i = self.local_to_map(cell_position)
@@ -70,7 +69,7 @@ func update_tile_map():
 	var substance = SUBSTANCE_TYPE.values()[grid_to_update]
 	if !grid_states[substance].is_displayed:
 		return
-		
+
 	for x in grid_size_x:
 		for y in grid_size_y:
 			var old_value: float = grid_states[substance].old[x+1][y+1]
