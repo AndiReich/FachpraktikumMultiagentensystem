@@ -6,7 +6,6 @@ var color_utils = preload("res://src/utils/color_utils.gd")
 var file_utils
 
 var functions : Dictionary = {}
-var function_data: Dictionary = {}
 var update_cooldown = 1.0
 var update_timer = 0.0
 var elapsed_seconds = 0
