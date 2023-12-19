@@ -6,6 +6,9 @@ const MOVEMENT_TARGETS = []
 const TRY_DIFFERENCIATION_COOLDOWN: float = 0.5
 var try_differenciation_timer: float = 0.0
 
+const DEACTIVATION_COOLDOWN: float = 30
+var deactivation_timer: float = 0
+
 	
 func _init(color_code: int):
 	self.color_code = color_code
@@ -17,6 +20,7 @@ func _init(color_code: int):
 	cell_texture = resulting_texture
 
 func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
+	
 	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 	move(delta, cell, closest_neighbor)
 	
@@ -27,6 +31,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 			differenciate(cell, color_code)
 		try_differenciation_timer = 0.0
 	try_differenciation_timer += delta
+	
+	if(deactivation_timer > DEACTIVATION_COOLDOWN):
+		deactivation_timer = 0.0
+		deactivate(cell)
+	deactivation_timer += delta
 	
 	
 func move(delta: float, cell: Cell, target: Cell):
@@ -64,6 +73,10 @@ func should_differenciate(cell: Cell) -> bool:
 		return true
 	
 	return false
+	
+func deactivate(cell: Cell):
+	cell_type = cell.TYPES.BCELL
+	super.differenciate(cell, -1)
 	
 	
 	
