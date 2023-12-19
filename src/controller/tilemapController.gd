@@ -140,7 +140,6 @@ func _on_fetch_grid_state(cell_position : Vector2,
 	substance_type : SUBSTANCE_TYPE,
 	caller_id : int):
 		
-	instance_from_id(caller_id).grid_state_response.emit({})
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	map_position += Vector2i(1,1)
 
@@ -165,8 +164,6 @@ func _on_fetch_grid_state(cell_position : Vector2,
 	instance_from_id(caller_id).grid_state_response.emit(movement_map)
 	
 func _on_fetch_grid_value(cell_position: Vector2, substance_type: SUBSTANCE_TYPE, caller_id: int):
-	instance_from_id(caller_id).grid_state_value_response.emit(0)
-	pass
-	#var grid_position: Vector2i = self.local_to_map(cell_position) + Vector2i(1,1)
-	#var value = grid_states[substance_type].current[grid_position.x][grid_position.y]
-	#instance_from_id(caller_id).grid_state_value_response.emit(value)
+	var grid_position: Vector2i = self.local_to_map(cell_position) + Vector2i(1,1)
+	var value = grid_states[substance_type].current[grid_position.x][grid_position.y]
+	instance_from_id(caller_id).grid_state_value_response.emit(value)
