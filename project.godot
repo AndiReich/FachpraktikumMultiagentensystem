@@ -36,8 +36,16 @@ theme/custom="res://assets/ui/base_theme.tres"
 2d_physics/layer_1="Collision Layer"
 2d_physics/layer_2="Detection Layer"
 
+[physics]
+
+common/physics_ticks_per_second=5
+common/max_physics_steps_per_frame=4
+2d/physics_engine="GodotPhysics2D"
+2d/solver/solver_iterations=1
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
 textures/size/viewport_height=648
 textures/size/viewport_width=1152

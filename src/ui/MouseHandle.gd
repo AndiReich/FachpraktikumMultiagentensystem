@@ -1,19 +1,19 @@
 extends Container
 
 # images
-var antibody_image = Image.load_from_file("res://assets/cells/Antibody.png")
-var b_cell_image = Image.load_from_file("res://assets/cells/BCell.png")
-var macrophage_image = Image.load_from_file("res://assets/cells/Macrophage.png")
-var plasmacyte_image = Image.load_from_file("res://assets/cells/Plasmacyte.png")
-var t_helper_cell_image = Image.load_from_file("res://assets/cells/THelperCell.png")
-var virus_image = Image.load_from_file("res://assets/cells/Antigen.png")
-var delete_image = Image.load_from_file("res://assets/ui/TrashIcon.png")
+var antibody_image = Global.antibody_image
+var b_cell_image = Global.b_cell_image
+var macrophage_image = Global.macrophage_image
+var plasmacyte_image = Global.plasmacyte_image
+var t_helper_cell_image = Global.t_helper_cell_image
+var virus_image = Global.virus_image
+var delete_image = Global.delete_image
 
 # overlays
-var b_cell_overlay = Image.load_from_file("res://assets/cells/BCellOverlay.png")
-var macrophage_overlay = Image.load_from_file("res://assets/cells/MacrophageOverlay.png")
-var plasmacyte_overlay = Image.load_from_file("res://assets/cells/PlasmacyteOverlay.png")
-var t_helper_cell_overlay = Image.load_from_file("res://assets/cells/THelperCellOverlay.png")
+var b_cell_overlay = Global.b_cell_overlay
+var macrophage_overlay = Global.macrophage_overlay
+var plasmacyte_overlay = Global.plasmacyte_overlay
+var t_helper_cell_overlay = Global.t_helper_cell_overlay
 
 var agent_scene = preload("res://scenes/agents/agent.tscn")
 var code_selection_scene = preload("res://scenes/ui/antigen_code_selector.tscn")
