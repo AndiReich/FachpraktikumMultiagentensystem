@@ -2,6 +2,9 @@ class_name ActivatedTHelperCellT4 extends CellStateHandler
 
 const MOVEMENT_TARGETS = []
 
+const GRID_MOVEMENT_COOLDOWN = 0.5
+var grid_movement_timer = 0
+
 func _init(color_code: int):
 	self.color_code = color_code
 	cell_type = Cell.TYPES.ACTIVATEDTHELPERCELL
@@ -20,7 +23,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		emanate_timer = 0.0
 	
 func move(delta: float, cell: Cell, target: Cell):
-	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL2)
+	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
+		super.grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL2)
+		grid_movement_timer = 0
+	grid_movement_timer += delta
+	
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):

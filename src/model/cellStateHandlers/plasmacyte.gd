@@ -4,6 +4,9 @@ var agent_scene = preload("res://scenes/agents/agent.tscn")
 
 const MOVEMENT_TARGETS = []
 
+const GRID_MOVEMENT_COOLDOWN = 0.5
+var grid_movement_timer = 0
+
 var IL6 = TileMapController.SUBSTANCE_TYPE.IL6
 var il6_threshold: float = 0.5
 var generate_cooldown: float = 5.0
@@ -26,7 +29,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	move(delta, cell, closest_neighbor)
 	
 func move(delta: float, cell: Cell, target: Cell):
-	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL6)
+	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
+		super.grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL6)
+		grid_movement_timer = 0
+	grid_movement_timer += delta
+	
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):

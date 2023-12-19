@@ -6,6 +6,9 @@ const MOVEMENT_TARGETS = []
 const TRY_DIFFERENCIATION_COOLDOWN: float = 0.5
 var try_differenciation_timer: float = 0.0
 
+const GRID_MOVEMENT_COOLDOWN = 0.5
+var grid_movement_timer = 0
+
 	
 func _init(color_code: int):
 	self.color_code = color_code
@@ -31,10 +34,15 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	
 func move(delta: float, cell: Cell, target: Cell):
 	var random_value = randi_range(0,1)
-	if random_value == 0:
-		grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL4)
-	else:
-		grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL5)
+	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
+		if random_value == 0:
+			grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL4)
+		else:
+			grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL5)
+		grid_movement_timer = 0
+	grid_movement_timer += delta
+	
+	
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):

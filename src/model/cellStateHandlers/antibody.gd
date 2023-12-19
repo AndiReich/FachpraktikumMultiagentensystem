@@ -2,6 +2,9 @@ class_name Antibody extends CellStateHandler
 
 const MOVEMENT_TARGETS = [Cell.TYPES.PATHOGEN]
 
+const GRID_MOVEMENT_COOLDOWN = 0.5
+var grid_movement_timer = 0
+
 const math_utils = preload("res://src/utils/math_utils.gd")
 
 var is_attached_to_pathogen: bool = false
@@ -38,7 +41,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 			cell.global_transform = attached_pathogen.get_global_transform() * collider_to_cell_transform
 	
 func move(delta: float, cell: Cell, target: Cell):
-	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.CS)
+	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
+		super.grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.CS)
+		grid_movement_timer = 0
+	grid_movement_timer += delta
+	
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
