@@ -4,6 +4,9 @@ var agent_scene = preload("res://scenes/agents/agent.tscn")
 
 const MOVEMENT_TARGETS = []
 
+const GRID_MOVEMENT_COOLDOWN = 0.5
+var grid_movement_timer = 0
+
 var IL6 = TileMapController.SUBSTANCE_TYPE.IL6
 var il6_threshold: float = 0.5
 var generate_cooldown: float = 5.0
@@ -15,8 +18,8 @@ var death_timer: float = 0
 func _init(color_code: int):
 	self.color_code = color_code
 	self.cell_type = Cell.TYPES.PLASMACYTE
-	var base = Image.load_from_file("res://assets/cells/Plasmacyte.png")
-	var overlay = Image.load_from_file("res://assets/cells/PlasmacyteOverlay.png")
+	var base = Global.plasmacyte_image
+	var overlay = Global.plasmacyte_overlay
 	var modified_image = color_utils.get_specific_permutation_with_overlay(base, overlay, range_of_mutations, color_code)
 	var resulting_texture = ImageTexture.create_from_image(modified_image)
 	cell_texture = resulting_texture
@@ -34,7 +37,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	death_timer += delta
 	
 func move(delta: float, cell: Cell, target: Cell):
-	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL6)
+	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
+		super.grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL6)
+		grid_movement_timer = 0
+	grid_movement_timer += delta
+	
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):

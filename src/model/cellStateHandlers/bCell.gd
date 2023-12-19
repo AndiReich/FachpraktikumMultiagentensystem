@@ -6,7 +6,7 @@ const MOVEMENT_TARGETS = [Cell.TYPES.ANTIGENPRESENTINGCELL]
 
 func _init():
 	cell_type = Cell.TYPES.BCELL
-	var base = Image.load_from_file("res://assets/cells/BCell.png")
+	var base = Global.b_cell_image
 	var resulting_texture = ImageTexture.create_from_image(base)
 	cell_texture = resulting_texture
 	

@@ -46,7 +46,7 @@ func _process(delta):
 	if diffusion_decay_timer > diffusion_decay_cooldown:
 		grid_to_update = (grid_to_update + 1) % 5
 		var substance = SUBSTANCE_TYPE.values()[grid_to_update]
-		grid_states[substance].add_diffusion_and_decay_parallel()
+		grid_states[substance].add_diffusion_and_decay()
 		diffusion_decay_timer = 0.0
 	
 	update_timer += delta
