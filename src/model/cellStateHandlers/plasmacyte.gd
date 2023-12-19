@@ -12,6 +12,9 @@ var il6_threshold: float = 0.5
 var generate_cooldown: float = 5.0
 var generate_timer: float = generate_cooldown
 
+const DEATH_START_COOLDOWN: float = 5
+var death_timer: float = 0
+
 func _init(color_code: int):
 	self.color_code = color_code
 	self.cell_type = Cell.TYPES.PLASMACYTE
@@ -27,6 +30,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	if generate_timer > generate_cooldown:
 		_try_generate(cell)
 	move(delta, cell, closest_neighbor)
+	
+	if(death_timer > DEATH_START_COOLDOWN):
+		death_timer = 0.0
+		try_to_die(cell)
+	death_timer += delta
 	
 func move(delta: float, cell: Cell, target: Cell):
 	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
@@ -54,3 +62,9 @@ func _try_generate(cell: Cell):
 	
 func emanate(cell: Cell):
 	print_debug("Plasmacyte does not emanate.")
+
+func try_to_die(cell):
+	# 5 chance to die every 5 seconds
+	var random_float = randf_range(0,1)
+	if(random_float < 0.10):
+		cell.queue_free()

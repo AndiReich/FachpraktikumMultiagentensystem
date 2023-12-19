@@ -38,14 +38,14 @@ func emanate(cell: Cell):
 
 func remove_attached_antibodies():
 	for antibody in attached_antibodies:
-		antibody.queue_free()
-		antibody = null
+		if is_instance_valid(antibody):
+			antibody.queue_free()
 
 func try_die(cell: Cell):
 	if attached_antibodies.size() >= num_antibodies_to_kill:
-		cell.queue_free()
-		cell = null
 		remove_attached_antibodies()
+		cell.queue_free()
+		
 
 func _on_antibody_attach_to_pathogen(cell: Cell):
 	attached_antibodies.append(cell)

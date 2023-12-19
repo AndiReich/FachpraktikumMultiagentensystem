@@ -4,12 +4,13 @@ const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
 const MOVEMENT_TARGETS = []
 
 const TRY_DIFFERENCIATION_COOLDOWN: float = 0.5
-var try_differenciation_timer: float = 0.0
-
 const GRID_MOVEMENT_COOLDOWN = 0.5
+const DEACTIVATION_COOLDOWN: float = 30
+
+var try_differenciation_timer: float = 0.0
+var deactivation_timer: float = 0
 var grid_movement_timer = 0
 
-	
 func _init(color_code: int):
 	self.color_code = color_code
 	cell_type = Cell.TYPES.ACTIVATEDBCELL
@@ -31,7 +32,12 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		try_differenciation_timer = 0.0
 	try_differenciation_timer += delta
 	
-	
+	if(deactivation_timer > DEACTIVATION_COOLDOWN):
+		deactivation_timer = 0.0
+		deactivate(cell)
+	deactivation_timer += delta
+
+
 func move(delta: float, cell: Cell, target: Cell):
 	var random_value = randi_range(0,1)
 	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
@@ -41,8 +47,6 @@ func move(delta: float, cell: Cell, target: Cell):
 			grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL5)
 		grid_movement_timer = 0
 	grid_movement_timer += delta
-	
-	
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
@@ -73,7 +77,11 @@ func should_differenciate(cell: Cell) -> bool:
 	
 	return false
 	
-	
+func deactivate(cell: Cell):
+	cell_type = cell.TYPES.BCELL
+	super.differenciate(cell, -1)
+
+
 	
 	
 	
