@@ -5,6 +5,7 @@ const DIFFERENCIATION_TARGET = Cell.TYPES.ACTIVATEDTHELPERCELL
 const MOVEMENT_TARGETS = [Cell.TYPES.ANTIGENPRESENTINGCELL]
 
 func _init():
+	color_code = -1
 	cell_type = Cell.TYPES.THELPERCELL
 	var base = Global.t_helper_cell_image
 	var resulting_texture = ImageTexture.create_from_image(base)

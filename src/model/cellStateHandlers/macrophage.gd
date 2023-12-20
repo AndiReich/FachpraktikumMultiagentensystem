@@ -10,6 +10,7 @@ var grid_movement_timer = 0
 
 
 func _init():
+	color_code = -1
 	cell_type = Cell.TYPES.MACROPHAGE
 	var base = Global.macrophage_image
 	var resulting_texture = ImageTexture.create_from_image(base)

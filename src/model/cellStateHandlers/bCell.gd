@@ -5,6 +5,7 @@ const DIFFERENCIATION_TARGET = Cell.TYPES.ACTIVATEDBCELL
 const MOVEMENT_TARGETS = [Cell.TYPES.ANTIGENPRESENTINGCELL]
 
 func _init():
+	color_code = -1
 	cell_type = Cell.TYPES.BCELL
 	var base = Global.b_cell_image
 	var resulting_texture = ImageTexture.create_from_image(base)

@@ -109,7 +109,7 @@ func update_cell_sprite(cell: Cell):
 	
 func grid_movement_towards_substance(delta: float, cell: Cell, substance_type: TileMapController.SUBSTANCE_TYPE):
 	# grid movement	
-	# we get a  return value form the signal handler in the movement map
+	# we get a return value form the signal handler in the movement map
 	# in this case godot opperates on a single thread so there should be no race condition here	
 	var caller_id = cell.get_instance_id()
 	cell.fetch_grid_state.emit(cell.position, 3, substance_type, caller_id)

@@ -3,6 +3,7 @@ class_name ChartController extends Control
 @onready var chart: Chart = $Chart
 
 var color_utils = preload("res://src/utils/color_utils.gd")
+var file_utils
 
 var functions : Dictionary = {}
 var update_cooldown = 1.0
@@ -12,7 +13,10 @@ var should_pause = false
 var agent_root_node
 
 
+
 func _ready():	
+	file_utils = FileUtils.new()
+	file_utils.open_writer()
 	agent_root_node = get_tree().root.find_child("AgentRootNode", true, false)
 	
 	var chart_properties = initialize_chart_properties()
@@ -48,7 +52,11 @@ func _process(delta: float):
 	update_timer += delta
 	if(update_timer >= update_cooldown):
 		# gets all agent nodes and their cell type
-		var cell_counts = fetch_cell_counts()
+		var cells = fetch_cells()
+		var cell_counts = fetch_cell_counts(cells)
+		
+		for cell in cells:
+			file_utils.save_cell_state_to_csv(cell)
 		
 		# updates the functions for each cell type
 		for key in functions.keys():
@@ -84,9 +92,11 @@ func initialize_chart_properties() -> ChartProperties:
 	chart_properties.y_scale = 1
 	return chart_properties
 
+
+func fetch_cells() -> Array[Node]:
+	return agent_root_node.get_children()
 		
-func fetch_cell_counts() -> Dictionary:
-	var agent_nodes = agent_root_node.get_children()
+func fetch_cell_counts(agent_nodes: Array[Node]) -> Dictionary:
 	var cell_counter = {}
 	for agent_node in agent_nodes:
 		var cell = agent_node as Cell
@@ -97,3 +107,8 @@ func fetch_cell_counts() -> Dictionary:
 			cell_counter[cell_type] = 1
 			
 	return cell_counter
+	
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		file_utils.close_writer()
+		get_tree().quit() # default behavior
