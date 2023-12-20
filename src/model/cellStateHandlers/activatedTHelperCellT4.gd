@@ -1,12 +1,17 @@
 class_name ActivatedTHelperCellT4 extends CellStateHandler
 
 const MOVEMENT_TARGETS = []
+const DEACTIVATION_COOLDOWN: float = 30
+const GRID_MOVEMENT_COOLDOWN = 0.5
+
+var grid_movement_timer = 0
+var deactivation_timer: float = 0
 
 func _init(color_code: int):
 	self.color_code = color_code
 	cell_type = Cell.TYPES.ACTIVATEDTHELPERCELL
-	var base = Image.load_from_file("res://assets/cells/THelperCell.png")
-	var overlay = Image.load_from_file("res://assets/cells/THelperCellOverlay.png")
+	var base = Global.t_helper_cell_image
+	var overlay = Global.t_helper_cell_overlay
 	var modified_image = color_utils.get_specific_permutation_with_overlay(base, overlay, range_of_mutations, color_code)
 	var resulting_texture = ImageTexture.create_from_image(modified_image)
 	cell_texture = resulting_texture
@@ -18,9 +23,18 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	if emanate_timer > emanate_cooldown:
 		emanate(cell)
 		emanate_timer = 0.0
-	
+
+	if(deactivation_timer > DEACTIVATION_COOLDOWN):
+		deactivation_timer = 0.0
+		deactivate(cell)
+	deactivation_timer += delta
+
 func move(delta: float, cell: Cell, target: Cell):
-	grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL2)
+	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
+		super.grid_movement_towards_substance(delta, cell, TileMapController.SUBSTANCE_TYPE.IL2)
+		grid_movement_timer = 0
+	grid_movement_timer += delta
+
 	super.move(delta, cell, target)
 	
 func differenciate(cell: Cell, color_code: int):
@@ -36,3 +50,7 @@ func emanate(cell: Cell):
 	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL4)
 	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL5)
 	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL6)
+
+func deactivate(cell: Cell):
+	cell_type = cell.TYPES.THELPERCELL
+	super.differenciate(cell, -1)

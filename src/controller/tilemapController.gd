@@ -46,16 +46,15 @@ func _process(delta):
 	if diffusion_decay_timer > diffusion_decay_cooldown:
 		grid_to_update = (grid_to_update + 1) % 5
 		var substance = SUBSTANCE_TYPE.values()[grid_to_update]
-		grid_states[substance].add_diffusion_and_decay_parallel()
+		grid_states[substance].add_diffusion_and_decay()
 		diffusion_decay_timer = 0.0
 	
 	update_timer += delta
 	if update_timer > update_cooldown: 
-		update_tile_map()
+		update_entire_tile_map()
 		update_timer = 0.0
 		
-	for substance in grid_states:
-		grid_states[substance].old = grid_states[substance].current.duplicate(true)
+	grid_states[grid_to_update].old = grid_states[grid_to_update].current.duplicate(true)
 
 func _on_emanate(cell_position : Vector2, substance_type_id : TileMapController.SUBSTANCE_TYPE):
 	var map_position: Vector2i = self.local_to_map(cell_position)
@@ -70,7 +69,7 @@ func update_tile_map():
 	var substance = SUBSTANCE_TYPE.values()[grid_to_update]
 	if !grid_states[substance].is_displayed:
 		return
-		
+
 	for x in grid_size_x:
 		for y in grid_size_y:
 			var old_value: float = grid_states[substance].old[x+1][y+1]
@@ -140,16 +139,17 @@ func _on_fetch_grid_state(cell_position : Vector2,
 	radius : int, 
 	substance_type : SUBSTANCE_TYPE,
 	caller_id : int):
+		
 	var map_position: Vector2i = self.local_to_map(cell_position)
 	map_position += Vector2i(1,1)
-	
+
 	var offset_x = map_position.x - radius
 	var offset_y = map_position.y - radius
 	var end_offset_x = map_position.x + radius
 	var end_offset_y = map_position.y + radius
-	
+
 	var grid_state_handler = grid_states[substance_type]
-	
+
 	var movement_map = {}
 	for x in range(offset_x, end_offset_x + 1):
 		for y in range(offset_y, end_offset_y + 1):
@@ -160,7 +160,7 @@ func _on_fetch_grid_state(cell_position : Vector2,
 				var grid_value = grid_state_handler.current[x][y]
 				var local_position = self.map_to_local(Vector2i(x-1,y-1))
 				movement_map[local_position] = int(floor(grid_value*9))
-				
+
 	instance_from_id(caller_id).grid_state_response.emit(movement_map)
 	
 func _on_fetch_grid_value(cell_position: Vector2, substance_type: SUBSTANCE_TYPE, caller_id: int):
