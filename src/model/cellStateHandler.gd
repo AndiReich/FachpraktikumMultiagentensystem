@@ -65,7 +65,7 @@ func disable_movement():
 func differenciate(cell: Cell, color_code: int):
 		cell.initialize_by_cell_type(cell.cell_state_handler.cell_type, color_code, range_of_mutations)
 	
-func generate():
+func generate(cell: Cell):
 	push_error("CellStateHandler base implementation should not be used. Use one of the subclasses instead.")
 	
 func emanate(cell: Cell):

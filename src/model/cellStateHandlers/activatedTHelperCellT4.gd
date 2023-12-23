@@ -1,11 +1,18 @@
 class_name ActivatedTHelperCellT4 extends CellStateHandler
 
-const MOVEMENT_TARGETS = []
-const DEACTIVATION_COOLDOWN: float = 30
-const GRID_MOVEMENT_COOLDOWN = 0.5
+var agent_scene = preload("res://scenes/agents/agent.tscn")
 
-var grid_movement_timer = 0
+const MOVEMENT_TARGETS = []
+const DEACTIVATION_COOLDOWN: float = 60
+const GRID_MOVEMENT_COOLDOWN = 0.5
+const PROLIFERATE_NEIGHBORS_LIMIT: int = 3
+const PROLIFERATE_COLLDOWN: float = 10
+const IL2_TRESHHOLD : float = 0.75
+
+var IL2 = TileMapController.SUBSTANCE_TYPE.IL2
+var grid_movement_timer: float = 0
 var deactivation_timer: float = 0
+var proliferate_timer: float = 0
 
 func _init(color_code: int):
 	self.color_code = color_code
@@ -28,6 +35,15 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		deactivation_timer = 0.0
 		deactivate(cell)
 	deactivation_timer += delta
+	
+	var act_t_cell_neighbors = neighbors.filter(filter_is_t_cell)
+	if act_t_cell_neighbors.size() < PROLIFERATE_NEIGHBORS_LIMIT:
+		generate(cell)
+	proliferate_timer += delta
+
+func filter_is_t_cell(cell: Cell):
+	return (cell.cell_state_handler.cell_type == Cell.TYPES.ACTIVATEDTHELPERCELL 
+	|| cell.cell_state_handler.cell_type == Cell.TYPES.THELPERCELL)
 
 func move(delta: float, cell: Cell, target: Cell):
 	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):
@@ -40,10 +56,18 @@ func move(delta: float, cell: Cell, target: Cell):
 func differenciate(cell: Cell, color_code: int):
 	print_debug("Activated t-helper cell T4 does not differenciate.")
 	
-func generate():
-	# generate new T4 Helper cells randomly when ILs levels are high enough
-	pass
-	
+func generate(cell: Cell):
+	if proliferate_timer >= PROLIFERATE_COLLDOWN:
+		var caller_id = cell.get_instance_id()
+		cell.fetch_grid_value.emit(cell.position, IL2, caller_id)
+		var il2_value = await cell.grid_state_value_response
+		if il2_value >= IL2_TRESHHOLD:
+			var agent = agent_scene.instantiate(self.color_code)
+			agent.initialize_by_cell_type(Cell.TYPES.ACTIVATEDBCELL, self.color_code, range_of_mutations)
+			agent.position = cell.position
+			cell.agent_root_node.add_child(agent)
+			proliferate_timer = 0
+		
 func emanate(cell: Cell):
 	# emanate ILs 2, 4, 5 and 6
 	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL2)
