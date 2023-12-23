@@ -39,7 +39,7 @@ func differenciate(cell: Cell, color_code: int):
 	cell_type = DIFFERENCIATION_TARGET
 	super.differenciate(cell, color_code)
 	
-func generate():
+func generate(cell: Cell):
 	print_debug("Macrophage does not generate.")
 	
 func emanate(cell: Cell):
