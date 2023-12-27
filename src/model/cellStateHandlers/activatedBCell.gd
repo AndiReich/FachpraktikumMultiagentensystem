@@ -5,12 +5,12 @@ var agent_scene = preload("res://scenes/agents/agent.tscn")
 const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
 const MOVEMENT_TARGETS = []
 
-const TRY_DIFFERENCIATION_COOLDOWN: float = 0.5
+const TRY_DIFFERENCIATION_COOLDOWN: float = 5
 const GRID_MOVEMENT_COOLDOWN = 0.5
 const DEACTIVATION_COOLDOWN: float = 30
 const PROLIFERATE_NEIGHBORS_LIMIT: int = 3
-const PROLIFERATE_COLLDOWN: float = 10
-const IL4_TRESHHOLD : float = 0.75
+const PROLIFERATE_COLLDOWN: float = 2.5
+const IL4_TRESHHOLD : float = 0.4
 
 var IL4 = TileMapController.SUBSTANCE_TYPE.IL4
 var try_differenciation_timer: float = 0.0
@@ -31,6 +31,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 	move(delta, cell, closest_neighbor)
 	
+	var act_b_cell_neighbors = neighbors.filter(filter_is_b_cell)
+	if act_b_cell_neighbors.size() < PROLIFERATE_NEIGHBORS_LIMIT:
+		generate(cell)
+	proliferate_timer += delta
+	
 	# Differenciation logic
 	# IL based differenciation
 	if(try_differenciation_timer > TRY_DIFFERENCIATION_COOLDOWN):
@@ -43,11 +48,6 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		deactivation_timer = 0.0
 		deactivate(cell)
 	deactivation_timer += delta
-
-	var act_b_cell_neighbors = neighbors.filter(filter_is_b_cell)
-	if act_b_cell_neighbors.size() < PROLIFERATE_NEIGHBORS_LIMIT:
-		generate(cell)
-	proliferate_timer += delta
 
 func filter_is_b_cell(cell: Cell):
 	return (cell.cell_state_handler.cell_type == Cell.TYPES.ACTIVATEDBCELL 
@@ -75,7 +75,7 @@ func generate(cell: Cell):
 		var il4_value = await cell.grid_state_value_response
 		if il4_value >= IL4_TRESHHOLD:
 			var agent = agent_scene.instantiate(self.color_code)
-			agent.initialize_by_cell_type(Cell.TYPES.ACTIVATEDTHELPERCELL, self.color_code, range_of_mutations)
+			agent.initialize_by_cell_type(Cell.TYPES.ACTIVATEDBCELL, self.color_code, range_of_mutations)
 			agent.position = cell.position
 			cell.agent_root_node.add_child(agent)
 			proliferate_timer = 0

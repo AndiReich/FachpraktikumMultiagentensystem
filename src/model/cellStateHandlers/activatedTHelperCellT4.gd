@@ -63,7 +63,7 @@ func generate(cell: Cell):
 		var il2_value = await cell.grid_state_value_response
 		if il2_value >= IL2_TRESHHOLD:
 			var agent = agent_scene.instantiate(self.color_code)
-			agent.initialize_by_cell_type(Cell.TYPES.ACTIVATEDBCELL, self.color_code, range_of_mutations)
+			agent.initialize_by_cell_type(Cell.TYPES.ACTIVATEDTHELPERCELL, self.color_code, range_of_mutations)
 			agent.position = cell.position
 			cell.agent_root_node.add_child(agent)
 			proliferate_timer = 0

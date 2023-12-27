@@ -38,7 +38,7 @@ offset_top = -1.0
 offset_right = -53.0
 offset_bottom = 45.0
 grow_horizontal = 0
-text = "Toggle Update"
+text = "Diagramm Aktualisieren"
 vertical_alignment = 1
 
 [connection signal="toggled" from="CheckButton" to="CheckButton" method="_on_toggled"]
