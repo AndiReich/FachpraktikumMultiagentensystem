@@ -55,8 +55,9 @@ func _process(delta: float):
 		var cells = fetch_cells()
 		var cell_counts = fetch_cell_counts(cells)
 		
+		var time = Time.get_datetime_string_from_system()
 		for cell in cells:
-			file_utils.save_cell_state_to_csv(cell)
+			file_utils.save_cell_state_to_csv(cell, time)
 		
 		# updates the functions for each cell type
 		for key in functions.keys():
@@ -85,8 +86,8 @@ func initialize_chart_properties() -> ChartProperties:
 	chart_properties.colors.text = Color.WHITE_SMOKE
 	chart_properties.draw_bounding_box = false
 	chart_properties.show_title = true
-	chart_properties.title = "Agents by type"
-	chart_properties.y_label = "Cell count"
+	chart_properties.title = "Agententyp"
+	chart_properties.y_label = "Anzahl der zellen"
 	chart_properties.interactive = true 
 	chart_properties.smooth_domain = true
 	chart_properties.y_scale = 1

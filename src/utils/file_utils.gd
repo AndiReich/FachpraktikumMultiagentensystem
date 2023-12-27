@@ -14,8 +14,7 @@ func open_writer():
 	self.file = FileAccess.open(path, FileAccess.WRITE)
 	self.file.store_csv_line(["cell_id", "cell_type", "cell_pos_x", "cell_pos_y", "antigen_code", "time"])
 
-func save_cell_state_to_csv(cell: Cell):
-	var time = Time.get_datetime_string_from_system()
+func save_cell_state_to_csv(cell: Cell, time):
 	var id = cell.get_instance_id()
 	var type = Cell.TYPES.find_key(cell.cell_state_handler.cell_type).to_lower()
 	var pos_x = cell.position.x

@@ -44,14 +44,14 @@ offset_right = 408.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Agents" parent="CanvasLayer/TabContainer" instance=ExtResource("4_1uas1")]
+[node name="Agenten" parent="CanvasLayer/TabContainer" instance=ExtResource("4_1uas1")]
 layout_mode = 2
 
-[node name="Grid Layers" parent="CanvasLayer/TabContainer" instance=ExtResource("3_lenj1")]
+[node name="Substanzgitter" parent="CanvasLayer/TabContainer" instance=ExtResource("3_lenj1")]
 visible = false
 layout_mode = 2
 
-[node name="Charts" parent="CanvasLayer/TabContainer" instance=ExtResource("6_w6lb3")]
+[node name="Daten" parent="CanvasLayer/TabContainer" instance=ExtResource("6_w6lb3")]
 visible = false
 layout_mode = 2
 
@@ -65,10 +65,11 @@ script = ExtResource("6_roesk")
 
 [node name="AgentCounter" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
+text = "Anzahl der Agenten"
 script = ExtResource("7_ivp52")
 
 [node name="antigen_code_selector" parent="CanvasLayer" instance=ExtResource("8_7vfiw")]
 visible = false
 
-[connection signal="deleteMode" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_delete_mode"]
-[connection signal="instantiateAgent" from="CanvasLayer/TabContainer/Agents" to="CanvasLayer/Container" method="_on_agents_instantiate_agent"]
+[connection signal="deleteMode" from="CanvasLayer/TabContainer/Agenten" to="CanvasLayer/Container" method="_on_agents_delete_mode"]
+[connection signal="instantiateAgent" from="CanvasLayer/TabContainer/Agenten" to="CanvasLayer/Container" method="_on_agents_instantiate_agent"]
