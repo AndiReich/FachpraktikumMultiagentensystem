@@ -24,6 +24,11 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 	var closest_neighbor = super.find_closest_neighbor(cell, neighbors, MOVEMENT_TARGETS)
 	move(delta, cell, closest_neighbor)
 	
+	var act_b_cell_neighbors = neighbors.filter(filter_is_b_cell)
+	if act_b_cell_neighbors.size() < PROLIFERATE_NEIGHBORS_LIMIT:
+		generate(cell)
+	proliferate_timer += delta
+	
 	# Differenciation logic
 	# IL based differenciation
 	if(try_differenciation_timer > TRY_DIFFERENCIATION_COOLDOWN):
@@ -37,6 +42,9 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		deactivate(cell)
 	deactivation_timer += delta
 
+func filter_is_b_cell(cell: Cell):
+	return (cell.cell_state_handler.cell_type == Cell.TYPES.ACTIVATEDBCELL 
+	|| cell.cell_state_handler.cell_type == Cell.TYPES.BCELL)
 
 func move(delta: float, cell: Cell, target: Cell):
 	var random_value = randi_range(0,1)
@@ -53,9 +61,17 @@ func differenciate(cell: Cell, color_code: int):
 	cell_type = DIFFERENCIATION_TARGET
 	super.differenciate(cell, color_code)
 	
-func generate():
-	# generate new B Cells if a concentration of IL2, IL4 and IL5 is high enough
-	return
+func generate(cell: Cell):
+	if proliferate_timer >= PROLIFERATE_COLLDOWN:
+		var caller_id = cell.get_instance_id()
+		cell.fetch_grid_value.emit(cell.position, IL4, caller_id)
+		var il4_value = await cell.grid_state_value_response
+		if il4_value >= IL4_TRESHHOLD:
+			var agent = agent_scene.instantiate(self.color_code)
+			agent.initialize_by_cell_type(Cell.TYPES.ACTIVATEDBCELL, self.color_code, range_of_mutations)
+			agent.position = cell.position
+			cell.agent_root_node.add_child(agent)
+			proliferate_timer = 0
 	
 func emanate(cell: Cell):
 	print_debug("Activated b cell does not emanate.")

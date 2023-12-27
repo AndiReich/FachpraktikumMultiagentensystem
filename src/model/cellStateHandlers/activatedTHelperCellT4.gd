@@ -40,10 +40,18 @@ func move(delta: float, cell: Cell, target: Cell):
 func differenciate(cell: Cell, color_code: int):
 	print_debug("Activated t-helper cell T4 does not differenciate.")
 	
-func generate():
-	# generate new T4 Helper cells randomly when ILs levels are high enough
-	pass
-	
+func generate(cell: Cell):
+	if proliferate_timer >= PROLIFERATE_COLLDOWN:
+		var caller_id = cell.get_instance_id()
+		cell.fetch_grid_value.emit(cell.position, IL2, caller_id)
+		var il2_value = await cell.grid_state_value_response
+		if il2_value >= IL2_TRESHHOLD:
+			var agent = agent_scene.instantiate(self.color_code)
+			agent.initialize_by_cell_type(Cell.TYPES.ACTIVATEDTHELPERCELL, self.color_code, range_of_mutations)
+			agent.position = cell.position
+			cell.agent_root_node.add_child(agent)
+			proliferate_timer = 0
+		
 func emanate(cell: Cell):
 	# emanate ILs 2, 4, 5 and 6
 	cell.emanate.emit(cell.global_position, TileMapController.SUBSTANCE_TYPE.IL2)
