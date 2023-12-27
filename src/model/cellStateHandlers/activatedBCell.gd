@@ -1,15 +1,22 @@
 class_name ActivatedBCell extends CellStateHandler
 
+var agent_scene = preload("res://scenes/agents/agent.tscn")
+
 const DIFFERENCIATION_TARGET = Cell.TYPES.PLASMACYTE
 const MOVEMENT_TARGETS = []
 
 const TRY_DIFFERENCIATION_COOLDOWN: float = 0.5
 const GRID_MOVEMENT_COOLDOWN = 0.5
 const DEACTIVATION_COOLDOWN: float = 30
+const PROLIFERATE_NEIGHBORS_LIMIT: int = 3
+const PROLIFERATE_COLLDOWN: float = 10
+const IL4_TRESHHOLD : float = 0.75
 
+var IL4 = TileMapController.SUBSTANCE_TYPE.IL4
 var try_differenciation_timer: float = 0.0
 var deactivation_timer: float = 0
 var grid_movement_timer = 0
+var proliferate_timer: float = 0
 
 func _init(color_code: int):
 	self.color_code = color_code

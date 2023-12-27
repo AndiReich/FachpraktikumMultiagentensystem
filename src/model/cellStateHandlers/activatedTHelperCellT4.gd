@@ -1,11 +1,18 @@
 class_name ActivatedTHelperCellT4 extends CellStateHandler
 
-const MOVEMENT_TARGETS = []
-const DEACTIVATION_COOLDOWN: float = 30
-const GRID_MOVEMENT_COOLDOWN = 0.5
+var agent_scene = preload("res://scenes/agents/agent.tscn")
 
-var grid_movement_timer = 0
+const MOVEMENT_TARGETS = []
+const DEACTIVATION_COOLDOWN: float = 60
+const GRID_MOVEMENT_COOLDOWN = 0.5
+const PROLIFERATE_NEIGHBORS_LIMIT: int = 3
+const PROLIFERATE_COLLDOWN: float = 10
+const IL2_TRESHHOLD : float = 0.75
+
+var IL2 = TileMapController.SUBSTANCE_TYPE.IL2
+var grid_movement_timer: float = 0
 var deactivation_timer: float = 0
+var proliferate_timer: float = 0
 
 func _init(color_code: int):
 	self.color_code = color_code
@@ -28,6 +35,15 @@ func next_move(delta: float, cell: Cell, neighbors: Array, collisions: Array):
 		deactivation_timer = 0.0
 		deactivate(cell)
 	deactivation_timer += delta
+	
+	var act_t_cell_neighbors = neighbors.filter(filter_is_t_cell)
+	if act_t_cell_neighbors.size() < PROLIFERATE_NEIGHBORS_LIMIT:
+		generate(cell)
+	proliferate_timer += delta
+
+func filter_is_t_cell(cell: Cell):
+	return (cell.cell_state_handler.cell_type == Cell.TYPES.ACTIVATEDTHELPERCELL 
+	|| cell.cell_state_handler.cell_type == Cell.TYPES.THELPERCELL)
 
 func move(delta: float, cell: Cell, target: Cell):
 	if(grid_movement_timer > GRID_MOVEMENT_COOLDOWN):

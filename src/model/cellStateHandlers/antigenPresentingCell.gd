@@ -30,7 +30,7 @@ func move(delta: float, cell: Cell, target: Cell):
 func differenciate(cell: Cell, color_code: int):
 	print_debug("Antigen presenting cell does not differenciate.")
 	
-func generate():
+func generate(cell: Cell):
 	print_debug("Antigen presenting cell does not generate.")
 	
 func emanate(cell: Cell):
